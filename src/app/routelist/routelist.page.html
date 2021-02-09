@@ -1,34 +1,148 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>routelist</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-  <ion-row>
- 
-      <ion-label color="primary">Select Date</ion-label>
+<ion-menu side="start" content-id="main-content">
+
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title class="menuToolbar" >{{'routelist-menu.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/home2/routelist" >
+        <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myWallet.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-routeHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToTechHistoryPage()">
+        <ion-icon class="iconStyling" name="archive" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-techHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToProfilePage()">
+        <ion-icon class="iconStyling" name="person" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-profile.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-settings.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item routerLink="/login">
+        <ion-icon class="iconStyling" name="log-out"  slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-logout.title' | translate}}t</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons class="nav-buttons" slot="end">
+         <ion-button style="width: 50px;/*!" (click)="navigateToNotificationsPage()" ><ion-icon class="notBtn" name="notifications" ></ion-icon><ion-badge></ion-badge></ion-button>
+        <ion-menu-button class="menuBtn"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons (click)="navigateToProfilePage()" id="profile"></ion-buttons>
+      <ion-title>{{'routelist-myRoutes.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-button (click)="onChangeFromFunction()">PATA ME</ion-button>
+    <ion-list *ngFor="let route of routes">
+      <p>{{route.date}}</p>
+    </ion-list>
+    <ion-item class="from">
+      <ion-datetime placeholder="{{'routelist-from.title' | translate}}"displayFormat="DD/MM/YYYY" (ionChange)="onChangeFromFunction()" [(ngModel)]="startDate" ></ion-datetime>
+    </ion-item>
+    <ion-item class="to" >
+      <ion-datetime class="text-center" placeholder="{{'routelist-to.title' | translate}}" displayFormat="DD/MM/YYYY"(ionChange)="onChangeFromFunction()" [(ngModel)]="endDate"></ion-datetime>
+    </ion-item>
+    <ion-list>
+      <ion-item *ngFor="let item of filtered">
+      <ion-buttons item-start>
+        <ion-icon class="icon-size" name="map" ></ion-icon>
+      </ion-buttons>
+      <ion-buttons item-end>
+        <button  class="btn-accept" ion-button color="light">TAKE</button>
+      </ion-buttons>
+      <ion-label class="availability">Available</ion-label> <br>
+      <ion-label class="destination" >{{item.destination}}</ion-label> <br>
+      <ion-label class="date">{{item.date}}</ion-label>
+    </ion-item>
+    <p class="text-md-danger" *ngIf="invalidSelection">Inavalid Date Selection </p>
+    </ion-list>
+  </ion-content>
+<!-- 
+  <ion-content class="ion-padding" padding>
+    <ion-label class="centerlabel searchRoute"> {{'routelist-search.title' | translate}} </ion-label>
+
+    <ion-item class="from">
+      <ion-datetime placeholder="{{'routelist-from.title' | translate}}"displayFormat="DD/MM/YYYY" (ionChange)="confirm()" [(ngModel)]="selectedDate" ></ion-datetime>
+    </ion-item>
+    <ion-item class="to" >
+      <ion-datetime class="text-center" placeholder="{{'routelist-to.title' | translate}}" displayFormat="DD/MM/YYYY" (ionChange)="confirm()" [(ngModel)]="selectedDate2"></ion-datetime>
+    </ion-item>
+    <ion-label class="centerlabel currentDate">{{'routelist-currentDate.title' | translate}}</ion-label>
+    <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+
+    <ion-list>
       <ion-item>
-  <ion-datetime [(ngModel)]="selectedDate" displayFormat="YYYY-MM-DD" min="2019" max="2023" value="2008-09-02" required></ion-datetime>
-</ion-item>
-</ion-row>
+      <ion-buttons item-start>
+        <ion-icon class="icon-size" name="map" ></ion-icon>
+      </ion-buttons>
+      <ion-buttons item-end>
+        <button (click)="route2(e)" class="btn-accept" ion-button color="light">{{'routelist-accept.title' | translate}}</button>
+      </ion-buttons>
+      <ion-label class="availability">{{'routelist-available.title' | translate}}</ion-label> <br>
+      <ion-label class="destination" >{{}}</ion-label> <br>
+      <ion-label class="date">{{}}</ion-label>
+    </ion-item>
+    <p class="text-md-danger" >{{'routelist-invalidDate.title' | translate}} </p> 
+    </ion-list>
 
-    <ion-row>
-  
-    <button class="btn-round bg-primary" ion-button color = "primary"(click)="confirm()">Confirm</button>
-  
+
+
+      <ion-list>
+      <ion-item>
+      <ion-buttons item-start>
+        <ion-icon class="icon-size" name="map" ></ion-icon>
+      </ion-buttons>
+      <ion-buttons item-end>
+        <button  class="btn-accept" ion-button color="light">{{'routelist-accept.title' | translate}}</button>
+      </ion-buttons>
+      <ion-label class="availability">{{'routelist-available.title' | translate}}</ion-label> <br>
+      <ion-label class="destination" >{{}}</ion-label> <br>
+      <ion-label class="date">{{}}</ion-label>
+    </ion-item>
+    < <p class="text-md-danger" >{{'routelist-invalidDate.title' | translate}} </p> 
+    </ion-list>
    
-</ion-row>
-   <ion-list >
-      <ion-item *ngFor="let name of names; let l=index" (click)="route(l)">{{ name }}</ion-item>
-  </ion-list>
-  <ion-label>Cust Routes</ion-label>
-    <ion-list ion-item *ngFor="let item of custs; let e=index" (click)="route2(e)">Αναχώηση:{{ item.depdate }}, {{item.deptime}}, {{item.pickupadd1}}
-       <ion-row>
-       Άφιξη: {{item.returndate}}, {{item.returntime}}, {{item.pickupadd2}} 
-     </ion-row>
-  </ion-list>  
-</ion-content> -->
+   
+    
+  </ion-content> -->
+  
+  <!-- 
+  <div class="myiontab">
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-buttons class="addBtn"  vertical="bottom" horizontal="center" translucent="true">
+        <button class="adBtn2">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-tab-bar>
+  
+  </div>
+
+
+
+
 
 <ion-menu side="start" content-id="main-content">
 
@@ -109,7 +223,7 @@
       <ion-label class="destination" >{{item.pickupadd2}}</ion-label> <br>
       <ion-label class="date">{{item.returndate}}</ion-label>
     </ion-item>
-    <p class="text-md-danger" >{{'routelist-invalidDate.title' | translate}} </p>
+    <p class="text-md-danger" >{{'routelist-invalidDate.title' | translate}} </p> 
     </ion-list>
 
       <ion-list>
@@ -124,7 +238,7 @@
       <ion-label class="destination" >{{routes[m]}}</ion-label> <br>
       <ion-label class="date">{{name}}</ion-label>
     </ion-item>
-    <p class="text-md-danger" >{{'routelist-invalidDate.title' | translate}} </p>
+    < <p class="text-md-danger" >{{'routelist-invalidDate.title' | translate}} </p> 
     </ion-list>
    
    
@@ -160,4 +274,4 @@
     </ion-tab-bar>
   
   </div>
-
+ -->

@@ -58,25 +58,29 @@
       <ion-img class="centerItems" src="assets/images/wallet_board.svg">
       
       </ion-img>
-      <p class="money">{{currencyValue}}{{currencyIcon}}</p>
+
+     
+        <p *ngFor="let wallet of wallets" class="money">{{wallet.euro}}</p> 
+ 
+
     </ion-item>
+    
 
-
-     <div class="centerItems styleItems ion-padding">
+  <form [formGroup]="paymentForm" (ngSubmit)="submit()">
+    <div class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-transactionType.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select [(ngModel)]="selectedValue" (ionChange)="confirm()" interface="action-sheet">
+        <ion-select formControlName="typeOfPayment" (onChange)="sendData()" [(ngModel)]="selectedValue" (ionChange)="confirm()" interface="action-sheet">
           <ion-select-option  *ngFor="let type of types" [value]="type">
                       {{type}}
           </ion-select-option>
         </ion-select>
       </ion-item >
     </div>
-
     <div *ngIf="eng" class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-transaction.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select [(ngModel)]="checkpointen"  interface="action-sheet">
+        <ion-select formControlName="transactionType" (onChange)="sendData()" [(ngModel)]="checkpointen"  interface="action-sheet">
           <ion-select-option  *ngFor="let enlang of enlangs" [value]="enlang">
                       {{enlang}}
           </ion-select-option>
@@ -87,7 +91,7 @@
      <div *ngIf="el" class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-transaction.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select [(ngModel)]="checkpointel"  interface="action-sheet">
+        <ion-select formControlName="otherTransactionType" (onChange)="sendData()" [(ngModel)]="checkpointel"  interface="action-sheet">
           <ion-select-option  *ngFor="let ellang of ellangs" [value]="ellang">
                       {{ellang}}
           </ion-select-option>
@@ -98,39 +102,40 @@
     <div class="centerItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-amount.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-input name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
+        <ion-input formControlName="ammountOfPayment" (onChange)="sendData()" name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
       </ion-item>
     </div>
+    <div class="myiontab">
 
+      <ion-tab-bar slot="bottom" class="ion-no-border">
+        <ion-buttons class="addBtn" type="submit" vertical="bottom" horizontal="center" translucent="true">
+          <button (click)="sendData()"  class="adBtn2">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
+          <ion-icon class="iconStyling" name="home"></ion-icon>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="wallet" class="comments" (click)="navigateToWalletPage()">
+          <ion-icon class="iconStyling" name="wallet"></ion-icon>
+        </ion-tab-button>
+    
+        <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
+    
+        <ion-tab-button tab="route-history" class="notifs" (click)="navigateToRouteHistoryPage()">
+          <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="settings" (click)="navigateToSettingsPage()">
+          <ion-icon class="iconStyling" name="settings"></ion-icon>
+        </ion-tab-button>
+      </ion-tab-bar>
+    
+    </div>
+  
+  </form>
 
   </ion-content>
   <!-- ---------------- !!!!!! ---------------- --> 
-  <div class="myiontab">
-
-    <ion-tab-bar slot="bottom" class="ion-no-border">
-      <ion-buttons class="addBtn" (click)="navigateToRouteListPage()" vertical="bottom" horizontal="center" translucent="true">
-        <button (click)="navigateToRouteListPage()" class="adBtn2">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
-        <ion-icon class="iconStyling" name="home"></ion-icon>
-      </ion-tab-button>
   
-      <ion-tab-button tab="wallet" class="comments" (click)="navigateToWalletPage()">
-        <ion-icon class="iconStyling" name="wallet"></ion-icon>
-      </ion-tab-button>
-  
-      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
-  
-      <ion-tab-button tab="route-history" class="notifs" (click)="navigateToRouteHistoryPage()">
-        <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="settings" (click)="navigateToSettingsPage()">
-        <ion-icon class="iconStyling" name="settings"></ion-icon>
-      </ion-tab-button>
-    </ion-tab-bar>
-  
-  </div>
-

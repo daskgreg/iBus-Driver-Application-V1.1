@@ -40,6 +40,7 @@
     "cordova-plugin-background-fetch": "^6.1.1",
     "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-device": "^2.0.3",
+    "date-fns": "^2.17.0",
     "firebase": "^8.2.6",
     "firebaseui": "^4.7.3",
     "firebaseui-angular": "^5.1.1",

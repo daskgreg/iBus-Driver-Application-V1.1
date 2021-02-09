@@ -49,10 +49,7 @@ export class RoutestartedPage implements OnInit {
   startRoute(){
     console.log("the route has started");
     alert('Route has started');
-
-    setTimeout((isClick) => { this.router.navigate(['map']) }, 3000);
-
-    
+    setTimeout((isClick) => { this.router.navigate(['map']) }, 3000);    
   }
 
   

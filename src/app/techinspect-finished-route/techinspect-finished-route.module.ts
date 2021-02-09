@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WalletPageRoutingModule } from './wallet-routing.module';
+import { TechinspectFinishedRoutePageRoutingModule } from './techinspect-finished-route-routing.module';
 
-import { WalletPage } from './wallet.page';
+import { TechinspectFinishedRoutePage } from './techinspect-finished-route.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -14,11 +14,11 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     IonicModule,
-    WalletPageRoutingModule,
+    TechinspectFinishedRoutePageRoutingModule,
     TranslateModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [WalletPage]
+  declarations: [TechinspectFinishedRoutePage]
 })
-export class WalletPageModule {}
+export class TechinspectFinishedRoutePageModule {}

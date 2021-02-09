@@ -59,6 +59,9 @@ ion-fab{
 }
 
 .myiontab{
+    position: relative;
+    top: 10px;
+    padding-top: 199px;
 	ion-fab {
 		margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
 		ion-fab-button {
@@ -190,25 +193,38 @@ ion-select{
     padding: 4px 5px 5px 29px;
     text-align: center;
 }
+.money{
+    position: absolute;
+    color: white;
+    justify-content: center;
+    display: flex;
+    background-color: transparent;
+    font-size: 80px;
+    width: 100%;
+    font-family: monteBold;
+}
 .md .money{
     position: absolute;
     color: white;
     justify-content: center;
-    width: 100%;
     display: flex;
+    background-color: transparent;
     font-size: 80px;
+    width: 100%;
     font-family: monteBold;
-    top:-40px;
+    
+   
+   
 }
 .ios .money{
     position: absolute;
     color: white;
     justify-content: center;
-    width: 100%;
     display: flex;
+    background-color: transparent;
     font-size: 80px;
+    width: 100%;
     font-family: monteBold;
-    top:-40px;
 }
 ion-input{
     font-size: 21px;

@@ -330,7 +330,7 @@ for (var i = 0; i < polylines.length; i++) {
     alert("Τέλος δρομολογίου από τη θέση " + this.latitude + "," + this.longitude + " και ώρα " + endDate + ".");
     this.telos=1;
     if(this.telos == 1 ){
-      this.router.navigate(['techinspect']);
+      this.router.navigate(['techinspect-finished-route']);
     }else {
       alert("Το δρομολόγιο δεν έχει τελειώσει");
     }

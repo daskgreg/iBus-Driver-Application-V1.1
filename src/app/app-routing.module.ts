@@ -119,6 +119,14 @@ const routes: Routes = [
     path: 'privacy',
     loadChildren: () => import('./privacy/privacy.module').then( m => m.PrivacyPageModule)
   },
+  {
+    path: 'techinspect-finished-route',
+    loadChildren: () => import('./techinspect-finished-route/techinspect-finished-route.module').then( m => m.TechinspectFinishedRoutePageModule)
+  },
+  {
+    path: 'techinspect-finished-route',
+    loadChildren: () => import('./techinspect-finished-route/techinspect-finished-route.module').then( m => m.TechinspectFinishedRoutePageModule)
+  },
 ];
 
 @NgModule({

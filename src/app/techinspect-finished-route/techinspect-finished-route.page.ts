@@ -3,14 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-@Component({
-  selector: 'app-techinspect',
-  templateUrl: './techinspect.page.html',
-  styleUrls: ['./techinspect.page.scss'],
-})
-export class TechinspectPage implements OnInit {
 
-	techchk_json=[{"checkpoint_id": "33", "checkpoint_gre": "Τα στοιχεία του οχήματος (πινακίδες κυκλοφορίας, αρ. πλαισίου, αρ. κινητήρα σύμφωνα με την άδεια. κυκλοφορίας).", "checkpoint_eng": "Vehicle details (registration plates, chassis number, engine number according to the license. Registration)."},
+@Component({
+  selector: 'app-techinspect-finished-route',
+  templateUrl: './techinspect-finished-route.page.html',
+  styleUrls: ['./techinspect-finished-route.page.scss'],
+})
+export class TechinspectFinishedRoutePage implements OnInit {
+
+  techchk_json=[{"checkpoint_id": "33", "checkpoint_gre": "Τα στοιχεία του οχήματος (πινακίδες κυκλοφορίας, αρ. πλαισίου, αρ. κινητήρα σύμφωνα με την άδεια. κυκλοφορίας).", "checkpoint_eng": "Vehicle details (registration plates, chassis number, engine number according to the license. Registration)."},
 	{"checkpoint_id": "34", "checkpoint_gre": "Το όχημα εσωτερικά- εξωτερικά (οπτικώς).", "checkpoint_eng": "The vehicle internally-externally (visually)."},
 	{"checkpoint_id": "35", "checkpoint_gre": "Ο εξοπλισμός του οχήματος (τρίγωνο, πυροσβεστήρας, φαρμακείο).", "checkpoint_eng": "The equipment of the vehicle (triangle, fire extinguisher, pharmacy)."},
 	{"checkpoint_id": "36", "checkpoint_gre": "Η πίεση των ελαστικών- η ύπαρξη ρεζέρβας.", "checkpoint_eng": "The tire pressure - the existence of a reserve."},
@@ -185,7 +186,7 @@ sendData(myCommentForm){
 
       setTimeout(() => {
         loader.dismiss();
-        this.router.navigate(['routestarted']);
+        this.router.navigate(['routelist/', 200]);  
       }, 1000);
       console.log(data);
     })
@@ -229,5 +230,6 @@ sendData(myCommentForm){
   navigateToStartRoutePage(){
     this.router.navigate(['routestarted']);
   }
+
 
 }

@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./register2.page.scss'],
 })
 export class Register2Page {
-
+  //greg 
   get country(){
     return this.registrationForm2.get('country');
   }

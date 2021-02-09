@@ -1,5 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.page.html',
@@ -32,15 +35,60 @@ export class WalletPage implements OnInit {
 	checkpointen:any;
 	checkpointel:any;
 
-  constructor(private router : Router) { 
+	//greg 
+
+	get typeOfPayment(){
+		return this.paymentForm.get('typeOfPayment');
+	}
+	get transactionType(){
+		return this.paymentForm.get('transactionType');
+	}
+	get otherTransactionType(){
+		return this.paymentForm.get('otherTransactionType');
+	}
+	get ammountOfPayment(){
+		return this.paymentForm.get('ammountOfPayment');
+	}
+
+	public errorMessages = {
+		typeOfPayment: [
+			{ type: 'required', message: 'Type of payment is required'},
+		],
+		ammountOfPayment: [
+			{ type: 'required', message: 'Amount of Payment is required'},
+		]
+	}
+
+	paymentForm = this.formBuilder.group({
+		typeOfPayment: ['', [Validators.required]],
+		ammountOfPayment: ['', [Validators.required]],
+		transactionType:[''],
+		otherTransactionType:['']
+	})
+
+	serviceRegistration:any="";
+	dataFromService:any="";
+  constructor(public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder) { 
   	console.log(this.language);
   	this.enlangs=[];
   	this.ellangs=[];
   	this.ids=[];
   }
 
+  wallets: any = [];
+
   ngOnInit() {
+	
   }
+  ionViewWillEnter(){
+	console.log('wallet');
+	this.http.get('http://localhost:3000/wallet').subscribe( (data) => {
+		console.log(data);
+		this.wallets = data;
+	})
+  }
+
+  
   confirm(){
   	this.enlangs=[];
   	this.ellangs=[];
@@ -108,9 +156,40 @@ export class WalletPage implements OnInit {
   		alert( this.amount + " ευρώ ως " + this.selectedValue + " για την συνναλαγή " + this.checkpointel);
   	}
   }
-  navigateToFeedPage(){
-    this.router.navigate(['routelist'])
-  }
+ 
+
+  public submit(){
+  
+	console.log(this.paymentForm.value);
+	var myPaymentForm = this.paymentForm.value;
+	this.sendData(myPaymentForm).subscribe(
+	async (dataReturnFromService) => {
+		let loader = await this.loadingCtrl.create({
+			message: "Wallet is Updated"
+		});
+		loader.present();
+	this.dataFromService = JSON.stringify(dataReturnFromService);
+	console.log(JSON.stringify(dataReturnFromService));
+	console.log( dataReturnFromService['_body'] );
+	setTimeout(() => {
+		loader.dismiss();
+		this.router.navigate(['routestarted']);
+	  }, 1000);
+	//this.router.navigate(['register3']);
+
+	}, error => {
+	console.log(error);
+	});
+} 
+
+sendData(myPaymentForm){
+	var url="http://localhost:3000/walletDetails";
+	return this.http.post(url,myPaymentForm,
+		{headers:new HttpHeaders(
+		{ "content-type":"application/json"
+		})})
+
+}
   navigateToSettingsPage(){
     this.router.navigate(['settings'])
   }
@@ -126,9 +205,7 @@ export class WalletPage implements OnInit {
   navigateToProfilePage(){
     this.router.navigate(['profile'])
   }
-  navigateToRouteListPage(){
-    this.router.navigate(['routelist'])
-  }
+
   navigateToNotificationsPage(){
 	  this.router.navigate(['notifications']);
   }

@@ -155,7 +155,11 @@ ionic-selectable{
     opacity: 1 !important;
     text-align: center;  
 }
+
 .myiontab{
+    position: relative;
+    top: 10px;
+    padding-top: 250px;
 	ion-fab {
 		margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
 		ion-fab-button {
