@@ -1,0 +1,450 @@
+{
+	"LOGIN":{
+		"title":"Login",
+	"greeting":"Hey Login",
+	"withcode":"<br><br>You are <br><br>!",
+	"btn":"Show Alert"
+},
+"ALERT":{
+	"header":"Error",
+	"msg":"There was a problem"
+},
+"LOGIN-WELCOME":{
+		"title":"Login iBus Driver",
+	"greeting":"Καλωςόρισες",
+	"withcode":"<br><br>Είσαι <br><br>!",
+	"btn":"Show Alert"
+},
+"LOGIN-DETAILS":{
+		"title":"Enter your login details to"
+	
+},
+"LOGIN-ACCESS":{
+		"title":"access your account"
+	
+},
+"LOGIN-PHONE":{
+		"title":"Phone Number"
+	
+},
+"LOGIN-PASSWORD":{
+		"title":"Password"
+	
+},
+"LOGIN-FORGOT":{
+		"title":"Did you forgot your password?"
+	
+},
+"LOGIN-ACCOUNT":{
+		"title":"Don't have an Account?"
+	
+},
+"LOGIN-REGISTER":{
+		"title":"REGISTER NOW"
+	
+},
+"routelist-search":{
+		"title":"Search Routes"
+	
+},
+"routelist-from":{
+		"title":"FROM"
+	
+},
+"routelist-to":{
+		"title":"TO"
+	
+},
+"routelist-currentDate":{
+		"title":"Current Date"
+	
+},
+"routelist-accept":{
+		"title":"ACCEPT"
+	
+},
+"routelist-available":{
+		"title":"Available"
+	
+},
+"routelist-invalidDate":{
+		"title":"Inavalid Date Selection"
+	
+},
+"routelist-myRoutes":{
+		"title":"My Routes"
+	
+},
+"routelist-menu":{
+		"title":"Menu"
+	
+},
+"routelist-myWallet":{
+		"title":"My Wallet"
+	
+},
+"routelist-routeHistory":{
+		"title":"Route History"
+	
+},
+"routelist-techHistory":{
+		"title":"Tech History"
+	
+},
+"routelist-profile":{
+		"title":"Profile"
+	
+},
+"routelist-settings":{
+		"title":"Settings"
+	
+},
+"routelist-logout":{
+		"title":"Logout"
+	
+},
+"vehicleCheck-check":{
+		"title":"Vehicle Check"
+	
+},
+"vehicleCheck-pleaseCheck":{
+		"title":"Please check the Vehicle before starting route"
+	
+},
+"vehicleCheck-checkArea":{
+		"title":"Check Area"
+	
+},
+"vehicleCheck-comments":{
+		"title":"Please write your comments"
+	
+},
+"vehicleCheck-start":{
+		"title":"START"
+	
+},
+"routeStarted-myRoute":{
+		"title":"My Route"
+	
+},
+"routeStarted-startRoute":{
+		"title":"START ROUTE"
+	
+},
+"routeStarted-map":{
+		"title":"MAP"
+	
+},
+"routeStarted-passengers":{
+		"title":"VIEW PASSENGERS"
+	
+},
+"routeStarted-routeDetails":{
+		"title":"ROUTE DETAILS"
+	
+},
+"myWallet-balance":{
+		"title":"CURRENT BALANCE"
+	
+},
+"myWallet-transactionType":{
+		"title":"Transaction Type"
+	
+},
+"myWallet-transaction":{
+		"title":"Select Transaction"
+	
+},
+"myWallet-amount":{
+		"title":"Insert Amount"
+	
+},
+"settings-distance":{
+		"title":"Distance Unit"
+	
+},
+"settings-currency":{
+		"title":"Currency"
+	
+},
+"settings-language":{
+		"title":"Language"
+	
+},
+"settings-maintenance":{
+		"title":"Maintenance"
+	
+},
+"maintenance-details":{
+		"title":"Insert Details"
+	
+},
+"maintenance-daysOut":{
+		"title":"Days out of service"
+	
+},
+"maintenance-daysIn":{
+		"title":"Days in service"
+	
+},
+"maintenance-send":{
+		"title":"SEND"
+	
+},
+"maintenance-service":{
+		"title":"SERVICE"
+	
+},
+"maintenance-carWash":{
+		"title":"CAR WASH"
+	
+},
+"maintenance-accident":{
+		"title":"ACCIDENT"
+	
+},
+"maintenance-company":{
+		"title":"COMPANY"
+	
+},
+"routedetails-start":{
+		"title":"The Start"
+	
+},
+"routedetails-details":{
+		"title":"Routing Details"
+	
+},
+"routedetails-end":{
+		"title":"The End"
+	
+},
+"passengers-list":{
+		"title":"Passengers List"
+	
+},
+"passengers-personal":{
+		"title":"Personal Details"
+	
+},
+"passengers-name":{
+		"title":"Name"
+	
+},
+"passengers-lastName":{
+		"title":"Last Name"
+	
+},
+"passengers-phone":{
+		"title":"Phone"
+	
+},
+"passengers-email":{
+		"title":"Email"
+	
+},
+"map-end":{
+		"title":"END"
+	
+},
+"map-start":{
+		"title":"START"
+	
+},
+"forgot-title":{
+		"title":"Password Recovery"
+	
+},
+"forgot-method":{
+		"title":"Select the method your prefer"
+	
+},
+"forgot-recover":{
+		"title":"to recover your password"
+	
+},
+"forgot-email":{
+		"title":"Email"
+	
+},
+"forgot-phone":{
+		"title":"Phone number"
+	
+},
+"forgot-send":{
+		"title":"SEND"
+	
+},
+"passrec-recovery":{
+		"title":"Recovery"
+	
+},
+"passrec-success":{
+		"title":"Successfull"
+	
+},
+"passrec-emailsend":{
+		"title":"An email has been sent"
+	
+},
+"passrec-emailsend2":{
+		"title":"to your email account"
+	
+},
+"passrec-verify":{
+		"title":"please verify before"
+	
+},
+"passrec-trylogin":{
+		"title":"trying to login"
+	
+},
+"passrec-login":{
+		"title":"LOGIN"
+	
+},
+"register-info1":{
+		"title":"Personal Information I"
+	
+},
+"register-info":{
+		"title":"Personal Details"
+	
+},
+"register-addressinfo":{
+		"title":"Address Details"
+	
+},
+"register-driverinfo":{
+		"title":"Driver Details"
+	
+},
+"register-form":{
+		"title":"Fill the form"
+	
+},
+"register-fname":{
+		"title":"First name"
+	
+},
+"register-lname":{
+		"title":"Last name"
+	
+},
+"register-confirmpass":{
+		"title":"Confirm Password"
+	
+},
+"register-pass":{
+		"title":"Password"
+	
+},
+"register-next":{
+		"title":"NEXT"
+	
+},
+"register2-info2":{
+		"title":"Personal Information II"
+	
+},
+"register2-country":{
+		"title":"Country"
+	
+},
+"register2-state":{
+		"title":"State"
+	
+},
+"register2-address":{
+		"title":"Address"
+	
+},
+"register2-zip":{
+		"title":"Zip Code"
+	
+},
+"register3-lnumber":{
+		"title":"Driver's Licence Number"
+	
+},
+"register3-licence":{
+		"title":"Driver's Licence"
+	
+},
+"register3-insurance":{
+		"title":"Insurance Licence"
+	
+},
+"register3-profilepic":{
+		"title":"Profile Photo"
+	
+},
+"registercom-emailverify":{
+		"title":"Email Verification"
+	
+},
+"registercom-regcomplete":{
+		"title":"Registration Completed"
+	
+},
+"registercom-success":{
+		"title":"Successfully"
+	
+},
+"registercom-return":{
+		"title":"RETURN TO LOGIN"
+	
+},
+"profile-profile":{
+		"title":"Profile"
+	
+},
+"profile-fname":{
+		"title":"First name"
+	
+},
+"profile-lname":{
+		"title":"Last name"
+	
+},
+"profile-address":{
+		"title":"Address"
+	
+},
+"profile-city":{
+		"title":"City"
+	
+},
+"profile-state":{
+		"title":"State"
+	
+},
+"profile-email":{
+		"title":"Email"
+	
+},
+"profile-phone":{
+		"title":"Phone number"
+	
+},
+"profile-licensenum":{
+		"title":"Licence Number"
+	
+},
+"profile-platenum":{
+		"title":"Plate Number"
+	
+},
+"profile-passcon":{
+		"title":"Confirm Password"
+	
+},
+"profile-pass":{
+		"title":"Password"
+	
+},
+"profile-update":{
+		"title":"UPDATE"
+	
+}
+}

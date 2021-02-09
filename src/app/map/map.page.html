@@ -1,0 +1,84 @@
+<ion-content class="background">
+ <div #map id="map"></div>
+<!--   <div >
+        <ion-button class="btn-primary" ion-button (click)="startWithoutApi()" style="background-color:green; display: inline-block;width:32%;border-right:0;border-left:0">
+            Start
+          </ion-button>
+        <ion-button class="btn-primary" ion-button (click)="navigation()" style="display: inline-block;width:32%;" >
+            Navigate
+         </ion-button>
+      
+      
+     
+      <ion-button class="btn-primary" ion-button (click)="endWithoutApi()" style="background-color:red;border-right:0;width:32%; display: inline-block;border-left:0">
+         End
+      </ion-button>
+         
+    
+</div> -->
+ <!-- <ion-button class="btn-primary" ion-button (click)="inspect()" style="background-color:red;border-right:0;width:32%; display: inline-block;border-left:0">
+         Tech Inspect
+      </ion-button> -->
+      <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button (click)="navigateToRouteOnGoPage()">
+      <ion-icon name=arrow-back></ion-icon>
+    </ion-fab-button>
+     
+  </ion-fab>
+</ion-content>
+
+
+
+<!--  <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button tab="routelist" (click)="startWithoutApi()">
+        Start
+      </ion-tab-button>
+  
+      <ion-tab-button tab="wallet" class="comments" (click)="endWithoutApi()">
+        End
+      </ion-tab-button>
+      <ion-tab-button tab="wallet" class="comments" (click)="inspect()">
+        Tech Inspect
+      </ion-tab-button>
+    </ion-tab-bar> -->
+
+
+ 
+<div class="maptab">
+  <ion-fab *ngIf="hideBackBtn" class="backBtn"  vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button class="backBtnStyle" (click)="navigateToRouteOnGoPage()">
+      <ion-icon name=arrow-back></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab *ngIf="hideEndBtn" class="endBtn" vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button class="endBtnStyle" (click)="endWithoutApi()">
+      <button class="endBtnFont" >{{'map-end.title' | translate}}</button>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab *ngIf="hideCustomBtn" class="customBtn" vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button class="customBtnStyle" (click)="startWithoutApi()">
+      <button class="customBtnFont" >{{'map-start.title' | translate}}</button>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button class="menuBtn" (click)="showBtn()" >
+      <ion-icon name="apps"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
+
+
+
+<!-- <ion-content padding class="background">
+ INSERT MAP HERE
+ <div #map id="map"></div>
+
+</ion-content>
+<ion-tabs>  
+
+  <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button (click)="navigateToRouteOnGoPage()">
+      <ion-icon name=arrow-back></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-tabs> -->

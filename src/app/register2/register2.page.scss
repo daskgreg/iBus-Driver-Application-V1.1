@@ -1,0 +1,146 @@
+.registration-page{
+    position:relative;
+    top:55px;
+    z-index:200;
+}
+
+.back-btn{
+    position: relative;
+    bottom: 30px;
+    left:20px;
+    width:50px;
+    height: 50px;
+}
+
+.arrow-back{
+    position: relative;
+    left: 10px;
+    top: -6px;
+}
+.toolbar-title{
+    font-size:16px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-blue);   
+    position:relative;
+    bottom:2px;
+}
+// img{
+//     position:relative;
+//     left:35px;
+// }
+.registration-desc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: monteBold;
+    font-size: 26px;
+    color: var(--ion-color-ibus-darkblue);
+    position: relative;
+    top: 65px;
+}
+
+
+#form {
+    margin-top:5px;
+    padding-left:30px;
+    padding-right:30px;
+    background-color:white;
+    position: relative;
+    top:100px;
+}
+ion-icon{
+    position: absolute;
+    right: 29px;
+    color: var(--ion-color-ibus-darkblue);
+}
+
+ion-input{
+    height: 80px;
+    font-size:15px;
+    color:var(--ion-color-ibus-darkblue);
+    font-family:monteMedium;
+    margin-top:3%;
+    border-radius:21px;
+    position:relative;
+    border:2px solid var(--ion-color-ibus-blue);
+    text-align: center;
+    
+}
+
+.btn-send{
+    height: 60px;
+    height:18;
+    text-align:center;
+    color:white;
+    font-family: monteBold;
+    font-size:13px;
+    border-radius: 21px;
+    background-image: linear-gradient(180deg, #4E98FF 90%,#4E98FF 10%);
+    margin-top:7%;
+}
+
+.steps-desc{
+    position:relative;
+    top:10px;
+}
+.step-1{
+    position:relative;
+    left:30px;
+    font-size:11px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-darkblue);
+}
+.step-2{
+    position:relative;
+    left:70px;
+    font-size:11px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-darkblue);
+}
+.step-3{
+    position:relative;
+    left:120px;
+    font-size:11px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-darkblue);
+}
+@media only screen and (max-width: 428px) {
+ 
+    .steps-desc{
+        position:relative;
+        top:10px;
+        left:7px;
+    }
+}
+@media only screen and (max-width: 414px) {
+ 
+    .steps-desc{
+        position:relative;
+        top:10px;
+        left:0px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .steps-desc{
+        display:none;
+    }
+    .toolbar-title{
+        font-size: 14px;
+        font-family: monteBold;
+        color: var(--ion-color-ibus-blue);
+        position: relative;
+        top:-2px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .steps-desc{
+        display:none;
+    }
+    .toolbar-title{
+        font-size: 12px;
+        font-family: monteBold;
+        color: var(--ion-color-ibus-blue);
+        position: relative;
+        top:-5px;
+    }
+}

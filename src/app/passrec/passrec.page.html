@@ -1,0 +1,30 @@
+
+<ion-content>
+  <div class="registration-page">
+  <ion-toolbar color="blue">
+    <ion-title class="toolbar-title center">{{'passrec-recovery.title' | translate}}</ion-title>
+    <ion-buttons>
+    <ion-button routerLink="/forgotpass" class="back-btn"><ion-icon class="arrow-back" slot="start" name="arrow-back"></ion-icon></ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+
+
+  <div class="registration-completed-desc">
+    <a class="reg-title1">{{'forgot-title.title' | translate}}</a>
+    <a class="reg-title2">{{'passrec-success.title' | translate}}</a>
+    <img src="assets/images/pass_recover_check.svg" alt="Registration is Completed" />
+  </div>
+
+
+
+  <div class="email-verification-desc">
+    <a>{{'passrec-emailsend.title' | translate}}</a>
+    <a>{{'passrec-emailsend2.title' | translate}}</a>
+    <a>{{'passrec-verify.title' | translate}}</a>
+    <a>{{'passrec-trylogin.title' | translate}}</a>
+  </div>
+  <form id="form">
+  <ion-button class="btn-send" expand="block" routerLink="/login" shape="round">{{'passrec-login.title' | translate}}</ion-button>
+</form>
+</div>
+</ion-content>

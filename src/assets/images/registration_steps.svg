@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="347" height="80" viewBox="0 0 347 80">
+  <g id="Group_54" data-name="Group 54" transform="translate(-43 -159.895)">
+    <g id="Ellipse_10" data-name="Ellipse 10" transform="translate(43 159.895)" fill="#1d3557" stroke="#1d3557" stroke-width="3">
+      <ellipse cx="39" cy="38.5" rx="39" ry="38.5" stroke="none"/>
+      <ellipse cx="39" cy="38.5" rx="37.5" ry="37" fill="none"/>
+    </g>
+    <line id="Line_8" data-name="Line 8" x2="57.909" transform="translate(120.398 199.841)" fill="none" stroke="#1d3557" stroke-width="3"/>
+    <g id="Ellipse_11" data-name="Ellipse 11" transform="translate(177 161.895)" fill="#1d3557" stroke="#1d3557" stroke-width="3">
+      <ellipse cx="39" cy="38.5" rx="39" ry="38.5" stroke="none"/>
+      <ellipse cx="39" cy="38.5" rx="37.5" ry="37" fill="none"/>
+    </g>
+    <line id="Line_9" data-name="Line 9" x2="58.879" transform="translate(253.831 200.955)" fill="none" stroke="#1d3557" stroke-width="3"/>
+    <g id="Ellipse_12" data-name="Ellipse 12" transform="translate(312 163.895)" fill="#1d3557" stroke="#1d3557" stroke-width="3">
+      <ellipse cx="39" cy="38" rx="39" ry="38" stroke="none"/>
+      <ellipse cx="39" cy="38" rx="37.5" ry="36.5" fill="none"/>
+    </g>
+    <text id="_1" data-name="1" transform="translate(82 208.895)" fill="#fff" font-size="27" font-family="Futura-Medium, Futura" font-weight="500" letter-spacing="-0.02em"><tspan x="-8.332" y="0">1</tspan></text>
+    <text id="_2" data-name="2" transform="translate(216 211.895)" fill="#fff" font-size="27" font-family="Futura-Medium, Futura" font-weight="500" letter-spacing="-0.02em"><tspan x="-8.332" y="0">2</tspan></text>
+    <text id="_3" data-name="3" transform="translate(351 212.895)" fill="#fff" font-size="27" font-family="Futura-Medium, Futura" font-weight="500" letter-spacing="-0.02em"><tspan x="-8.332" y="0">3</tspan></text>
+  </g>
+</svg>

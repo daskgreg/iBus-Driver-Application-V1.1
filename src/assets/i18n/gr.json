@@ -1,0 +1,450 @@
+{
+	"LOGIN":{
+		"title":"Σύνδεση",
+	"greeting":"Καλωςόρισες",
+	"withcode":"<br><br>Είσαι <br><br>!",
+	"btn":"Show Alert"
+},
+"ALERT":{
+	"header":"Παρουσιάστηκε πρόβλημα",
+	"msg":"Παρουσιάστηκε πρόβλημα"
+},
+"LOGIN-WELCOME":{
+		"title":"Σύνδεση στο iBus Driver",
+	"greeting":"Καλωςόρισες",
+	"withcode":"<br><br>Είσαι <br><br>!",
+	"btn":"Show Alert"
+},
+"LOGIN-DETAILS":{
+		"title":"Εισάγετε τα στοιχεία σας για"
+	
+},
+"LOGIN-ACCESS":{
+		"title":"να εισέλθετε στον λογαριασμό σας"
+	
+},
+"LOGIN-PHONE":{
+		"title":"Αριθμός τηλεφώνου"
+	
+},
+"LOGIN-PASSWORD":{
+		"title":"Κωδικός"
+	
+},
+"LOGIN-FORGOT":{
+		"title":"Ξεχάσατε τον κωδικό σας;"
+	
+},
+"LOGIN-ACCOUNT":{
+		"title":"Δεν έχετε λογαριαμό;"
+	
+},
+"LOGIN-REGISTER":{
+		"title":"ΕΓΓΡΑΦΕΙΤΕ ΤΩΡΑ"
+	
+},
+"routelist-search":{
+		"title":"Αναζήτηση δρομολογίων"
+	
+},
+"routelist-from":{
+		"title":"ΑΠΟ"
+	
+},
+"routelist-to":{
+		"title":"ΕΩΣ"
+	
+},
+"routelist-currentDate":{
+		"title":"Τωρινή ημερομηνία"
+	
+},
+"routelist-accept":{
+		"title":"ΑΠΟΔΟΧΗ"
+	
+},
+"routelist-available":{
+		"title":"Διαθέσιμο"
+	
+},
+"routelist-invalidDate":{
+		"title":"Μη ¨Εγκυρη Επιλογή Ημερομηνίας"
+	
+},
+"routelist-myRoutes":{
+		"title":"Τα Δρομολόγια μου"
+	
+},
+"routelist-menu":{
+		"title":"Μενού"
+	
+},
+"routelist-myWallet":{
+		"title":"Το πορτοφόλι μου"
+	
+},
+"routelist-routeHistory":{
+		"title":"Ιστορικό Δρομολογίων"
+	
+},
+"routelist-techHistory":{
+		"title":"Ιστορικό Τεχνικών Ελέγχων"
+	
+},
+"routelist-profile":{
+		"title":"Προφίλ"
+	
+},
+"routelist-settings":{
+		"title":"Ρυθμίσεις"
+	
+},
+"routelist-logout":{
+		"title":"Αποσύνδεση"
+	
+},
+"vehicleCheck-check":{
+		"title":"Τεχνικός Έλεγχος"
+	
+},
+"vehicleCheck-pleaseCheck":{
+		"title":"Παρακαλώ ελέγξτε το όχημα πριν την εκκίνηση του δρομολογίου"
+	
+},
+"vehicleCheck-checkArea":{
+		"title":"Περιοχή Ελέγχου"
+	
+},
+"vehicleCheck-comments":{
+		"title":"Παρακαλώ εισάγετε τα σχόλια σας"
+	
+},
+"vehicleCheck-start":{
+		"title":"Εκκίνηση"
+	
+},
+"routeStarted-myRoute":{
+		"title":"Το δρομολόγιο μου"
+	
+},
+"routeStarted-startRoute":{
+		"title":"ΕΚΚΙΝΗΣΗ ΔΡΟΜΟΛΟΓΙΟΥ"
+	
+},
+"routeStarted-map":{
+		"title":"ΧΑΡΤΗΣ"
+	
+},
+"routeStarted-passengers":{
+		"title":"ΔΕΙΤΕ ΤΟΥΣ ΕΠΙΒΑΤΕΣ"
+	
+},
+"routeStarted-routeDetails":{
+		"title":"ΛΕΠΤΟΜΕΡΙΕΣ ΔΡΟΜΟΛΟΓΙΟΥ"
+	
+},
+"myWallet-balance":{
+		"title":"ΤΩΡΙΝΟ ΥΠΟΛΟΙΠΟ"
+	
+},
+"myWallet-transactionType":{
+		"title":"Τύπος Συναλλαγής"
+	
+},
+"myWallet-transaction":{
+		"title":"Επιλέξτε Συναλλαγή"
+	
+},
+"myWallet-amount":{
+		"title":"Εισάγετε το Ποσό"
+	
+},
+"settings-distance":{
+		"title":"Μονάδα Απόστασης"
+	
+},
+"settings-currency":{
+		"title":"Νόμισμα"
+	
+},
+"settings-language":{
+		"title":"Γλώσσα"
+	
+},
+"settings-maintenance":{
+		"title":"Συντήρηση"
+	
+},
+"maintenance-details":{
+		"title":"ΕΙσαγωγή Λεπτομεριών"
+	
+},
+"maintenance-daysOut":{
+		"title":"Μέρες εκτός συντήρησης"
+	
+},
+"maintenance-daysIn":{
+		"title":"Μέρες εντός συντήρησης"
+	
+},
+"maintenance-send":{
+		"title":"ΑΠΟΣΤΟΛΗ"
+	
+},
+"maintenance-service":{
+		"title":"ΣΥΝΕΡΓΕΙΟ"
+	
+},
+"maintenance-carWash":{
+		"title":"ΠΛΥΝΤΗΡΙΟ ΑΥΤΟΚΙΝΗΤΩΝ"
+	
+},
+"maintenance-accident":{
+		"title":"ΑΤΥΧΗΜΑ"
+	
+},
+"maintenance-company":{
+		"title":"ΕΤΑΙΡΙΑ"
+	
+},
+"routedetails-start":{
+		"title":"Αρχή"
+	
+},
+"routedetails-details":{
+		"title":"Λεπτομέριες Δρομολογίου"
+	
+},
+"routedetails-end":{
+		"title":"Τέλος"
+	
+},
+"passengers-list":{
+		"title":"Λίστα Επιβατών"
+	
+},
+"passengers-personal":{
+		"title":"Προσωπικά στοιχεία"
+	
+},
+"passengers-name":{
+		"title":"Όνομα"
+	
+},
+"passengers-lastName":{
+		"title":"Επίθετο"
+	
+},
+"passengers-phone":{
+		"title":"Τηλέφωνο"
+	
+},
+"passengers-email":{
+		"title":"Email"
+	
+},
+"map-end":{
+		"title":"ΤΕΛΟΣ"
+	
+},
+"map-start":{
+		"title":"ΑΡΧΗ"
+	
+},
+"forgot-title":{
+		"title":"Ανάκτηση Κωδικού"
+	
+},
+"forgot-method":{
+		"title":"Επιλέξτε την μέθοδο που προτιμάτε"
+	
+},
+"forgot-recover":{
+		"title":"για να ανακτήσετε τον κωδικό σας"
+	
+},
+"forgot-email":{
+		"title":"Email"
+	
+},
+"forgot-phone":{
+		"title":"Αριθμός τηλεφώνου"
+	
+},
+"forgot-send":{
+		"title":"ΑΠΟΣΤΟΛΗ"
+	
+},
+"passrec-recovery":{
+		"title":"Ανάκτηση"
+	
+},
+"passrec-success":{
+		"title":"Επιτυχής"
+	
+},
+"passrec-emailsend":{
+		"title":"Έχει σταλθεί ένα email"
+	
+},
+"passrec-emailsend2":{
+		"title":"στη διεύθυνση email σας"
+	
+},
+"passrec-verify":{
+		"title":"παρακαλώ επαληθεύστε πριν"
+	
+},
+"passrec-trylogin":{
+		"title":"προσπαθήσετε να συνδεθείτε"
+	
+},
+"passrec-login":{
+		"title":"ΣΥΝΔΕΣΗ"
+	
+},
+"register-info1":{
+		"title":"Προσωπικά Στοιχεία I"
+	
+},
+"register-info":{
+		"title":"Προσωπικά Στοιχεία"
+	
+},
+"register-addressinfo":{
+		"title":"Στοιχεία Διεύθυνσης"
+	
+},
+"register-driverinfo":{
+		"title":"Στοιχεία Οδηγού"
+	
+},
+"register-form":{
+		"title":"Συμπληρώστε την φόρμα"
+	
+},
+"register-fname":{
+		"title":"Όνομα"
+	
+},
+"register-lname":{
+		"title":"Επίθετο"
+	
+},
+"register-confirmpass":{
+		"title":"Επαλήθευση Κωδικού"
+	
+},
+"register-pass":{
+		"title":"Κωδικός"
+	
+},
+"register-next":{
+		"title":"ΕΠΟΜΕΝΟ"
+	
+},
+"register2-info2":{
+		"title":"Προσωπικά Στοιχεία II"
+	
+},
+"register2-country":{
+		"title":"Χώρα"
+	
+},
+"register2-state":{
+		"title":"Πόλη"
+	
+},
+"register2-address":{
+		"title":"Διεύθυνση"
+	
+},
+"register2-zip":{
+		"title":"Ταχυδρομικός Κώδικας"
+	
+},
+"register3-lnumber":{
+		"title":"Αριθμός Διπλώματος Οδηγού"
+	
+},
+"register3-licence":{
+		"title":"Δίπλωμα Όδηγου"
+	
+},
+"register3-insurance":{
+		"title":"Ασφάλεια Οχήματος"
+	
+},
+"register3-profilepic":{
+		"title":"Φωτογραφία Προφίλ"
+	
+},
+"registercom-emailverify":{
+		"title":"Επαλήθευση Email"
+	
+},
+"registercom-regcomplete":{
+		"title":"Η Εγγραφή Ολοκληρώθηκε"
+	
+},
+"registercom-success":{
+		"title":"Με Επιτυχία"
+	
+},
+"registercom-return":{
+		"title":"ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΥΝΔΕΣΗ"
+	
+},
+"profile-profile":{
+		"title":"Προφίλ"
+	
+},
+"profile-fname":{
+		"title":"Όνομα"
+	
+},
+"profile-lname":{
+		"title":"Επίθετο"
+	
+},
+"profile-address":{
+		"title":"Διεύθυνση"
+	
+},
+"profile-city":{
+		"title":"Πόλη"
+	
+},
+"profile-state":{
+		"title":"Περιοχή"
+	
+},
+"profile-email":{
+		"title":"Email"
+	
+},
+"profile-phone":{
+		"title":"Αριθμός τηλεφώνου"
+	
+},
+"profile-licensenum":{
+		"title":"Αριθμός Διπλώματος"
+	
+},
+"profile-platenum":{
+		"title":"Αριθμός Πινακίδας"
+	
+},
+"profile-passcon":{
+		"title":"Επαλήθευση Κωδικού"
+	
+},
+"profile-pass":{
+		"title":"Κωδικός"
+	
+},
+"profile-update":{
+		"title":"ΕΝΗΜΕΡΩΣΗ"
+	
+}
+}

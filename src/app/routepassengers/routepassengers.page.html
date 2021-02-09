@@ -1,0 +1,148 @@
+<ion-menu side="start" content-id="main-content">
+
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title class="menuToolbar" >{{'routelist-menu.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/home2/routelist" >
+        <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myWallet.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-routeHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToTechHistoryPage()">
+        <ion-icon class="iconStyling" name="archive" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-routeHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToProfilePage()">
+        <ion-icon class="iconStyling" name="person" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-profile.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-settings.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item routerLink="/login">
+        <ion-icon class="iconStyling" name="log-out"  slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-logout.title' | translate}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons class="nav-buttons"slot="end">
+         <ion-button style="width: 50px;/*!" (click)="navigateToNotificationsPage()" ><ion-icon class="notBtn" name="notifications" ></ion-icon></ion-button>
+        <ion-menu-button class="menuBtn"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons (click)="navigateToProfilePage()" id="profile"></ion-buttons>
+      <ion-title>{{'passengers-list.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content style="--offset-top:0px; --offset-bottom:0px;position: relative;top: 21px;">
+
+    <ion-item (click)="saveTodos(m)" *ngFor="let item of pases; let m=index" class="ion-text-center itemStyle" lines="none" >
+      <ion-fab vertical="bottom" horizontal="left" translucent="true">
+        <ion-fab-button class="numberIconStyle" (click)="navigateToRouteListPage()">
+          {{item.number}}
+        </ion-fab-button>
+      </ion-fab>
+      <button  class="nameBtn">{{item.fullname}}</button>
+    </ion-item>
+  </ion-content>
+
+  <div class="myiontab" *ngIf="hideTabs">
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-buttons class="addBtn" (click)="navigateToStartRoutePage()" vertical="bottom" horizontal="center" translucent="true">
+        <button (click)="navigateToStartRoutePage()" class="adBtn2">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
+        <ion-icon class="iconStyling" name="home"></ion-icon>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="wallet" class="comments" (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet"></ion-icon>
+      </ion-tab-button>
+  
+      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
+  
+      <ion-tab-button tab="route-history" class="notifs" (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="settings" (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  
+  </div>
+  <!-- <div class="bottomBar" *ngIf="hideTabs">
+    
+    <ion-buttons class="addBtn" (click)="navigateToStartRoutePage()" vertical="bottom" horizontal="center" translucent="true">
+      <button (click)="navigateToStartRoutePage()" class="adBtn2">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+      
+      <ion-tab-bar slot="bottom" class="ion-no-border">
+        <ion-tab-button tab="feed" (click)="navigateToRoutelist()">
+          <ion-icon class="iconStyling" name="home"></ion-icon>
+        </ion-tab-button>
+    
+        <ion-tab-button (click)="navigateToWalletPage()" tab="wallet" class="comments">
+          <ion-icon class="iconStyling" name="wallet"></ion-icon>
+        </ion-tab-button>
+    
+        <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
+    
+        <ion-tab-button (click)="navigateToRouteHistoryPage()" tab="route-history" class="notifs">
+          <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
+        </ion-tab-button>
+    
+        <ion-tab-button (click)="navigateToSettingsPage()" tab="settings">
+          <ion-icon class="iconStyling" name="settings"></ion-icon>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </div> -->
+</div>
+
+
+  <div class="popUp" *ngIf="showInformation">
+    <div *ngFor="let item of onepass; let e=index " id="hidenItem">
+      
+      <ion-label class="pDetails">
+        <ion-buttons class="closeBtn" (click)="saveTodos()">
+          <ion-icon side="end" class="closeBtnIcon" name="backspace" ></ion-icon>
+        </ion-buttons>
+        <div class="center">
+          <ion-title class="pTitle">{{'passengers-personal.title' | translate}}</ion-title>
+        </div>
+      </ion-label>
+      <div class="pDetails">
+      <ion-label class="ion-text-center">{{'passengers-name.title' | translate}}: {{item.fname}}</ion-label>
+      <ion-label class="ion-text-center">{{'passengers-lastName.title' | translate}}: {{item.lname}}</ion-label>
+      <ion-label class="ion-text-center">{{'passengers-phone.title' | translate}}: {{item.lname}}:{{item.phone}}</ion-label>
+      <ion-label class="ion-text-center">{{'passengers-email.title' | translate}}: {{item.lname}}:{{item.phone}}: {{item.email}}</ion-label>
+    </div>
+    </div>
+  </div>

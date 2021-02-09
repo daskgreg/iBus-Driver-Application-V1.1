@@ -1,0 +1,132 @@
+ion-content.background{
+    --ion-background-color: var( --ion-color-ibus-theblue);
+}
+#map{
+ 
+			// width: 100%;
+			//  height: 85%;
+			//  opacity: 0;
+			//  transition: opacity 150ms ease-in;
+			//  display: block;
+			//  &.show-map{
+			//    opacity: 1;
+			//  }
+			width: 100%;
+			height: 87%;
+			padding-left: 12px;
+			padding-top: 22px;
+			padding-right: 12px;
+			border-top-right-radius: 60px;
+			border-top-left-radius: 60px;
+			border-bottom-left-radius: 60px;
+			border-bottom-right-radius: 60px;
+ }
+.maptab{
+	text-align: center;
+	justify-content: center;
+	width: 100%;
+	display: flex;
+	ion-fab {
+		margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
+		ion-fab-button {
+			--box-shadow: none;
+		}
+    }
+    ion-fab-button{
+		width: 70px;
+		height: 70px;
+	}
+    ion-icon{
+        color:var(--ion-color-ibus-darkblue);
+	}
+	button{
+		background-color:transparent;
+	}
+	.menuBtn{
+		--background:white;
+	}
+	.endBtn{
+		position: absolute;
+		bottom: 1.2%;
+		margin: auto;
+		left: 69%;
+		.endBtnStyle{
+			border: 2px solid var(--ion-color-ibus-red);
+			border-radius: 40px;
+			--background: white;
+		}
+		.endBtnFont{
+			font-size:15px;
+			font-family:monteSBold;
+			color:var(--ion-color-ibus-red);
+		}
+	}
+	.backBtn{
+		position: absolute;
+		bottom: 1.2%;
+		margin: auto;
+		left: 17%;
+		.backBtnStyle{
+			border: 2px solid var(--ion-color-ibus-darkblue);
+			border-radius: 40px;
+			--background:white;
+		}
+	}
+	.customBtn{
+		position: absolute;
+		bottom: 13%;
+		margin: auto;
+		left: 43%;
+		.customBtnStyle{
+			border: 2px solid var(--ion-color-ibus-classicgreen);
+			border-radius: 40px;
+			--background: white;
+		}
+		.customBtnFont{
+			font-size:15px;
+			font-family:monteSBold;
+			color:var(--ion-color-ibus-classicgreen);
+		}
+		
+	}
+	ion-tab-bar {
+		--border: 0;
+		--background: transparent;
+		position: absolute;
+		bottom: 0;
+		left:0; right: 0;
+		width: 100%;
+		&:after{
+			content: " ";
+			width: 100%;
+			bottom: 0;
+			background: var(--ion-color-light);
+			height: env(safe-area-inset-bottom);
+			position: absolute;
+		}
+		ion-tab-button {
+			--background: var(--ion-color-light);
+		}
+		ion-tab-button.comments {
+			margin-right: 0px;
+			border-top-right-radius: 18px;
+		}
+		ion-tab-button.notifs {
+			margin-left: 0px;
+			border-top-left-radius: 18px;
+		}
+		svg {    
+			width: 72px;
+			margin-top: 19px;
+			path{
+				fill:  var(--ion-color-light);
+			}		
+		}
+	}
+}
+
+.iconStyling{
+	color:var(--ion-color-ibus-darkblue);
+}
+
+

@@ -1,0 +1,69 @@
+<ion-content>
+  <div class="registration-page">
+  <ion-toolbar color="blue">
+    <ion-title class="toolbar-title center">{{'register2-info2.title' | translate}}</ion-title>
+    <ion-buttons>
+    <ion-button class="back-btn" (click)="navigateBack()"><ion-icon class="arrow-back" slot="start" name="arrow-back"></ion-icon></ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Code goes here -->
+
+  <div class="center">
+    <img src="assets/images/registration_steps_one.svg" alt="ibus registration steps" />
+  </div>
+  <div class="steps-desc">
+    <a class="step-1">{{'register-info.title' | translate}}</a>
+    <a class="step-2">{{'register-addressinfo.title' | translate}}</a>
+    <a class="step-3">{{'register-driverinfo.title' | translate}}</a>
+  </div>
+  <div class="registration-desc">
+    <a>{{'register-form.title' | translate}}</a>
+  </div>
+
+
+  <form id="form" [formGroup]="registrationForm2" (ngSubmit)="submit()">
+    <ion-list>
+      <ion-item lines='none'>
+        <ion-input  formControlName="country" name="country"  type="text" placeholder="{{'register2-country.title' | translate}}" required>
+        </ion-input>  <ion-icon slot="end" name="flag" ios="flag"></ion-icon>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.country">
+        <ng-container *ngIf="country.hasError(error.type) && (country.dirty || country.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      <ion-item lines="none">
+        <ion-input  formControlName="location" name="Location" type="text" placeholder="{{'register2-state.title' | translate}}" required></ion-input>
+        <ion-icon slot="end" name="ribbon"></ion-icon>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.location">
+        <ng-container *ngIf="location.hasError(error.type) && (location.dirty || location.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      <ion-item lines="none">
+        <ion-input formControlName="address" name="address" type="text" placeholder="{{'register2-address.title' | translate}}" required></ion-input>
+        <ion-icon slot="end" name="home"></ion-icon>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.address">
+        <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      <ion-item lines="none">
+        <ion-input formControlName="zip" name="zip" type="text" placeholder="{{'register2-zip.title' | translate}}" required></ion-input>
+        <ion-icon slot="end" name="code"></ion-icon>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.zip">
+        <ng-container *ngIf="zip.hasError(error.type) && (zip.dirty || zip.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+
+      <ion-button [disabled]="!registrationForm2.valid" (click)="sendData()" type="submit" class="btn-send" expand="block" shape="round" >{{'register-next.title' | translate}} </ion-button>
+    </ion-list>
+  </form>
+  </div>
+</ion-content>

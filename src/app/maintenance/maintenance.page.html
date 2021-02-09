@@ -1,0 +1,114 @@
+<div class="popUp" *ngIf="showInformation">
+  <div id="hidenItem">
+    <ion-buttons class="closeBtn" (click)="saveTodos()">
+      <ion-icon side="end" class="closeBtnIcon" name="exit" ></ion-icon>
+    </ion-buttons>
+    <ion-label class="pDetails">
+      <div class="centerItems pTitle">{{'maintenance-details.title' | translate}}</div>
+    </ion-label>
+    <div class=" pDetails ion-padding">
+      <ion-label class="centerItems classLabel">{{'maintenance-daysOut.title' | translate}}</ion-label>
+      <ion-input name="text" class="centerItems" placeholder="Insert Value"></ion-input>
+    </div>
+    <div class="pDetails ion-padding">
+      <ion-label  class="centerItems classLabel">{{'maintenance-daysIn.title' | translate}}</ion-label>
+      <ion-input name="text" class="centerItems" placeholder="Insert value"></ion-input>
+    </div>
+  </div>
+
+  <div  (click)="navigateToMaintenancePage()" class="center">
+    <button (click)="saveTodos()" ion-button class="sendBtn">{{'maintenance-send.title' | translate}}</button>
+ </div>
+
+</div>
+<ion-menu side="start" content-id="main-content">
+
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title class="menuToolbar" >{{'routelist-menu.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/home/feed" >
+        <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item routerLink="/home/notifications">
+        <ion-icon class="iconStyling" name="wallet" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myWallet.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-routeHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToTechHistoryPage()">
+        <ion-icon class="iconStyling" name="archive" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-techHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToProfilePage()">
+        <ion-icon class="iconStyling" name="person" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-profile.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-settings.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item routerLink="/login">
+        <ion-icon class="iconStyling" name="log-out"  slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-logout.title' | translate}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons class="nav-buttons"slot="end">
+         <ion-button style="width: 50px;/*!" (click)="navigateToNotificationsPage()" ><ion-icon class="notBtn" name="notifications" ></ion-icon><ion-badge></ion-badge></ion-button>
+        <ion-menu-button class="menuBtn"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons (click)="navigateToProfilePage()" id="profile"></ion-buttons>
+      <ion-title>{{'settings-maintenance.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content>
+  <div class="center">
+     <button (click)="callService()" ion-button class="maintBtn">{{'maintenance-service.title' | translate}}</button>
+     <button class="maintBtn" (click)="callWash()">{{'maintenance-carWash.title' | translate}}</button>
+     <button class="maintBtn" (click)="callAcciddent()">{{'maintenance-accident.title' | translate}}</button>
+     <button class="maintBtn" (click)="callCompany()">{{'maintenance-company.title' | translate}}</button>
+  </div> 
+</ion-content>
+
+<div  class="bottomBar">
+  <ion-buttons class="addBtn" (click)="navigateToSettingsPage()" vertical="bottom" horizontal="center" translucent="true">
+    <button (click)="navigateToSettingsPage()" class="adBtn2">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+      <ion-tab-bar slot="bottom" class="ion-no-border">
+        <ion-tab-button (click)="navigateToroutelist()" tab="routelist">
+          <ion-icon class="iconStyling" name="home"></ion-icon>
+        </ion-tab-button>
+    
+        <ion-tab-button (click)="navigateToWalletPage()" tab="wallet" class="comments">
+          <ion-icon class="iconStyling" name="wallet"></ion-icon>
+        </ion-tab-button>
+    
+        <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
+    
+        <ion-tab-button (click)="navigateToRouteHistoryPage()" tab="route-history" class="notifs">
+          <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
+        </ion-tab-button>
+    
+        <ion-tab-button (click)="navigateToSettingsPage()" tab="settings">
+          <ion-icon class="iconStyling" name="settings"></ion-icon>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </div>
+</div>

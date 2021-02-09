@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="registration-page">
+  <ion-toolbar color="blue">
+    <ion-title class="toolbar-title center">{{'registercom-emailverify.title' | translate}}</ion-title>
+    <ion-buttons>
+    <ion-button class="back-btn" (click)="navigateBack()"><ion-icon class="arrow-back" slot="start" name="arrow-back"></ion-icon></ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+
+
+  <div class="registration-completed-desc">
+    <a class="reg-title1">{{'registercom-regcomplete.title' | translate}}</a>
+    <a class="reg-title2">{{'registercom-success.title' | translate}}</a>
+  </div>
+  <div class="center">
+    <img src="assets/images/registration_steps_three.svg" alt="Registration is Completed" />
+  </div>
+  <div class="steps-desc">
+    <a class="step-1">{{'register-info.title' | translate}}</a>
+    <a class="step-2">{{'register-addressinfo.title' | translate}}</a>
+    <a class="step-3">{{'register-driverinfo.title' | translate}}</a>
+  </div>
+
+
+  <div class="email-verification-desc">
+    <a>{{'passrec-emailsend.title' | translate}}</a>
+    <a>{{'passrec-emailsend2.title' | translate}}</a>
+    <a>{{'passrec-verify.title' | translate}}</a>
+    <a>{{'passrec-trylogin.title' | translate}}</a>
+  </div>
+  <form id="form">
+  <ion-button *ngIf="!hasVerifiedEmail" class="btn-send" expand="block" shape="round" (click)="navigateLogin()">{{'registercom-return.title' | translate}}</ion-button>
+</form>
+</div>
+</ion-content>

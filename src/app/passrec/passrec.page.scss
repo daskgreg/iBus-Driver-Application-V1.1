@@ -1,0 +1,101 @@
+.registration-page{
+    position:relative;
+    top:55px;
+    z-index:200;
+}
+
+.back-btn{
+    position: relative;
+    bottom: 30px;
+    left:20px;
+    width:50px;
+    height: 50px;
+}
+.arrow-back{
+    position: relative;
+    left: 10px;
+    top: -6px;
+}
+.toolbar-title{
+    font-size:18px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-blue);   
+    position: relative;
+    bottom: 2px;
+}
+img{
+    position: relative;
+    bottom: 80px;
+}
+.registration-completed-desc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.email-verification-desc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family:monteRegular;
+    font-size:26px;
+    color:var(--ion-color-ibus-darkblue);
+    position: relative;
+    top: 70px;
+}
+.reg-title1{
+    font-family: monteBold;
+    font-size: 26px;
+    color: var(--ion-color-ibus-darkblue);
+    position: relative;
+    top: 155px;
+}
+.reg-title2{
+    font-family: monteBold;
+    font-size: 28px;
+    color: var(--ion-color-ibus-lightgreen);
+    position: relative;
+    top: 155px;
+}
+.steps-desc{
+    position:relative;
+    top:10px;
+}
+.step-1{
+    position:relative;
+    left:30px;
+    font-size:11px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-darkblue);
+}
+.step-2{
+    position:relative;
+    left:70px;
+    font-size:11px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-darkblue);
+}
+.step-3{
+    position:relative;
+    left:120px;
+    font-size:11px;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-darkblue);
+}
+.btn-send{
+    height: 60px;
+    height:18;
+    text-align:center;
+    color:white;
+    font-family: monteBold;
+    font-size:13px;
+    border-radius: 21px;
+    background-image: linear-gradient(180deg, #4E98FF 90%,#4E98FF 10%);
+    position:relative;
+    top:110px;
+}
+
+#form {
+    margin-top:5px;
+    padding-left:30px;
+    padding-right:30px;
+}

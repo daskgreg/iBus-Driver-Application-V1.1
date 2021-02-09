@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="loginpage">
+  <ion-toolbar color="blue">
+    <ion-title class="toolbar-title center">{{'LOGIN-WELCOME.title' | translate}}</ion-title>
+    <ion-buttons>
+    <ion-button class="back-btn" routerLink="/"><ion-icon class="arrow-back" slot="start" name="arrow-back"></ion-icon></ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+
+  <div class="center profile-img">
+    <div class="profile-img">
+  
+    </div>
+    <div class="login-desc">
+      <a>{{'LOGIN-DETAILS.title' | translate}} </a>
+       <a>{{'LOGIN-ACCESS.title' | translate}}</a>
+    </div>
+  </div>
+
+  <form id="form">
+    <ion-list>
+      <ion-item lines='none'>
+        <ion-input  name="mobile"  type="text" [(ngModel)]="mobile" placeholder="{{'LOGIN-PHONE.title' | translate}}" required>
+        </ion-input>  <ion-icon slot="end" name="call" ios="call"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input  type="password" name="password" [(ngModel)]="pass" placeholder="{{'LOGIN-PASSWORD.title' | translate}}" requred></ion-input>
+        <ion-icon slot="end" name="eye"></ion-icon>
+      </ion-item>
+      <ion-button class="btn-login"  (click)="login()" expand="block" shape="round" >{{'LOGIN.title' | translate}}</ion-button>
+      <ion-item class="forgot-password" (click)="forgot()" lines='none'>
+       {{'LOGIN-FORGOT.title' | translate}} 
+      </ion-item>
+
+      <ion-item class="registernow" lines='none'>
+        {{'LOGIN-ACCOUNT.title' | translate}}<a (click)="register()">{{'LOGIN-REGISTER.title' | translate}}</a>
+      </ion-item>
+
+    </ion-list>
+  </form>
+  <firebase-ui></firebase-ui>
+  <!-- <h1 *ngIf="afAuth.currentUser">Welcome {{afAuth.currentUser}} 
+
+  </h1>-->
+
+  <ion-button (click)="signOut()">Sign out</ion-button>
+</div>
+</ion-content>

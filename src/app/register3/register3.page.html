@@ -1,0 +1,55 @@
+<ion-content>
+  <div class="registration-page">
+  <ion-toolbar color="blue">
+    <ion-title class="toolbar-title center">{{'register-driverinfo.title' | translate}}</ion-title>
+    <ion-buttons>
+    <ion-button class="back-btn" (click)="navigateBack()"><ion-icon class="arrow-back" slot="start" name="arrow-back"></ion-icon></ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Code goes here -->
+
+  <div class="center">
+    <img src="assets/images/registration_steps_two.svg" alt="ibus registration steps" />
+  </div>
+  <div class="steps-desc">
+    <a class="step-1">{{'register-info.title' | translate}}</a>
+    <a class="step-2">{{'register-addressinfo.title' | translate}}</a>
+    <a class="step-3">{{'register-driverinfo.title' | translate}}</a>
+  </div>
+  <div class="registration-desc">
+    <a>{{'register-form.title' | translate}}</a>
+  </div>
+
+
+  <form id="form">
+    <ion-list>
+      <ion-item lines='none'>
+        <ion-icon  name="newspaper" ios="newspaper"></ion-icon>
+        <ion-input class="fileclass" name="licNumber"  type="text" placeholder="{{'register3-lnumber.title' | translate}}" required>
+        </ion-input>
+      </ion-item>
+       <ion-item lines='none'>
+          <ion-icon  name="folder"></ion-icon>
+          <input type="file" (change)="onFileChange($event)" name="imgCarReg" id="file" class="fileInput"/>
+          <label class="fileclass" for="file"> {{'register3-licence.title' | translate}}</label>
+        </ion-item>
+        <!-- <ion-item lines='none'>
+          <ion-icon  name="folder"></ion-icon>
+          <input (change)="onFileChangeTwo($event)" type="file"  name="imgCarReg" id="file" class="fileInput"/>
+          <label class="fileclass" for="file"> {{'register3-insurance.title' | translate}}</label>
+        </ion-item> -->
+         <!-- <ion-item lines='none'>
+          <ion-icon  name="folder"></ion-icon>
+          <input (change)="onFileChange3($event)" type="file" name="imgProfile" id="file" class="fileInput"/>
+          <label class="fileclass" for="file"> {{'register3-profilepic.title' | translate}}</label>
+        </ion-item>   -->
+
+
+
+
+      <ion-button class="btn-send" expand="block" shape="round" (click)="submitForm()" >{{'register-next.title' | translate}}</ion-button>
+    </ion-list>
+  </form>
+  </div>
+</ion-content>

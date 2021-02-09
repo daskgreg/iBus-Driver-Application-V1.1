@@ -1,0 +1,23 @@
+<ion-content padding class="background">
+  <ion-title class="ion-text-center">{{'routedetails-details.title' | translate}}</ion-title>
+
+   <ion-label class="ion-text-center timeItem" lines="none">
+      <button class="startTimeBtn">{{'routedetails-start.title' | translate}}</button>
+    </ion-label>
+  <ion-list class="theList" *ngFor="let test of tests; let e=index">
+  	  
+    <ion-label class="ion-text-center timeItem" lines="none">
+      <button class="timeBtn">{{test}}</button>
+    </ion-label>
+
+  </ion-list>
+   <ion-label class="ion-text-center timeItem" lines="none">
+      <button class="endTimeBtn">{{'routedetails-end.title' | translate}}</button>
+    </ion-label>
+
+  <ion-buttons class="addBtn" (click)="navigateToMyroutePage()" vertical="bottom" horizontal="center" translucent="true">
+    <button (click)="navigateToMyroutePage()" class="adBtn2">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-content>

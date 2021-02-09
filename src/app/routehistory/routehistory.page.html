@@ -1,0 +1,131 @@
+<ion-menu side="start" content-id="main-content">
+
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title class="menuToolbar" >Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="routelist" >
+        <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >My Routes</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >My Wallet</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >Route History</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToTechHistoryPage()">
+        <ion-icon class="iconStyling" name="archive" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >Tech History</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToProfilePage()">
+        <ion-icon class="iconStyling" name="person" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >Profile</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >Settings</ion-label>
+      </ion-item>
+      <ion-item routerLink="/login">
+        <ion-icon class="iconStyling" name="log-out"  slot="start"></ion-icon>
+        <ion-label class="menuTxt" >Logout</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons class="nav-buttons" slot="end">
+         <ion-button style="width: 50px;/*!" (click)="navigateToNotificationsPage()" ><ion-icon class="notBtn" name="notifications" ></ion-icon><ion-badge></ion-badge></ion-button>
+        <ion-menu-button class="menuBtn"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons (click)="navigateToProfilePage()" id="profile"></ion-buttons>
+      <ion-title>My Routes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  
+
+  <ion-content class="ion-padding" padding>
+    <ion-label class="centerlabel searchRoute"> Search Routes </ion-label>
+
+    <ion-item class="from">
+      <ion-datetime placeholder="FROM"displayFormat="DD/MM/YYYY" (ionChange)="confirm()" [(ngModel)]="selectedDate" ></ion-datetime>
+    </ion-item>
+    <ion-item class="to" >
+      <ion-datetime class="text-center" placeholder="TO" displayFormat="DD/MM/YYYY" (ionChange)="confirm()" [(ngModel)]="selectedDate2"></ion-datetime>
+    </ion-item>
+    <ion-label class="centerlabel currentDate">Current Date</ion-label>
+    <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+
+    <ion-list>
+      <ion-item *ngFor="let item of custs; let e=index">
+      <ion-buttons item-start>
+        <ion-icon class="icon-size" name="map" ></ion-icon>
+      </ion-buttons>
+      <!-- <ion-buttons item-end>
+        <button  class="btn-accept" ion-button color="light">ACCEPT</button>
+      </ion-buttons> -->
+      <ion-label class="availability">Available</ion-label> <br>
+      <ion-label class="destination" >{{item.pickupadd2}}</ion-label> <br>
+      <ion-label class="date">{{item.returndate}}</ion-label>
+    </ion-item>
+    <!-- <p class="text-md-danger" *ngIf="invalidSelection">Inavalid Date Selection </p> -->
+    </ion-list>
+
+      <ion-list>
+      <ion-item *ngFor="let name of names; let m=index">
+      <ion-buttons item-start>
+        <ion-icon class="icon-size" name="map" ></ion-icon>
+      </ion-buttons>
+      <!-- <ion-buttons item-end>
+        <button  class="btn-accept" ion-button color="light">ACCEPT</button>
+      </ion-buttons> -->
+      <ion-label class="availability">Available</ion-label> <br>
+      <ion-label class="destination" >{{routes[m]}}</ion-label> <br>
+      <ion-label class="date">{{name}}</ion-label>
+    </ion-item>
+    <!-- <p class="text-md-danger" *ngIf="invalidSelection">Inavalid Date Selection </p> -->
+    </ion-list>
+   
+   
+    
+ 
+ 
+  </ion-content>
+  <div class="myiontab">
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-buttons class="addBtn" (click)="navigateToRouteListPage()"  vertical="bottom" horizontal="center" translucent="true">
+        <button (click)="navigateToRouteListPage()" class="adBtn2">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
+        <ion-icon class="iconStyling" name="home"></ion-icon>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="wallet" class="comments" (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet"></ion-icon>
+      </ion-tab-button>
+  
+      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
+  
+      <ion-tab-button tab="route-history" class="notifs" (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="settings" (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  
+  </div>
+  

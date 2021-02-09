@@ -1,0 +1,118 @@
+<ion-menu side="start" content-id="main-content">
+
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title class="menuToolbar" >{{'routelist-menu.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/home2/routelist" >
+        <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myWallet.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-routeHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToTechHistoryPage()">
+        <ion-icon class="iconStyling" name="archive" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-techHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToProfilePage()">
+        <ion-icon class="iconStyling" name="person" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-profile.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-settings.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item routerLink="/login">
+        <ion-icon class="iconStyling" name="log-out"  slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-logout.title' | translate}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons class="nav-buttons" slot="end">
+         <ion-button style="width: 50px;/*!" (click)="navigateToNotificationsPage()" ><ion-icon class="notBtn" name="notifications" ></ion-icon><ion-badge></ion-badge></ion-button>
+        <ion-menu-button class="menuBtn"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons (click)="navigateToProfilePage()" id="profile"></ion-buttons>
+      <ion-title>{{'profile-profile.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content>
+
+    <ion-item lines="none">
+      <ion-img class="centerItems" src="assets/images/myprofile.svg">
+      </ion-img>
+    </ion-item>
+
+    <form id="form">
+      <ion-list>
+        <ion-item lines='none'>
+          <ion-input  name="firstName"  type="text" placeholder="{{'profile-fname.title' | translate}}" required>
+          </ion-input>  <ion-icon slot="end" name="person" ios="mail"></ion-icon>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-input  name="lastName" type="text" placeholder="{{'profile-lname.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="person"></ion-icon>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input  name="address" type="text" placeholder="{{'profile-address.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="home"></ion-icon>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input  name="city" type="text" placeholder="{{'profile-city.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="person"></ion-icon>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input  name="state" type="text" placeholder="{{'profile-state.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="ribbon"></ion-icon>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input  name="email" type="email" placeholder="{{'profile-email.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="mail"></ion-icon>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-input  name="phoneNumber" type="tel" placeholder="{{'profile-phone.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="call"></ion-icon>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input  name="licenseNumber" type="text" placeholder="{{'profile-licensenum.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="newspaper"></ion-icon>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input  name="plateNumber" type="text" placeholder="{{'profile-platenum.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="newspaper"></ion-icon>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-input  name="pass" type="password" placeholder="{{'profile-passcon.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="eye"></ion-icon>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input  name="confirmPassword" type="password" placeholder="{{'profile-pass.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="eye"></ion-icon>
+        </ion-item>
+  
+  
+        <ion-button class="btn-send" expand="block" shape="round"  (click)="navigateToFeedPage()">{{'profile-update.title' | translate}}</ion-button>
+      </ion-list>
+    </form>
+  </ion-content>

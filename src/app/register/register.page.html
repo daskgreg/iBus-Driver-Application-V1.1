@@ -1,0 +1,92 @@
+<ion-content>
+  <div class="registration-page">
+  <ion-toolbar color="blue">
+    <ion-title class="toolbar-title center">{{'register-info1.title' | translate}}</ion-title>
+    <ion-buttons>
+    <ion-button class="back-btn" (click)="navigateBack()"><ion-icon class="arrow-back" slot="start" name="arrow-back"></ion-icon></ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Code goes here -->
+
+  <div class="center">
+    <img src="assets/images/registration_steps.svg" alt="ibus registration steps" />
+  </div>
+  <div class="steps-desc">
+    <a class="step-1">{{'register-info.title' | translate}}</a>
+    <a class="step-2">{{'register-addressinfo.title' | translate}}</a>
+    <a class="step-3">{{'register-driverinfo.title' | translate}}</a>
+  </div>
+  <div class="registration-desc">
+    <a>{{'register-form.title' | translate}}</a>
+  </div>
+
+
+  <form id="form" [formGroup]="registrationForm" (ngSubmit)="submit()">
+    <ion-list>
+      <ion-item lines='none'>
+        <ion-input  formControlName="firstName" name="firstName" inputmode="text" type="text" placeholder="{{'register-fname.title' | translate}}" required>
+        </ion-input>  <ion-icon slot="end" name="person" ios="mail"></ion-icon>
+      </ion-item>
+        <div *ngFor="let error of errorMessages.firstName">
+          <ng-container *ngIf="firstName.hasError(error.type) && (firstName.dirty || firstName.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item lines="none">
+          <ion-input formControlName="lastName" name="lastName" inputmode="text" type="text" placeholder="{{'register-lname.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="person"></ion-icon>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.lastName">
+          <ng-container *ngIf="lastName.hasError(error.type) && (lastName.dirty || lastName.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item lines="none">
+          <ion-input formControlName="birth" name="birth" type="date" placeholder="mm/dd/yyyy" required></ion-input>
+          <ion-icon slot="end" name="calendar"></ion-icon>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-input formControlName="email" name="email" inputmode="email" type="email" placeholder="Email" required></ion-input>
+          <ion-icon slot="end" name="mail"></ion-icon>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.email">
+          <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item lines="none">
+          <ion-input formControlName="phoneNumber" name="phoneNumber" inputmode="tel" type="tel" placeholder="{{'forgot-phone.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="call"></ion-icon>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.phoneNumber">
+          <ng-container *ngIf="phoneNumber.hasError(error.type) && (phoneNumber.dirty || phoneNumber.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+         
+        <ion-item lines="none">
+          <ion-input formControlName="pass" name="pass" inputmode="password" type="password" placeholder="{{'register-confirmpass.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="eye"></ion-icon>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.pass">
+          <ng-container *ngIf="pass.hasError(error.type) && (pass.dirty || pass.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item lines="none">
+          <ion-input formControlName="confirmPassword" name="confirmPassword" inputmode="confirmPassword"type="password" placeholder="{{'register-pass.title' | translate}}" required></ion-input>
+          <ion-icon slot="end" name="eye"></ion-icon>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.confirmPassword">
+          <ng-container *ngIf="confirmPassword.hasError(error.type) && (confirmPassword.dirty || confirmPassword.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div> 
+  
+      <ion-button [disabled]="!registrationForm.valid" type="submit" class="btn-send" expand="block" shape="round"  (click)="sendData()"  >{{'register-next.title' | translate}}</ion-button>
+    </ion-list>
+  </form>
+  </div>
+</ion-content>

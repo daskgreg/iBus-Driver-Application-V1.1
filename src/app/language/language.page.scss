@@ -1,0 +1,25 @@
+
+ion-content.background{
+    --ion-background-color: var( --ion-color-ibus-theblue);
+}
+.style-center{ 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+} 
+.btnStyling{
+    background-color:transparent;
+}
+ion-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: white;
+    font-size: 25px;
+    position: absolute;
+    font-family: monteSBold;
+    margin-left: 20%;
+    margin-top: 38%;
+}
