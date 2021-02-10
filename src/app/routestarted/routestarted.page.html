@@ -59,6 +59,128 @@
   <ion-content scroll="true">
 
     <ion-label  style="padding: 1px;" class="ion-text-center">
+      {{dataFromRouteListJSON.passengerFirstName}}
+      <ion-item (click)="navigateToRouteDetails()" class="destItem" lines="none">
+        <button  class="destBtn">{{dataFromRouteListJSON.departure}}</button>
+        <ion-icon class="dmpIconStyle destIcon" name="map" side="end" ></ion-icon>
+      </ion-item>
+      <ion-item class="timeItem" lines="none">
+        <ion-icon class="dmpIconStyle timeIcon" name="hourglass" side="start" ></ion-icon>
+        <button class="timeBtn"><a class="numberStyle">{{dataFromRouteListJSON.time}}</a>hours</button>
+      </ion-item>
+      <ion-item (click)="navigateToPassengersPage()" class="passItem" lines="none">
+        <button class="passBtn"><a class="numberStyle">{{dataFromRouteListJSON.passengerNumber}}</a>Passengers</button>
+        <ion-icon class="dmpIconStyle passIcon" name="walk" side="start" ></ion-icon>
+      </ion-item>
+    </ion-label>
+
+    <ion-list class="ionListClass">
+      <ion-button  (click)="startRoute()" class="btnStyle2">{{'routeStarted-startRoute.title' | translate}}</ion-button>
+    </ion-list>
+    <ion-list class="ionListClass">
+      <ion-button (click)="navigateToMapPage()"  class="btnStyle">{{'routeStarted-map.title' | translate}}</ion-button>
+    </ion-list>
+    <ion-list class="ionListClass">
+      <ion-button (click)="navigateToPassengersPage()"class="btnStyle">{{'routeStarted-passengers.title' | translate}}</ion-button>
+    </ion-list>
+    <ion-list class="ionListClass">
+      <ion-button  (click)="navigateToRouteDetails()" class="btnStyle">{{'routeStarted-routeDetails.title' | translate}}</ion-button>
+    </ion-list>
+  </ion-content>
+  <div class="myiontab">
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-buttons class="addBtn" (click)="navigateToVehiclePage()" vertical="bottom" horizontal="center" translucent="true">
+        <button (click)="navigateToVehiclePage()" class="adBtn2">
+          <ion-icon  name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
+        <ion-icon class="iconStyling" name="home"></ion-icon>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="wallet" class="comments" (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet"></ion-icon>
+      </ion-tab-button>
+  
+      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
+  
+      <ion-tab-button tab="route-history" class="notifs" (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="settings" (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  
+  </div>
+  
+</div>
+</ion-router-outlet>
+
+<!-- <ion-menu side="start" content-id="main-content">
+
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title class="menuToolbar" >{{'routelist-menu.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/home/feed" >
+        <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToWalletPage()">
+        <ion-icon class="iconStyling" name="wallet" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-myWallet.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToRouteHistoryPage()">
+        <ion-icon class="iconStyling" name="file-tray-full" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-routeHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToTechHistoryPage()">
+        <ion-icon class="iconStyling" name="archive" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-techHistory.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToProfilePage()">
+        <ion-icon class="iconStyling" name="person" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-profile.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item (click)="navigateToSettingsPage()">
+        <ion-icon class="iconStyling" name="settings" slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-settings.title' | translate}}</ion-label>
+      </ion-item>
+      <ion-item routerLink="/login">
+        <ion-icon class="iconStyling" name="log-out"  slot="start"></ion-icon>
+        <ion-label class="menuTxt" >{{'routelist-logout.title' | translate}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+<ion-router-outlet id="main-content">
+
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons class="nav-buttons"slot="end">
+         <ion-button style="width: 50px;/*!" (click)="navigateToNotificationsPage()" ><ion-icon class="notBtn" name="notifications" ></ion-icon></ion-button>
+        <ion-menu-button class="menuBtn"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons (click)="navigateToProfilePage()" id="profile"></ion-buttons>
+      <ion-title>{{'routeStarted-myRoute.title' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content scroll="true">
+
+    <ion-label  style="padding: 1px;" class="ion-text-center">
+    
       <ion-item (click)="navigateToRouteDetails()" class="destItem" lines="none">
         <button  class="destBtn">{{startPlace}}</button>
         <ion-icon class="dmpIconStyle destIcon" name="map" side="end" ></ion-icon>
@@ -116,4 +238,4 @@
   </div>
   
 </div>
-</ion-router-outlet>
+</ion-router-outlet> -->

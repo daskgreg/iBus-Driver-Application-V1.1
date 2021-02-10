@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { LanguageService } from '../services/language.service';
 import {  isWithinInterval } from 'date-fns';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
@@ -70,7 +70,8 @@ export class RoutelistPage implements OnInit {
   //  {"chrbus_code": "panos", "zone_id": "5", "pup_code": "chrPup2", "duration": "1900-01-01 00:00:00.000", "time": "1900-01-01 02:00:00.000", "vhc_type": "", "order": "2", "chrbus_name": "panos", "zone_name": "panos_chr2", "pup_desc": "chrPup2", "cty_code": "3", "pup_address": "chrPup 2", "latitude": "40.630777", "longitude": "22.943101", "cty_name": "Thessaloniki"},
   //   {"chrbus_code": "panos", "zone_id": "6", "pup_code": "chrPup4", "duration": "1900-01-01 00:00:00.000", "time": "1900-01-01 03:00:00.000", "vhc_type": "", "order": "3", "chrbus_name": "panos", "zone_name": "panos_chr3", "pup_desc": "chrPup4", "cty_code": "1", "pup_address": "chrPup 4", "latitude": "38.011600", "longitude": "23.717808", "cty_name": "Athens"}];
 
-
+  serviceRegistration:any="";
+	dataFromService:any="";
   constructor(public loadingCtrl: LoadingController,public http:HttpClient,private router : Router, private languageService: LanguageService) {
 
 
@@ -98,7 +99,7 @@ export class RoutelistPage implements OnInit {
       this.allDates = JSON.stringify(this.routes);
       this.myDate = JSON.parse(this.allDates);
       console.log("This.myDate:",this.myDate);
-    
+      console.log(this.routes.date);
       if(1){
         console.log("Start Date:", this.startDate);
         console.log("End Date", this.endDate);
@@ -124,7 +125,82 @@ export class RoutelistPage implements OnInit {
    
   }
 
+  getIdOfItem
 
+  public sendDataOfTheSelectedRoute(item,itemid:number,itemdeparture:string,itemarrival:string,itemdate:string){
+    console.log(item,itemid,itemdeparture,itemarrival,itemdate);
+    console.log("JUST THE ITEM", item);
+    this.http.get('http://localhost:3000/routing?route').subscribe( (data)=>{
+      console.log(data);
+      this.routes = data;
+      this.allDates = JSON.stringify(this.routes);
+      this.myDate = JSON.parse(this.allDates);
+      console.log("This.myDate:",this.myDate);
+      console.log(this.allDates.id);
+      console.log(this.allDates.id);
+      console.log(this.allDates.id);
+    } )
+
+    var dataToSend = {
+      "id": itemid,
+      "date":itemdate,
+      "departure":itemdeparture,
+      "itemarrival":itemarrival,
+
+    //  'id' + itemid + 'departure' + itemdeparture + 'arrival' + itemarrival + 'date' + itemdate;
+    }
+    console.log(dataToSend);
+    var gregJSON = JSON.stringify(dataToSend);
+    console.log(gregJSON);
+    this.saveMyData(item).subscribe((dataReturnFromService) =>{
+      this.dataFromService = JSON.stringify(dataReturnFromService);
+      console.log(this.dataFromService['_body']);
+
+      this.router.navigate(['routestarted/'+ JSON.stringify(item)]);
+    });
+
+    }
+    saveMyData(dataToSend){
+      var url="https://reqres.in/api/users";
+      return this.http.post(url,dataToSend,
+        {headers:new HttpHeaders(
+          {"Content-type":"Application/json"}
+        )})
+    }
+    clickme(routeid:number){
+      alert(routeid)
+    }
+  
+
+    navigateToSettingsPage(){
+      this.router.navigate(["settings"])
+    }
+    navigateToRouteHistoryPage(){
+      this.router.navigate(["routehistory"])
+    }
+    navigateToTechHistoryPage(){
+      this.router.navigate(["techhistory"])
+    }
+    navigateToWalletPage(){
+      this.router.navigate(["wallet"])
+    }
+    navigateToProfilePage(){
+      this.router.navigate(["profile"])
+    }
+    navigateToNotificationsPage(){
+      this.router.navigate(['notifications']);
+    }
+    navigateToRouteListPage(){
+      this.router.navigate(['routelist']);
+    }
+    navigateToCreateRoutePage(){
+      this.router.navigate(['createroute']);
+    }
+  
+
+
+  }
+ 
 
 //     confirm(){
 //       this.routes=[];
@@ -294,28 +370,4 @@ export class RoutelistPage implements OnInit {
 //     // this.navCtrl.setRoot(TechinspectPage);
 //     this.router.navigate(['techinspect']) 
 //   }
-//   navigateToSettingsPage(){
-//     this.router.navigate(["settings"])
-//   }
-//   navigateToRouteHistoryPage(){
-//     this.router.navigate(["routehistory"])
-//   }
-//   navigateToTechHistoryPage(){
-//     this.router.navigate(["techhistory"])
-//   }
-//   navigateToWalletPage(){
-//     this.router.navigate(["wallet"])
-//   }
-//   navigateToProfilePage(){
-//     this.router.navigate(["profile"])
-//   }
-//   navigateToNotificationsPage(){
-//     this.router.navigate(['notifications']);
-//   }
-//   navigateToRouteListPage(){
-//     this.router.navigate(['routelist']);
-//   }
-//   navigateToCreateRoutePage(){
-//     this.router.navigate(['createroute']);
-//   }
-}
+//}

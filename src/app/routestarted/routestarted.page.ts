@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-routestarted',
@@ -25,7 +25,21 @@ export class RoutestartedPage implements OnInit {
   startPlace:any;
   vehmapId:any;
   passCounter=0;
-  constructor(private router : Router) { 
+  dataFromRouteList:any;
+  dataFromRouteListJSON:any;
+  constructor(private activatedRoute:ActivatedRoute, private router : Router) { 
+
+    // this.activatedRoute.paramMap.subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //   }
+    // )
+
+    this.dataFromRouteList = this.activatedRoute.snapshot.paramMap.get('xyz')
+    this.dataFromRouteListJSON = JSON.parse(this.dataFromRouteList);
+    console.log("HERE",this.dataFromRouteListJSON);
+
+
     var i=0;
 
     if(this.custom=="true"){

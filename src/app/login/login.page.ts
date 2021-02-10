@@ -103,7 +103,7 @@ export class LoginPage {
           }, 1000);
            var id = this.allData[i].id;
            this.router.navigate(['routelist/', id]);   
-
+          
         }else {
           let loader = await this.loadingCtrl.create({
             message: "Please try again.."

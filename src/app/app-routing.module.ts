@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./forgotpass/forgotpass.module').then( m => m.ForgotpassPageModule)
   },
   {
-    path: 'routelist/:mobile',
+    path: 'routelist/:id',
     loadChildren: () => import('./routelist/routelist.module').then( m => m.RoutelistPageModule)
   },
   {
@@ -80,7 +80,7 @@ const routes: Routes = [
     loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
   },
   {
-    path: 'routestarted',
+    path: 'routestarted/:xyz',
     loadChildren: () => import('./routestarted/routestarted.module').then( m => m.RoutestartedPageModule)
   },
   {
