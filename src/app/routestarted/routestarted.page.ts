@@ -27,18 +27,20 @@ export class RoutestartedPage implements OnInit {
   passCounter=0;
   dataFromRouteList:any;
   dataFromRouteListJSON:any;
+  dataFromRouteListLogin:any;
+  dataFromRouteListLoginJSON:any;
   constructor(private activatedRoute:ActivatedRoute, private router : Router) { 
 
-    // this.activatedRoute.paramMap.subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //   }
-    // )
+    
 
     this.dataFromRouteList = this.activatedRoute.snapshot.paramMap.get('xyz')
+    this.dataFromRouteListLogin = this.activatedRoute.snapshot.paramMap.get('loginid');
     this.dataFromRouteListJSON = JSON.parse(this.dataFromRouteList);
-    console.log("HERE",this.dataFromRouteListJSON);
-
+    this.dataFromRouteListLoginJSON = JSON.parse(this.dataFromRouteListLogin);
+    console.log('%c DATA FROM ROUTELIST JSON','color:orange;')
+    console.log(this.dataFromRouteListJSON);
+    console.log('%c DATA FROM ROUTELIST LOGIN JSON','color:yellow;')
+    console.log(this.dataFromRouteListLoginJSON);
 
     var i=0;
 
@@ -65,8 +67,34 @@ export class RoutestartedPage implements OnInit {
     alert('Route has started');
     setTimeout((isClick) => { this.router.navigate(['map']) }, 3000);    
   }
+  getPassengersInformationFromRouteListSelection(){
+    console.log('%c Routing to Passengers List', 'color:orange;');
+    console.log(this.dataFromRouteListJSON);
+    this.router.navigate(['routepassengers/' + JSON.stringify(this.dataFromRouteListJSON)]);
+  }
+  getRoutingInformationPathFromRouteListSelection(){
+    console.log('%c Routing to Route Path Details', 'color:yellow;');
+    console.log(this.dataFromRouteListJSON);
+     this.router.navigate(['routepassengers/' + JSON.stringify(this.dataFromRouteListJSON)]);
+  }
+  goBackToRouteListPage(){
+    console.log('%c Going back to Routelist Page','color:red;')
+    console.log(this.dataFromRouteListLoginJSON);
+    this.router.navigate(['routelist/' + JSON.stringify(this.dataFromRouteListLoginJSON)]);
+  }
+  beforeRouteStartedGoTechInspectPage(){
+    console.log('%c Going to Check Vehicle | DRIVER ID | ','color:red;');
+    console.log(this.dataFromRouteListLoginJSON);
+    console.log('%c Going to Check Vehicle | Route Information | ','color:red;');
+    console.log(this.dataFromRouteListJSON);
+    this.router.navigate(['techinspect/' + JSON.stringify(this.dataFromRouteListJSON) + '/' + JSON.stringify(this.dataFromRouteListLoginJSON)]);
+  }
+  goToWalletPageWithDriverId(){
+    console.log('%c GOing to Wallet Page | DRIVER ID |','color:pink;');
+    console.log(this.dataFromRouteListLoginJSON);
+    this.router.navigate(['wallet/' + JSON.stringify(this.dataFromRouteListLoginJSON)]);
+  }
 
-  
   navigateToMapPage(){
   	this.router.navigate(["map"])
   }

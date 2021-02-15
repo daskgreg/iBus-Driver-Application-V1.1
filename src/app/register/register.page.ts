@@ -11,51 +11,51 @@ import {Router} from '@angular/router';
 export class RegisterPage {
 
   get firstName(){
-    return this.registrationForm.get('firstName');
+    return this.registrationForm.get('first_name');
   }
   get lastName(){
-    return this.registrationForm.get('lastName');
+    return this.registrationForm.get('last_name');
   }
   get birth(){
-    return this.registrationForm.get('birth');
+    return this.registrationForm.get('birthday');
   }
   get email(){
     return this.registrationForm.get('email');
   }
   get phoneNumber(){
-    return this.registrationForm.get('phoneNumber');
+    return this.registrationForm.get('mobile');
   }
   get pass(){
-    return this.registrationForm.get('pass');
+    return this.registrationForm.get('password');
   }
   get confirmPassword(){
     return this.registrationForm.get('confirmPassword');
   }
 
   public errorMessages = {
-    firstName: [
+    first_name: [
       { type: 'required', message: 'First Name is required' },
       { type: 'maxlength', message: 'First Name cant be longer than 100 characters' },
     ],
-    lastName: [
+    last_name: [
       { type: 'required', message: 'Last Name is required' },
       { type: 'maxlength', message: 'Last Name cant be longer than 100 characters' },
       { type: 'minlength', message: 'Last Name should be bigger than 2 characters' }
     ],
-    birth: [
+    birthday: [
       { type: 'required', message: 'Birth Date is required'},
     ],
     email: [
       { type: 'required', message: 'Email is required' },
       { type: 'pattern', message: 'Please enter a valid Email' }
     ],
-    phoneNumber: [ 
+    mobile: [ 
       { type: 'required', message: 'Phone number is required' },
       { type: 'minlength', message: 'Your Phone number should be more than 4 numbers.'},
       { type: 'maxlength', message: 'Your Phone number should be less than 15 numbers.'},
       { type: 'pattern', message: 'Please enter a valid Phone Number' }
     ],
-    pass: [
+    password: [
       { type: 'required', message: 'Password is required'},
       { type: 'minlength', message: 'Please enter a password bigger than 5 characters'}
     ],
@@ -97,7 +97,7 @@ export class RegisterPage {
   }
 
   sendData(myRegistrationForm){
-    var url="https://reqres.in/api/users";
+    var url="http://cf11.travelsoft.gr/itourapi/trp_driver_signup.cfm?userid=dmta";
     return this.http.post(url,myRegistrationForm,
       {headers:new HttpHeaders(
         { "content-type":"application/json"

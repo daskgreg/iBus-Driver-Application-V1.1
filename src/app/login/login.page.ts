@@ -40,13 +40,9 @@ export class LoginPage {
        public alertCtrl: AlertController, 
         public loadingCtrl: LoadingController,
          public connect: ConnectProvider,
-   
          private http: HttpClient,
          private platform: Platform
       ) {
-
-        
-        
     this.locations= [];
      this.backgroundGeolocation.on(BackgroundGeolocationEvents.stationary).subscribe((location: BackgroundGeolocationResponse) => {
       var locationstr1 = localStorage.getItem("location");
@@ -55,15 +51,12 @@ export class LoginPage {
    }
 
    ionViewWillEnter(){
-   
+    this.http.get('http://cf11.travelsoft.gr/itourapi/trp_driver_login.cfm?userid=dmta').subscribe( (data) =>{
+      console.log(data);
+    })
 
    }
-
-  
-
-
-
-   shit: any = [];
+  shit: any = [];
   usersData: any = [];
   items: any;
   results: any;
@@ -78,8 +71,8 @@ export class LoginPage {
    localStorage.setItem('mobile',this.mobile)
    localStorage.setItem('pass',this.pass)   
   
-   this.http.get('http://localhost:3000/login2?users'
-   + '&mobile=' + this.mobile+'&password='+this.pass ).pipe( 
+   this.http.get('http://cf11.travelsoft.gr/itourapi/trp_driver_login.cfm?'
+   + '&mobile=' + this.mobile+'&password='+this.pass + '&userid=dmta').pipe( 
      finalize( () => loader.dismiss() )
    )
    .subscribe( async data => {
@@ -87,10 +80,12 @@ export class LoginPage {
      this.usersData = data;
      this.items = JSON.stringify(this.usersData);
      this.allData = JSON.parse(this.items);
-
+     console.log('%c This is the data of Login','color:orange;');
+     console.log(this.allData);
+     console.log(this.allData.DRIVER);
      for (var i=0; i<this.allData.length; i++){
 
-        if(this.allData[i].mobile == this.mobile){
+        if(this.allData[i].password == this.pass){
 
           let loader = await this.loadingCtrl.create({
             message: "Successfull Login"
@@ -102,7 +97,7 @@ export class LoginPage {
             loader.dismiss();
           }, 1000);
            var id = this.allData[i].id;
-           this.router.navigate(['routelist/', id]);   
+           this.router.navigate(['routelist/', JSON.stringify(this.allData[i].id)]);   
           
         }else {
           let loader = await this.loadingCtrl.create({
@@ -147,34 +142,24 @@ export class LoginPage {
     () => location.reload())
 };
   // async login(){
-
-  
   //   localStorage.setItem('mobile',this.mobile)
   //   localStorage.setItem('pass',this.pass)    
-
   //   console.log(this.mobile);
   //   console.log(this.pass); 
-
   //   let loader = await this.loadingCtrl.create({
   //     message: "Logging in"
   //   });
-
   //   loader.present();
-
-  
   //   this.connect.getJsonLogin().subscribe( (data) => {
   //     console.log("im in")
   //     console.log("loginData : ", data);
   //     let fff = data.json();
-
   //     this.response = fff;
-      
   //     console.log(this.response);
   //     console.log(this.response.RESPONSE);
   //     this.message = this.response.MESSAGE;
   //     console.log(this.message);
   //     this.response = JSON.parse(this.response);
-
   //     if (this.response.RESPONSE == "SUCCESS") {
   //       console.log("SUCCESS")
   //     }else {
@@ -183,8 +168,6 @@ export class LoginPage {
   //   }, err => {
   //     console.log("Kati paei lathos:",err);
   //   });
-
-    
   // }
     async loginwithoutapi(){
       
@@ -195,12 +178,10 @@ export class LoginPage {
     console.log(this.pass); 
     // if(this.errmobile!="" || this.errpass!="")
     //   return;
-
     let loader = await this.loadingCtrl.create({
       // content: "Logging in..."
       message: "Logging in..."
     })
-    
      loader.present();
       if(this.mobile==this.drv_master_json[0].person_id && this.pass==this.drv_master_json[0].password){
         this.flag=1;
@@ -213,7 +194,7 @@ export class LoginPage {
       }
       if (this.flag == "1"){
          loader.dismiss()
-         this.router.navigate(['routelist'])
+         //this.router.navigate(['routelist'])
          // this.router.navigate(['routelist'])
         //   this.navCtrl.setRoot(RoutesPage);
         }

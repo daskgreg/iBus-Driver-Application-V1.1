@@ -8,11 +8,11 @@
 
   <ion-content>
     <ion-list>
-      <ion-item (click)="navigateToFeedPage()" >
+      <ion-item (click)="goBackToRouteListPageWithDriverId()" >
         <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
         <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
       </ion-item>
-      <ion-item (click)="navigateToWalletPage()">
+      <ion-item (click)="weAreAlreadyInWalletPage()">
         <ion-icon class="iconStyling" name="wallet" slot="start"></ion-icon>
         <ion-label class="menuTxt" >{{'routelist-myWallet.title' | translate}}</ion-label>
       </ion-item>
@@ -102,7 +102,7 @@
     <div class="centerItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-amount.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-input formControlName="ammountOfPayment" (onChange)="sendData()" name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
+        <ion-input formControlName="ammountOfPayment" (click)="goBackToRouteListPageWithDriverId()" (onChange)="sendData()" name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
       </ion-item>
     </div>
     <div class="myiontab">
@@ -113,11 +113,11 @@
             <ion-icon name="arrow-back"></ion-icon>
           </button>
         </ion-buttons>
-        <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
+        <ion-tab-button tab="routelist" (click)="goBackToRouteListPageWithDriverId()">
           <ion-icon class="iconStyling" name="home"></ion-icon>
         </ion-tab-button>
     
-        <ion-tab-button tab="wallet" class="comments" (click)="navigateToWalletPage()">
+        <ion-tab-button tab="wallet" class="comments" (click)="weAreAlreadyInWalletPage()">
           <ion-icon class="iconStyling" name="wallet"></ion-icon>
         </ion-tab-button>
     

@@ -58,14 +58,21 @@
 
   <ion-content style="--offset-top:0px; --offset-bottom:0px;position: relative;top: 21px;">
 
-    <ion-item (click)="saveTodos(m)" *ngFor="let item of pases; let m=index" class="ion-text-center itemStyle" lines="none" >
+    <ion-list *ngFor="let papapa of thePassengersList; let i = index">
+      <ion-item>
+        <ion-label>Passenger Name</ion-label>
+        <ion-label>{{i}}{{papapa}}</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- <ion-item (click)="saveTodos(m)" *ngFor="let item of pases; let m=index" class="ion-text-center itemStyle" lines="none" >
       <ion-fab vertical="bottom" horizontal="left" translucent="true">
         <ion-fab-button class="numberIconStyle" (click)="navigateToRouteListPage()">
           {{item.number}}
         </ion-fab-button>
       </ion-fab>
-      <button  class="nameBtn">{{item.fullname}}</button>
-    </ion-item>
+      <button  class="nameBtn"></button>
+    </ion-item> -->
   </ion-content>
 
   <div class="myiontab" *ngIf="hideTabs">

@@ -1,7 +1,7 @@
 import { LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-techinspect',
@@ -42,6 +42,10 @@ export class TechinspectPage implements OnInit {
   imageChosen: any = 0;
   imagePath: any;
   imageNewPath: any;
+  greekLanguage:any = [];
+  greekLanguageJSON:any;
+  englishLanguage:any = []
+  englishLanguageJSON:any =[];
 
   //greg
   get measurementData(){
@@ -69,77 +73,55 @@ export class TechinspectPage implements OnInit {
 
   serviceRegistration:any="";
   dataFromService:any="";
+  dataFromStartedRouteWhileGoingBack:any;
+  dataFromStartedRouteWhileGoingBackJSON:any;
+  dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId:any;
+  dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON:any;
+  constructor(private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder ) { 
 
-  constructor(public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder ) { 
-  	this.enlangs=[];
-  	this.ellangs=[];
-  	this.ids=[];
-    var k=0;
-      if(this.language=="en" ){
-      console.log("here");
-      for(k=0; k<this.techchk_json.length; k++){
-        this.enlangs[k]=this.techchk_json[k].checkpoint_eng;
-        this.ids[k]=this.techchk_json[k].checkpoint_id;
-      }
-      this.el=false;
-      this.eng=true;
-      
-    }
-    else if (this.language=="gr"){
-      for(k=0; k<this.techchk_json.length; k++){
-        this.ellangs[k]=this.techchk_json[k].checkpoint_gre;
-        this.ids[k]=this.techchk_json[k].checkpoint_id;
-      }
-      this.el=true;
-      this.eng=false;
-    }
+    //greg 
+    this.dataFromStartedRouteWhileGoingBack = this.activatedRoute.snapshot.paramMap.get('dataFromRoute')
+    this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId = this.activatedRoute.snapshot.paramMap.get('dataFromDriverId');
+    this.dataFromStartedRouteWhileGoingBackJSON = JSON.parse(this.dataFromStartedRouteWhileGoingBack);
+    this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON = JSON.parse(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId);
+    console.log('%c DATA FROM ROUTELIST JSON','color:orange;')
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON);
+    console.log('%c DATA FROM ROUTELIST LOGIN JSON','color:yellow;')
+    console.log(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON);
+    //
+   
+       
+
+     this.enlangs=[];
+     this.ellangs=[];
+     this.ids=[];
+     var k=0;
+       if(this.language=="en" ){
+        this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=eng&userid=dmta').subscribe( (data) => {
+           this.englishLanguage= data;
+           console.log('%c English Language','color:orange;');
+           this.englishLanguageJSON = this.englishLanguage.DATA;
+           console.log(this.englishLanguageJSON);
+         })
+       this.el=false;
+       this.eng=true;
+       
+     }
+     else if (this.language=="gr"){
+      this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=gre&userid=dmta').subscribe( (data) => {
+         this.greekLanguage= data;
+         console.log('%c Greek Language','color:orange;');
+         this.greekLanguageJSON = this.greekLanguage.DATA;
+         console.log(this.greekLanguageJSON);
+       }) 
+       this.el=true;
+       this.eng=false;
+     }
     
   }
 
   ngOnInit() {
   }
-    selLang(l){
-  	console.log(l);
-  	console.log(this.language);
-  	
-  	var i=0;
-  	if(this.language=="English"){
-  		for(i=0; i<this.techchk_json.length; i++){
-  			this.enlangs[i]=this.techchk_json[i].checkpoint_eng;
-  			this.ids[i]=this.techchk_json[i].checkpoint_id;
-  		}
-  		this.eng=true;
-  		this.el=false;
-  	}
-  	else if(this.language=="Ελληνικά"){
-  		for(i=0; i<this.techchk_json.length; i++){
-  			this.ellangs[i]=this.techchk_json[i].checkpoint_gre;
-  			this.ids[i]=this.techchk_json[i].checkpoint_id;
-  		}
-  		this.el=true;
-  		this.eng=false;
-  	}
-  }
-
-  tech(k){
-  	this.com=true;
-  	console.log(k);
-  	
-  	console.log(this.checkpointen);
-    
-  	
-  }
-
-  // comment(){
-  // 	console.log(this.comments);
-  // 	if(this.language=="English"){
-  // 		alert("The status of the element:" + this.checkpointen + "has been updated.");
-  // 	}
-  // 	else
-  // 		if(this.language=="Ελληνικά"){
-  // 		alert("Η κατάσταση του στοιχείου:" + this.checkpointel + "έχει ενημερωθεί.");
-  // 	}
-  // }
 
   public submit(){
   
@@ -156,15 +138,11 @@ export class TechinspectPage implements OnInit {
 }
 
 sendData(myCommentForm){
-
-  console.log("data send");
-
-  var url="http://localhost:3000/vehicleCheck";
+  var url="http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?";
   return this.http.post(url,myCommentForm,
     {headers:new HttpHeaders(
       { "content-type":"application/json"
     })})
-
 }
    map(){
      console.log("kati");
@@ -185,7 +163,7 @@ sendData(myCommentForm){
 
       setTimeout(() => {
         loader.dismiss();
-        this.router.navigate(['routestarted']);
+        this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackJSON) + '/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON)]);
       }, 1000);
       console.log(data);
     })

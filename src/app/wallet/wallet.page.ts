@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -68,7 +69,17 @@ export class WalletPage implements OnInit {
 
 	serviceRegistration:any="";
 	dataFromService:any="";
-  constructor(public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder) { 
+	dataFromAllOverTheApplicationBringingDriverId:any;
+	dataFromAllOverTheApplicationBringingDriverIdJSON:any;
+  constructor(private activatedRoute:ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder) { 
+
+
+    this.dataFromAllOverTheApplicationBringingDriverId = this.activatedRoute.snapshot.paramMap.get('fordriverid');
+    this.dataFromAllOverTheApplicationBringingDriverIdJSON = JSON.parse(this.dataFromAllOverTheApplicationBringingDriverId);
+    console.log('%c DATA FROM ROUTELIST JSON','color:orange;')
+    console.log(this.dataFromAllOverTheApplicationBringingDriverIdJSON);
+  
+
   	console.log(this.language);
   	this.enlangs=[];
   	this.ellangs=[];
@@ -189,6 +200,15 @@ sendData(myPaymentForm){
 		{ "content-type":"application/json"
 		})})
 
+}
+weAreAlreadyInWalletPage(){
+	console.log('%c You are already in Wallet Page','color:green;');
+}
+goBackToRouteListPageWithDriverId(){
+	console.log('%c Going Back To Route list Page with Driver Id','color:orange;');
+	console.log(this.dataFromAllOverTheApplicationBringingDriverIdJSON)
+
+	this.router.navigate(['routelist/' + JSON.stringify(this.dataFromAllOverTheApplicationBringingDriverIdJSON)]);
 }
   navigateToSettingsPage(){
     this.router.navigate(['settings'])

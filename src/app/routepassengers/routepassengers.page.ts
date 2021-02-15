@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-routepassengers',
@@ -58,8 +58,30 @@ export class RoutepassengersPage implements OnInit {
     }
   console.log('wtf');
   }
+  dataFromRouteStarted:any;
+  dataFromRouteStartedJSON:any;
+  thePassengersList: any = [];
+  passengersList;
+  thePassengersListBecameAJSON:any;
+  constructor(private activatedRoute:ActivatedRoute, private router : Router) { 
+    //greg
+    this.dataFromRouteStarted = this.activatedRoute.snapshot.paramMap.get('passengers')
+    console.log('%c JSON','color:orange;');
+    console.log(this.dataFromRouteStarted);
+    console.log('%c JSON','color:yellow;');
+    this.dataFromRouteStartedJSON = JSON.parse(this.dataFromRouteStarted);
+    console.log("HERE",this.dataFromRouteStartedJSON.passengersList);
+    this.thePassengersList = this.dataFromRouteStartedJSON.passengersList;
+    console.log('%c thePassengersList','color:orange;');
+    console.log(this.thePassengersList);
+    this.thePassengersListBecameAJSON = JSON.stringify(this.thePassengersList);
+    console.log('%c thePassengersListBecameJSON','color:orange;');
+    console.log(this.thePassengersListBecameAJSON);
 
-  constructor(private router : Router) { 
+
+
+
+
   	this.fnames=[];
   	this.lnames=[];
   	this.pases=[];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-routedetails',
@@ -10,7 +10,23 @@ export class RoutedetailsPage implements OnInit {
 	pickUps=localStorage.getItem('routeDetails');
 	tests:any
 
-  constructor(private router : Router) { 
+
+
+
+  dataFromRouteDetails:any;
+  dataFromRouteStartedJSON:any;
+  theRoutingPathSelection: any = [];
+  constructor(private activatedRoute: ActivatedRoute,private router : Router) { 
+    //greg 
+    this.dataFromRouteDetails = this.activatedRoute.snapshot.paramMap.get('dromologio')
+    console.log('%c JSON','color:orange;');
+    console.log(this.dataFromRouteDetails);
+    this.dataFromRouteStartedJSON = JSON.parse(this.dataFromRouteDetails);
+    
+     console.log('%c JSON','color:yellow;');
+    console.log(this.dataFromRouteStartedJSON); // in this line i will take the arrival and departure 
+    this.theRoutingPathSelection = this.dataFromRouteStartedJSON.routePath;
+    
   	console.log(this.pickUps);
   	this.tests=[];
   	this.tests=["Athens", "Komotini", "Alexpoli"];
@@ -19,7 +35,7 @@ export class RoutedetailsPage implements OnInit {
   ngOnInit() {
   }
   navigateToMyroutePage(){
-  	this.router.navigate(['routestarted'])
+  	this.router.navigate(['routestarted/' + this.dataFromRouteDetails]);
   }
 
 }
