@@ -58,10 +58,10 @@
 
   <ion-content style="--offset-top:0px; --offset-bottom:0px;position: relative;top: 21px;">
 
-    <ion-list *ngFor="let papapa of thePassengersList; let i = index">
+    <ion-list *ngFor="let papapa of thepassengerListJSON.PASSENGERS; let i = index">
       <ion-item>
         <ion-label>Passenger Name</ion-label>
-        <ion-label>{{i}}{{papapa}}</ion-label>
+        <ion-label>{{papapa.FIRST_NAME}}    {{papapa.LAST_NAME}}</ion-label>
       </ion-item>
     </ion-list>
 

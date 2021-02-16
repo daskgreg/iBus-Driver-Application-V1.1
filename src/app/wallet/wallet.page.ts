@@ -71,9 +71,18 @@ export class WalletPage implements OnInit {
 	dataFromService:any="";
 	dataFromAllOverTheApplicationBringingDriverId:any;
 	dataFromAllOverTheApplicationBringingDriverIdJSON:any;
+	wallets: any = [];
+	walletsJSON:any;
+	walletsJSONtoArray:any = [];
+	dataTakenFromRouteStartedList:any;
+	dataTakenFromRouteSTartedListJSON:any;
   constructor(private activatedRoute:ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder) { 
 
-
+	this.dataTakenFromRouteStartedList = this.activatedRoute.snapshot.paramMap.get('routestartedetails');
+	this.dataTakenFromRouteSTartedListJSON =  JSON.parse(this.dataTakenFromRouteStartedList);
+	console.log('%c DATA TAKEN FROM ROUTE STARTED','color:yellow');
+	console.log(this.dataFromAllOverTheApplicationBringingDriverIdJSON);
+	
     this.dataFromAllOverTheApplicationBringingDriverId = this.activatedRoute.snapshot.paramMap.get('fordriverid');
     this.dataFromAllOverTheApplicationBringingDriverIdJSON = JSON.parse(this.dataFromAllOverTheApplicationBringingDriverId);
     console.log('%c DATA FROM ROUTELIST JSON','color:orange;')
@@ -85,17 +94,22 @@ export class WalletPage implements OnInit {
   	this.ellangs=[];
   	this.ids=[];
   }
-
-  wallets: any = [];
-
   ngOnInit() {
 	
   }
   ionViewWillEnter(){
 	console.log('wallet');
-	this.http.get('http://localhost:3000/wallet').subscribe( (data) => {
+	this.http.get('http://cf11.travelsoft.gr/itourapi/drv_wallet_tran_list.cfm?' + 'driver_id=' + this.dataFromAllOverTheApplicationBringingDriverIdJSON + '&userid=dmta').subscribe( (data) => {
 		console.log(data);
 		this.wallets = data;
+		this.walletsJSON = JSON.parse(this.wallets);
+		console.log(this.walletsJSON);
+		this.walletsJSONtoArray = this.walletsJSON.WTRANS;
+		console.log(this.walletsJSONtoArray);
+	
+		for(var i = 0; i<this.walletsJSONtoArray.length; i++){
+			console.log(this.walletsJSONtoArray[i].DEBIT);
+		}
 	})
   }
 
@@ -170,7 +184,7 @@ export class WalletPage implements OnInit {
  
 
   public submit(){
-  
+	console.log('%c Data Im taking after submiting wallets form','color:orange;');
 	console.log(this.paymentForm.value);
 	var myPaymentForm = this.paymentForm.value;
 	this.sendData(myPaymentForm).subscribe(

@@ -218,11 +218,17 @@ ion-item{
     width: 550px;
 }
 .destination{
-    position: relative;
-    right: 144px;
+    // position: relative;
+    // right: 144px;
+    // font-size: 14px;
+    // font-family: monteSBold;
+    // color:var(--ion-color-ibus-darkblue);
+    position: absolute;
+    right: 270px;
     font-size: 14px;
     font-family: monteSBold;
-    color:var(--ion-color-ibus-darkblue);
+    color: var(--ion-color-ibus-darkblue);
+    top: 50px;
 }
 .date{
     position: relative;

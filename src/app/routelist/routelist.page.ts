@@ -104,6 +104,7 @@ export class RoutelistPage implements OnInit {
   chrBusCustRoutesJSONparse:any;
   chrBusCustRoutesJSONparseToArray:any = [];
   chrBusCustRoutesJSONparseToArrayCUSTPICKUP:any = [];
+
   RPT_DRIVER_ROUTES_SERVICE_CODE:any;
   rptDriverRoutes: any = [];
   rptDriverRoutesJSONparse:any;
@@ -111,9 +112,15 @@ export class RoutelistPage implements OnInit {
   customPickUps:any = [];
   myPickUp:any;
   theRealPickUp:any = [];
-
+  chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES:any = [];
   arrivalPickup:any;
   departurePickup:any;
+
+
+  newCustomPickupRoutes:any=[];
+  newCustomPickupRoutesJSON:any;
+  newCustomPickupRoutesJSONtoArray:any = []
+  newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS:any = [];
   ionViewWillEnter(){
     this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?route_id=2&userid=dmta')
     .subscribe( (data) => {
@@ -140,13 +147,24 @@ export class RoutelistPage implements OnInit {
     this.http.get('http://cf11.travelsoft.gr/itourapi/rpt_drv_routes.cfm?' 
                   + 'driver_id=' + this.dataFromLoginPageJSON + '&from_date=' + theFirstDate + '&to_date=' + theLastDate + '&userid=dmta').subscribe( (data)=>{
       console.log(data);
-      this.rptDriverRoutes = data;
-      this.rptDriverRoutesJSONparse = JSON.parse(this.rptDriverRoutes);
+      this.rptDriverRoutes = data;this.rptDriverRoutesJSONparse = JSON.parse(this.rptDriverRoutes);
       this.rptDriverRoutesJSONparseToArray = this.rptDriverRoutesJSONparse;
       console.log('%c RPT DRIVER ROUTES','color:pink;');
       console.log(this.rptDriverRoutesJSONparseToArray);
       console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES.DRIVER_ID);
-          var i=0;
+      this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES = this.rptDriverRoutesJSONparseToArray.DRVROUTES
+      console.log(this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.SERVICECODE);
+      var i=0;
+      
+
+      // this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?' + 'route_id=' + this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.SERVICECODE + '&userid=dmta')
+      // .subscribe( (data) =>{
+      //   console.log('%c GAMW TIN PANAGIA');
+      //   console.log(data);
+        
+      // })
+
+
       while(i<this.rptDriverRoutesJSONparseToArray.DRVROUTES.length){ // Looking for Chapter Bus Service 
 
         if(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SERVICE == 'CHT'){
@@ -154,75 +172,43 @@ export class RoutelistPage implements OnInit {
           console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SERVICE);
       
           console.log('%c local storage chrbus_sp_id','color:yellow;'); // chrbus_sp_id
-          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].CHRBUS_SP_ID);
-          localStorage.setItem('RPT_DRIVER_ROUTES_CHRBUS_SP_ID', this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].CHRBUS_SP_ID);
+          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].CHRBUS_SP_ID);
+          localStorage.setItem('RPT_DRIVER_ROUTES_CHRBUS_SP_ID', this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].CHRBUS_SP_ID);
 
           console.log('%c local storage DRIVER_ID','color:orange;'); // driver_id
-          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].DRIVER_ID);
-          localStorage.setItem('RPT_DRIVER_ROUTES_DRIVER_ID', this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].DRIVER_ID);
+          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].DRIVER_ID);
+          localStorage.setItem('RPT_DRIVER_ROUTES_DRIVER_ID', this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].DRIVER_ID);
 
           console.log('%c local storage SERVICECODE','color:red;'); // service_code
-          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].SERVICECODE);
-          this.RPT_DRIVER_ROUTES_SERVICE_CODE =  this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].SERVICECODE;
+          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SERVICECODE);
+          this.RPT_DRIVER_ROUTES_SERVICE_CODE =  this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SERVICECODE;
 
           console.log('%c local storage VEHICLE_MAP_ID','color:blue;'); // vehicle_map_id
-          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].VEHICLE_MAP_ID);
-          localStorage.setItem('RPT_DRIVER_ROUTES_VEHICLE_MAP_ID', this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].VEHICLE_MAP_ID);
+          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].VEHICLE_MAP_ID);
+          localStorage.setItem('RPT_DRIVER_ROUTES_VEHICLE_MAP_ID', this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].VEHICLE_MAP_ID);
 
           console.log('%c local storage VHC_PLATES','color:green;'); // vhc_plates
-          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].VHC_PLATES);
-          localStorage.setItem('RPT_DRIVER_ROUTES_VHC_PLATES', this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].VHC_PLATES)
+          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].VHC_PLATES);
+          localStorage.setItem('RPT_DRIVER_ROUTES_VHC_PLATES', this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].VHC_PLATES)
 
           console.log('%c local storage SP_CODE','color:green;'); // sp_code
-          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].SP_CODE);
-          localStorage.setItem('RPT_DRIVER_ROUTES_SP_CODE', this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].SP_CODE)
+          console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SP_CODE);
+          localStorage.setItem('RPT_DRIVER_ROUTES_SP_CODE', this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SP_CODE)
 
-          if(this.rptDriverRoutesJSONparseToArray.DRVROUTES[0].TYPE == 'CUST'){
-            console.log('%c TYPE = CUST','color:yellow;');
-            this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_custRoutes.cfm?' + 'route_id=' + this.RPT_DRIVER_ROUTES_SERVICE_CODE + '&userid=dmta')
-            .subscribe( (data) => {
-              console.log(data)
-            this.chrbusCust = data;
-            console.log('%c CHRBUS CUST','color:orange;');
-            console.log(this.chrbusCust);
-            })
-            this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?' + 'route_id=' + this.RPT_DRIVER_ROUTES_SERVICE_CODE + '&userid=dmta')
-            .subscribe( (data) => {
-              console.log(data);
-
-            this.chrBusCustRoutes = data;
-            this.chrBusCustRoutesJSONparse = JSON.parse(this.chrBusCustRoutes);
-            this.chrBusCustRoutesJSONparseToArray = this.chrBusCustRoutesJSONparse;
-            console.log('%c CHRTBUS_CUST_ROUTES','color:red;');
-            console.log(this.chrBusCustRoutesJSONparseToArray)
-            this.chrBusCustRoutesJSONparseToArrayCUSTPICKUP = this.chrBusCustRoutesJSONparseToArray.CUSTPICKUPS[0];
-            console.log('%c FOR STATEMENT','color:pink');
-            console.log(this.chrBusCustRoutesJSONparseToArrayCUSTPICKUP)
-
-
-            for(i=0; i<this.chrBusCustRoutesJSONparseToArray.CUSTPICKUPS.length; i++){
-            }
-            this.departurePickup = this.chrBusCustRoutesJSONparseToArray.CUSTPICKUPS[0].PICKUP_ADDRESS;
-            this.arrivalPickup = this.chrBusCustRoutesJSONparseToArray.CUSTPICKUPS[i-1].PICKUP_ADDRESS;
-
-
-            console.log(this.departurePickup);
-            console.log(this.arrivalPickup);
-
-           
-            })
-          }else{
-            console.log('%c YOU FAILED THIS CITY','color:yellow;');
-          }
-
-          
-          break;
-        }else{
-          console.log('%c NOT FOUND THE SERVICE','color:red;');
-        }
+                
+                  this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?' + 'route_id=' + this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SERVICECODE + '&userid=dmta')
+                .subscribe( (data) =>{
+                  console.log('%c DATA','color:red;');
+                  console.log(data);
+                  this.newCustomPickupRoutes = data;
+                  this.newCustomPickupRoutesJSON = JSON.parse(this.newCustomPickupRoutes);
+                  this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
+                  this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.CUSTPICKUPS
+                })
+                
         i++;
       }
-                        
+    }                  
      
       
       // if(1){
@@ -258,7 +244,7 @@ export class RoutelistPage implements OnInit {
       this.dataFromService = JSON.stringify(dataReturnFromService);
       console.log(this.dataFromService['_body']);
 
-      this.router.navigate(['routestarted/'+ JSON.stringify(selectedDatesFromCustomPickups) + '/' +JSON.stringify(this.dataFromLoginPageJSON)]);
+      this.router.navigate(['techinspect/'+ JSON.stringify(selectedDatesFromCustomPickups) + '/' +JSON.stringify(this.dataFromLoginPageJSON)]);
     });
 
     }

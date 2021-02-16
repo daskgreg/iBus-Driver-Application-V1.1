@@ -22,13 +22,28 @@
   </div>
 
 
-  <form id="form">
+  <form id="form" [formGroup]="finalRegistrationForm" (ngSubmit)="submit()">
     <ion-list>
       <ion-item lines='none'>
         <ion-icon  name="newspaper" ios="newspaper"></ion-icon>
-        <ion-input class="fileclass" name="licNumber"  type="text" placeholder="{{'register3-lnumber.title' | translate}}" required>
+        <ion-input formControlName="licNumber" class="fileclass" name="licNumber"  type="text" placeholder="{{'register3-lnumber.title' | translate}}" required>
         </ion-input>
       </ion-item>
+      <div *ngFor="let error of errorMessages.licNumber">
+        <ng-container *ngIf="licNumber.hasError(error.type) && (licNumber.dirty || licNumber.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      <ion-item lines='none'>
+        <ion-icon  name="newspaper" ios="newspaper"></ion-icon>
+        <ion-input formControlName="plate" class="fileclass" name="plate"  type="text" placeholder="{{'register3-lnumber.title' | translate}}" required>
+        </ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.plate">
+        <ng-container *ngIf="plate.hasError(error.type) && (plate.dirty || plate.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
        <ion-item lines='none'>
           <ion-icon  name="folder"></ion-icon>
           <input type="file" (change)="onFileChange($event)" name="imgCarReg" id="file" class="fileInput"/>
@@ -44,11 +59,7 @@
           <input (change)="onFileChange3($event)" type="file" name="imgProfile" id="file" class="fileInput"/>
           <label class="fileclass" for="file"> {{'register3-profilepic.title' | translate}}</label>
         </ion-item>   -->
-
-
-
-
-      <ion-button class="btn-send" expand="block" shape="round" (click)="submitForm()" >{{'register-next.title' | translate}}</ion-button>
+      <ion-button [disabled]="!finalRegistrationForm.valid"class="btn-send" expand="block" type="submit" shape="round" (click)="submitForm()" >{{'register-next.title' | translate}}</ion-button>
     </ion-list>
   </form>
   </div>

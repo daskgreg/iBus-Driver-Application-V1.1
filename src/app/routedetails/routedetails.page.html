@@ -2,17 +2,17 @@
   <ion-title class="ion-text-center">{{'routedetails-details.title' | translate}}</ion-title>
 
    <ion-label class="ion-text-center timeItem" lines="none">
-      <button class="startTimeBtn">{{dataFromRouteStartedJSON.departure}}</button> <!-- {{'routedetails-start.title' | translate}}-->
+      <button class="startTimeBtn">{{thisIsMyStartingPoint}}</button> <!-- {{'routedetails-start.title' | translate}}-->
     </ion-label>
-  <ion-list class="theList" *ngFor="let myroute of theRoutingPathSelection; let i=index">
+  <ion-list class="theList">
   	  
-    <ion-label class="ion-text-center timeItem" lines="none">
-      <button class="timeBtn">{{myroute}}</button>
+    <ion-label class="ion-text-center timeItem" lines="none" *ngFor="let pickup of toMyNewArray">
+      <button class="timeBtn">{{pickup.PICKUP_ADDRESS}}</button>
     </ion-label>
 
   </ion-list>
    <ion-label class="ion-text-center timeItem" lines="none">
-      <button class="endTimeBtn">{{dataFromRouteStartedJSON.arrival}}</button> <!--{{'routedetails-end.title' | translate}}-->
+      <button class="endTimeBtn">{{thisIsmyLastPoint}}</button> <!--{{'routedetails-end.title' | translate}}-->
     </ion-label>
 
   <ion-buttons class="addBtn" (click)="navigateToMyroutePage()" vertical="bottom" horizontal="center" translucent="true">

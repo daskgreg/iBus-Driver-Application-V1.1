@@ -52,11 +52,11 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'register2',
+    path: 'register2/:information',
     loadChildren: () => import('./register2/register2.module').then( m => m.Register2PageModule)
   },
   {
-    path: 'register3',
+    path: 'register3/:infofromregisterone/:infofromregistertwo',
     loadChildren: () => import('./register3/register3.module').then( m => m.Register3PageModule)
   },
   {
@@ -68,7 +68,7 @@ const routes: Routes = [
     loadChildren: () => import('./home2/home2.module').then( m => m.Home2PageModule)
   },
   {
-    path: 'wallet/:fordriverid',
+    path: 'wallet/:fordriverid/:routestartedetails',
     loadChildren: () => import('./wallet/wallet.module').then( m => m.WalletPageModule)
   },
   {
@@ -84,7 +84,7 @@ const routes: Routes = [
     loadChildren: () => import('./routestarted/routestarted.module').then( m => m.RoutestartedPageModule)
   },
   {
-    path: 'routepassengers/:passengers',
+    path: 'routepassengers/:driverid/:dromologio/:passengers',
     loadChildren: () => import('./routepassengers/routepassengers.module').then( m => m.RoutepassengersPageModule)
   },
   {
@@ -96,7 +96,7 @@ const routes: Routes = [
     loadChildren: () => import('./techhistory/techhistory.module').then( m => m.TechhistoryPageModule)
   },
   {
-    path: 'routedetails/:dromologio',
+    path: 'routedetails/:driverid/:dromologio/:pickups',
     loadChildren: () => import('./routedetails/routedetails.module').then( m => m.RoutedetailsPageModule)
   },
   {

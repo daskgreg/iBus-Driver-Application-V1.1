@@ -78,26 +78,33 @@ export class RegisterPage {
 
   serviceRegistration:any="";
   dataFromService:any="";
+  isMyRegisterForm:any=[];
   constructor(public http:HttpClient, private formBuilder: FormBuilder, private router : Router) { }
 
 
   public submit(){
   
       console.log(this.registrationForm.value);
+
+      this.isMyRegisterForm = this.registrationForm.value;
+      console.log('%c BIRTH','color:yellow;');
+      console.log(this.isMyRegisterForm.birth);
+      this.router.navigate(['register2/' + JSON.stringify(this.isMyRegisterForm)]);
       var myRegistrationForm = this.registrationForm.value;
       this.sendData(myRegistrationForm).subscribe(
       (dataReturnFromService) => {
         this.dataFromService = JSON.stringify(dataReturnFromService);
         console.log(JSON.stringify(dataReturnFromService));
         console.log( dataReturnFromService['_body'] );
-        this.router.navigate(['register2']);
+        
       }, error => {
         console.log(error);
       });
   }
 
   sendData(myRegistrationForm){
-    var url="http://cf11.travelsoft.gr/itourapi/trp_driver_signup.cfm?userid=dmta";
+    var url=""
+    // var url="http://cf11.travelsoft.gr/itourapi/trp_driver_signup.cfm?userid=dmta";
     return this.http.post(url,myRegistrationForm,
       {headers:new HttpHeaders(
         { "content-type":"application/json"

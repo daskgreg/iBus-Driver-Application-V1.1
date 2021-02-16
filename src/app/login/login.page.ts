@@ -62,6 +62,8 @@ export class LoginPage {
   results: any;
   allData: any;
   postList = [];
+  driversInformationsLogin: any;
+  driversInformationLoginForChecks: any = [];
  async login(){
      let loader = await this.loadingCtrl.create({
       message: "Logging in"
@@ -83,10 +85,13 @@ export class LoginPage {
      console.log('%c This is the data of Login','color:orange;');
      console.log(this.allData);
      console.log(this.allData.DRIVER);
-     for (var i=0; i<this.allData.length; i++){
+     this.driversInformationsLogin = this.allData;
+     console.log(this.driversInformationsLogin);
+     this.driversInformationLoginForChecks = this.driversInformationsLogin.DRIVER;
+     console.log(this.driversInformationLoginForChecks);
 
-        if(this.allData[i].password == this.pass){
-
+     for(var i=0; i<this.driversInformationLoginForChecks.length; i++){
+        if(this.driversInformationLoginForChecks[i].FLAG == 1){
           let loader = await this.loadingCtrl.create({
             message: "Successfull Login"
           });
@@ -96,12 +101,11 @@ export class LoginPage {
           setTimeout(() => {
             loader.dismiss();
           }, 1000);
-           var id = this.allData[i].id;
-           this.router.navigate(['routelist/', JSON.stringify(this.allData[i].id)]);   
-          
+
+           this.router.navigate(['routelist/', JSON.stringify(this.driversInformationLoginForChecks[i].DRIVER_ID)]);   
         }else {
           let loader = await this.loadingCtrl.create({
-            message: "Please try again.."
+            message: "Password or login is wrong..."
           });
 
           loader.present();
@@ -110,6 +114,7 @@ export class LoginPage {
           }, 800);
         }
      }
+    
    }, err => {
      console.log('Kati paizei', err);
    });

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -29,7 +30,13 @@ export class RoutestartedPage implements OnInit {
   dataFromRouteListJSON:any;
   dataFromRouteListLogin:any;
   dataFromRouteListLoginJSON:any;
-  constructor(private activatedRoute:ActivatedRoute, private router : Router) { 
+
+  startingPoint:any;
+  newCustomPickupRoutes:any=[];
+  newCustomPickupRoutesJSON:any;
+  newCustomPickupRoutesJSONtoArray:any = []
+  newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS:any = [];
+  constructor(private http:HttpClient,private activatedRoute:ActivatedRoute, private router : Router) { 
 
     
 
@@ -39,8 +46,28 @@ export class RoutestartedPage implements OnInit {
     this.dataFromRouteListLoginJSON = JSON.parse(this.dataFromRouteListLogin);
     console.log('%c DATA FROM ROUTELIST JSON','color:orange;')
     console.log(this.dataFromRouteListJSON);
+    console.log(this.dataFromRouteListJSON.SERVICECODE);
     console.log('%c DATA FROM ROUTELIST LOGIN JSON','color:yellow;')
     console.log(this.dataFromRouteListLoginJSON);
+
+    this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?' + 'route_id=' + this.dataFromRouteListJSON.SERVICECODE + '&userid=dmta')
+    .subscribe( (data) =>{
+      console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
+      console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
+      console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
+      console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
+      console.log(data);
+      this.newCustomPickupRoutes = data;
+      console.log(this.newCustomPickupRoutes)
+      this.newCustomPickupRoutesJSON = JSON.parse(this.newCustomPickupRoutes);
+      console.log(this.newCustomPickupRoutesJSON);
+      this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
+      console.log(this.newCustomPickupRoutesJSONtoArray);
+      this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.CUSTPICKUPS
+      console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS);
+      console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].PICKUP_ADDRESS);
+      this.startingPoint = this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].PICKUP_ADDRESS
+    })
 
     var i=0;
 
@@ -70,7 +97,7 @@ export class RoutestartedPage implements OnInit {
   getPassengersInformationFromRouteListSelection(){
     console.log('%c Routing to Passengers List', 'color:orange;');
     console.log(this.dataFromRouteListJSON);
-    this.router.navigate(['routepassengers/' + JSON.stringify(this.dataFromRouteListJSON)]);
+    this.router.navigate(['routepassengers/' +  JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON)]);
   }
   getRoutingInformationPathFromRouteListSelection(){
     console.log('%c Routing to Route Path Details', 'color:yellow;');
@@ -90,11 +117,25 @@ export class RoutestartedPage implements OnInit {
     this.router.navigate(['techinspect/' + JSON.stringify(this.dataFromRouteListJSON) + '/' + JSON.stringify(this.dataFromRouteListLoginJSON)]);
   }
   goToWalletPageWithDriverId(){
+    console.log('%c Going to Wallet Page | DRIVER ID |','color:pink;');
+    console.log(this.dataFromRouteListLoginJSON);
+   this.router.navigate(['wallet/' + JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON)]);
+  }
+  goToRouteDetails(){
+    console.log('%c Going to RouteDetails | DRIVER ID |','color:pink;');
+    console.log(this.dataFromRouteListLoginJSON);
+    console.log('%c Going to RouteDetails | RPT DRV ROUTES |','color:pink;');
+    console.log(this.dataFromRouteListJSON);
+    console.log('%c Going to RouteDetails | PickUps |','color:pink;');
+    console.log(this.newCustomPickupRoutesJSONtoArray)
+
+    this.router.navigate(['routedetails/' + JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON) + '/' + JSON.stringify(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS)]);
+  }
+  navigateToWalletPage(){
     console.log('%c GOing to Wallet Page | DRIVER ID |','color:pink;');
     console.log(this.dataFromRouteListLoginJSON);
-    this.router.navigate(['wallet/' + JSON.stringify(this.dataFromRouteListLoginJSON)]);
+    this.router.navigate(['wallet/' + JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON)]);
   }
-
   navigateToMapPage(){
   	this.router.navigate(["map"])
   }
@@ -107,9 +148,7 @@ export class RoutestartedPage implements OnInit {
   navigateToSettingsPage(){
     this.router.navigate(['home2/settings'])
   }
-  navigateToWalletPage(){
-    this.router.navigate(['home2/wallet'])
-  }
+  
   navigateToRouteDetails(){
     this.router.navigate(['routedetails'])
   }

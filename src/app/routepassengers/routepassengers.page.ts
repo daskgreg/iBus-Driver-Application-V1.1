@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -60,26 +61,39 @@ export class RoutepassengersPage implements OnInit {
   }
   dataFromRouteStarted:any;
   dataFromRouteStartedJSON:any;
-  thePassengersList: any = [];
+  thePassenger: any = [];
+  VEHICLE_MAP_ID:any;
   passengersList;
   thePassengersListBecameAJSON:any;
-  constructor(private activatedRoute:ActivatedRoute, private router : Router) { 
+  thepassengerListJSON:any = [];
+  thepassengerListJSONPassenger:any;
+  dataFromRouteStartedDromologio:any;
+  dataFromRouteStartedDriverId:any;
+  dataFromRouteStartedJSONDromologio:any;
+  dataFromRouteStartedJSONDriverId:any;
+  constructor(private http:HttpClient, private activatedRoute:ActivatedRoute, private router : Router) { 
     //greg
+    this.dataFromRouteStartedDromologio = this.activatedRoute.snapshot.paramMap.get('dromologio');
+    this.dataFromRouteStartedJSONDromologio = JSON.parse(this.dataFromRouteStartedDromologio);
+    this.dataFromRouteStartedDriverId = this.activatedRoute.snapshot.paramMap.get('driverid');
+    this.dataFromRouteStartedJSONDriverId = JSON.parse(this.dataFromRouteStartedDriverId);
     this.dataFromRouteStarted = this.activatedRoute.snapshot.paramMap.get('passengers')
     console.log('%c JSON','color:orange;');
     console.log(this.dataFromRouteStarted);
     console.log('%c JSON','color:yellow;');
     this.dataFromRouteStartedJSON = JSON.parse(this.dataFromRouteStarted);
-    console.log("HERE",this.dataFromRouteStartedJSON.passengersList);
-    this.thePassengersList = this.dataFromRouteStartedJSON.passengersList;
-    console.log('%c thePassengersList','color:orange;');
-    console.log(this.thePassengersList);
-    this.thePassengersListBecameAJSON = JSON.stringify(this.thePassengersList);
-    console.log('%c thePassengersListBecameJSON','color:orange;');
-    console.log(this.thePassengersListBecameAJSON);
+    console.log("HERE",this.dataFromRouteStartedJSON.VEHICLE_MAP_ID);
+    this.VEHICLE_MAP_ID = this.dataFromRouteStartedJSON.VEHICLE_MAP_ID;
+    console.log(this.VEHICLE_MAP_ID);
 
+    this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_passengers_list.cfm?vehicle_map_id='+ this.VEHICLE_MAP_ID +'&userid=dmta')
+    .subscribe((data)=>{
+      console.log(data);
+      this.thePassenger = data;
+      this.thepassengerListJSON = JSON.parse(this.thePassenger);
+      console.log(this.thepassengerListJSON);
 
-
+    })
 
 
   	this.fnames=[];
@@ -109,6 +123,12 @@ export class RoutepassengersPage implements OnInit {
   console.log(this.fnames,this.lnames);
 }
 
+navigateToStartRoutePage(){
+
+
+  this.router.navigate(['routestarted/' + this.dataFromRouteStartedDromologio + '/' + this.dataFromRouteStartedDriverId ])
+}
+
   ngOnInit() {
   }
   navigateToWalletPage(){
@@ -129,9 +149,7 @@ export class RoutepassengersPage implements OnInit {
   navigateToRouteHistoryPage(){
     this.router.navigate(['routehistory'])
   }
-  navigateToStartRoutePage(){
-    this.router.navigate(['routestarted'])
-  }
+ 
   navigateToRouteListPage(){
     this.router.navigate(['routelist'])
   }

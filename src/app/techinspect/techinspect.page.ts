@@ -46,7 +46,9 @@ export class TechinspectPage implements OnInit {
   greekLanguageJSON:any;
   englishLanguage:any = []
   englishLanguageJSON:any =[];
-
+  myCommentForm:any =[];
+  checkThePoint:any=[]
+  checkThePointComment:any=[]
   //greg
   get measurementData(){
     return this.commentForm.get('measurementData');
@@ -90,7 +92,7 @@ export class TechinspectPage implements OnInit {
     console.log(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON);
     //
    
-       
+      
 
      this.enlangs=[];
      this.ellangs=[];
@@ -98,9 +100,10 @@ export class TechinspectPage implements OnInit {
      var k=0;
        if(this.language=="en" ){
         this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=eng&userid=dmta').subscribe( (data) => {
+          console.log(data);
            this.englishLanguage= data;
            console.log('%c English Language','color:orange;');
-           this.englishLanguageJSON = this.englishLanguage.DATA;
+           this.englishLanguageJSON = JSON.parse(this.englishLanguage);
            console.log(this.englishLanguageJSON);
          })
        this.el=false;
@@ -124,51 +127,79 @@ export class TechinspectPage implements OnInit {
   }
 
   public submit(){
-  
+    console.log('%c MY ENGLISH JSON','color:orange;');
     console.log(this.commentForm.value);
-    var myCommentForm = this.commentForm.value;
-    this.sendData(myCommentForm).subscribe(
-    (dataReturnFromService) => {
-      this.dataFromService = JSON.stringify(dataReturnFromService);
-      console.log(JSON.stringify(dataReturnFromService));
-      console.log(dataReturnFromService['_body'] );
-    }, error => {
-      console.log(error);
-    });
-}
+    
+    this.myCommentForm = this.commentForm.value;
+    console.log(this.myCommentForm.measurementData);
 
-sendData(myCommentForm){
-  var url="http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?";
-  return this.http.post(url,myCommentForm,
-    {headers:new HttpHeaders(
-      { "content-type":"application/json"
-    })})
-}
+    this.checkThePointComment = this.myCommentForm.comment;
+    console.log(this.checkThePointComment)
+    this.checkThePoint = this.myCommentForm.measurementData;
+    console.log(this.checkThePoint.CHECKPOINT);
+
+    console.log( );
+//
+    this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?' 
+                  + 'vhc_plates=' + this.dataFromStartedRouteWhileGoingBackJSON.VHC_PLATES
+                  + '&chrbus_code=' + this.dataFromStartedRouteWhileGoingBackJSON.SERVICECODE 
+                  + '&chrbus_sp_id=' + 1 //this.dataFromStartedRouteWhileGoingBackJSON.CHRBUS_SP_ID
+                  + '&sp_code=' + 1 //this.dataFromStartedRouteWhileGoingBackJSON.SP_CODE
+                  + '&fromd=' + this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_FROM_DATE
+                  + '&tod=' + this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_TO_DATE
+                  + '&driver_id=' + this.dataFromStartedRouteWhileGoingBackJSON.DRIVER_ID
+                  + '&checkpoint_id=' + this.checkThePoint.CHECKPOINT_ID
+                  + '&checkpoint_txt=' + this.checkThePoint.CHECKPOINT
+                  + '&checkpoint_status=' + this.checkThePoint.FLAG
+                  + '&comment=' + this.checkThePointComment
+                  + '&userid=dmta'
+                  ).subscribe( async (data)=>{
+                    console.log(data);
+
+                    let loader = await this.loadingCtrl.create({
+                      message:"Tech Inspect SuccessFully Done"
+                    });
+                    loader.present();
+
+                    setTimeout(() => {
+                      loader.dismiss();
+                      this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackJSON) + '/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON)]);
+                    }, 1000);
+                  })
+    // this.sendData(this.myCommentForm).subscribe(
+    // (dataReturnFromService) => {
+    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
+    //   this.dataFromService = JSON.stringify(dataReturnFromService);
+    //   console.log(JSON.stringify(dataReturnFromService));
+    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
+    //   console.log(this.dataFromService.CHECKPOINT)
+    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
+    //   console.log(dataReturnFromService['_body'] );
+    // }, error => {
+    //   console.log(error);
+    // });
+    //cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?vhc_plates=OPE5400&chrbus_code=2&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&driver_id=16&checkpoint_id=40&checkpoint_txt=The%20performance%20of%20the%20brakes.&checkpoint_status=1&comment=asdfasdfsadf&userid=dmta
+    //cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?vhc_plates=OPE5400&chrbus_code=2&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&driver_id=16&checkpoint_id=41&checkpoint_txt=Lights%20in%20terms%2unction          &checkpoint_status=1&comment=saffasafafsfasafs&userid=dmta
+} //http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?driverid=16&chrbus_code=CUST&vhc_plates=OPE5400&chrbus_sp_id=&sp_code=&fromd=2021-01-28&tod=2021-02-28&checkpoint_id=46&checkpoint_txt=The%20flexible%20-%20rigid%20piping%20of%20the%20braking%20system.&checkpoint_status=1&comment=rrffff&userid=dmta 
+ //http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?driver_id=16&vhc_plates=OPE6009&chrbus_code=panos&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&checkpoint_id=45&checkpoint_status=1&comments=test&userid=dmta
+// sendData(myCommentForm){
+  
+//   var url="";
+//   return this.http.post(url,myCommentForm,
+//     {headers:new HttpHeaders(
+//       { "content-type":"application/json"
+//     })})
+// }
    map(){
-     console.log("kati");
-  //	this.router.navigate(['routestarted'])
-  	// this.navCtrl.setRoot(CurrentPage);
-    let body = {
-      message: "Do you hear me?"
-    }
-    var url="http://localhost:3000/vehicleCheck";
-    this.http.post(url,JSON.stringify(body), 
-      { headers: new HttpHeaders(
-      {"content-type":"application/json"}
-    )}).subscribe(async (data) => {
-      let loader = await this.loadingCtrl.create({
-        message: "Tech Inspect Successfull"
-      });
-      loader.present();
-
+    
       setTimeout(() => {
-        loader.dismiss();
+       
         this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackJSON) + '/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON)]);
       }, 1000);
-      console.log(data);
-    })
+ 
+    }
 
-  }
+  
 
 
 

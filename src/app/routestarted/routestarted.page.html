@@ -60,7 +60,7 @@
 
     <ion-label  style="padding: 1px;" class="ion-text-center">
       <ion-item (click)="navigateToRouteDetails()" class="destItem" lines="none">
-        <button  class="destBtn">{{dataFromRouteListJSON.PICKUP_ADDRESS}}</button>
+        <button  class="destBtn">{{startingPoint}}</button>
         <ion-icon class="dmpIconStyle destIcon" name="map" side="end" ></ion-icon>
       </ion-item>
       <ion-item class="timeItem" lines="none">
@@ -83,7 +83,7 @@
       <ion-button (click)="getPassengersInformationFromRouteListSelection()"class="btnStyle">{{'routeStarted-passengers.title' | translate}}</ion-button>
     </ion-list>
     <ion-list class="ionListClass">
-      <ion-button  (click)="getRoutingInformationPathFromRouteListSelection()" class="btnStyle">{{'routeStarted-routeDetails.title' | translate}}</ion-button>
+      <ion-button  (click)="goToRouteDetails()" class="btnStyle">{{'routeStarted-routeDetails.title' | translate}}</ion-button>
     </ion-list>
   </ion-content>
   <div class="myiontab">

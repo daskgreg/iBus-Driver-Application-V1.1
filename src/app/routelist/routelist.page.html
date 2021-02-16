@@ -88,6 +88,24 @@
       <ion-datetime class="text-center" placeholder="{{'routelist-to.title' | translate}}" displayFormat="DD/MM/YYYY"(ionChange)="onChangeFromFunction()" [(ngModel)]="endDate"></ion-datetime>
     </ion-item>
     <ion-list >
+      <ion-item *ngFor="let select of rptDriverRoutesJSONparseToArray.DRVROUTES  " (click)="sendDataToRouteStarted(select)">
+        <ion-buttons item-start>
+        <ion-icon class="icon-size" name="map" ></ion-icon>
+      </ion-buttons>
+      <ion-buttons item-end>
+        <button  class="btn-accept" ion-button color="light">TAKE</button>
+      </ion-buttons>
+      <ion-label class="availability" ></ion-label> <br>
+      <ion-label class="destination">{{select.ASSIGNMENT_FROM_DATE}}</ion-label> <br>
+      <!-- <ion-label class="date">Yolo,Yolo,Yolo</ion-label> -->
+      <ion-item style="position: relative;
+      margin-top: 90px;" *ngFor="let selectRoute of newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS; let i = index">
+        <ion-label  class="">{{selectRoute.PICKUP_ADDRESS}}{{selectRoute[i]}}</ion-label>
+      </ion-item>
+      </ion-item>
+     
+    </ion-list>
+    <!-- <ion-list >
       <ion-item *ngFor="let selectedDatesFromCustomPickups of chrBusCustRoutesJSONparseToArray.CUSTPICKUPS  " (click)="sendDataToRouteStarted(selectedDatesFromCustomPickups)">
         <ion-buttons item-start>
         <ion-icon class="icon-size" name="map" ></ion-icon>
@@ -99,7 +117,7 @@
       <ion-label class="destination">{{selectedDatesFromCustomPickups.PICKUP_ADDRESS}}</ion-label> <br>
       <ion-label class="date"></ion-label>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
     <ion-list>
       <ion-item *ngFor="let item of filtered" (click)="sendDataOfTheSelectedRoute(item,item.id,item.departure,item.arrival,item.date)">
       <ion-buttons item-start>
