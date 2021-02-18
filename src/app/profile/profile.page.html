@@ -60,59 +60,54 @@
       </ion-img>
     </ion-item>
 
-    <form id="form">
-      <ion-list>
+    <form id="form" [formGroup]="profileRegistrationUpdateForm" (ngSubmit)="submit()">
+      <ion-list  *ngFor="let profile of getProfileJSONtoArray">
         <ion-item lines='none'>
-          <ion-input  name="firstName"  type="text" placeholder="{{'profile-fname.title' | translate}}" required>
+          <ion-input formControlName="firstName"  name="firstName"  type="text" placeholder="{{profile.FIRST_NAME}}" required>
           </ion-input>  <ion-icon slot="end" name="person" ios="mail"></ion-icon>
         </ion-item>
   
         <ion-item lines="none">
-          <ion-input  name="lastName" type="text" placeholder="{{'profile-lname.title' | translate}}" required></ion-input>
+          <ion-input  formControlName="lastName" name="lastName" type="text" placeholder="{{profile.LAST_NAME}}" required></ion-input>
           <ion-icon slot="end" name="person"></ion-icon>
         </ion-item>
         <ion-item lines="none">
-          <ion-input  name="address" type="text" placeholder="{{'profile-address.title' | translate}}" required></ion-input>
+          <ion-input formControlName="address" name="address" type="text" placeholder="{{profile.ADDRESS}}" required></ion-input>
           <ion-icon slot="end" name="home"></ion-icon>
         </ion-item>
         <ion-item lines="none">
-          <ion-input  name="city" type="text" placeholder="{{'profile-city.title' | translate}}" required></ion-input>
+          <ion-input formControlName="city"  name="city" type="text" placeholder="{{profile.LOCATION}}" required></ion-input>
           <ion-icon slot="end" name="person"></ion-icon>
         </ion-item>
         <ion-item lines="none">
-          <ion-input  name="state" type="text" placeholder="{{'profile-state.title' | translate}}" required></ion-input>
+          <ion-input formControlName="state"  name="state" type="text" placeholder="{{'profile-state.title' | translate}}" required></ion-input>
           <ion-icon slot="end" name="ribbon"></ion-icon>
         </ion-item>
 
         <ion-item lines="none">
-          <ion-input  name="email" type="email" placeholder="{{'profile-email.title' | translate}}" required></ion-input>
+          <ion-input formControlName="email" name="email" type="email" placeholder="{{profile.EMAIL}}" required></ion-input>
           <ion-icon slot="end" name="mail"></ion-icon>
         </ion-item>
   
         <ion-item lines="none">
-          <ion-input  name="phoneNumber" type="tel" placeholder="{{'profile-phone.title' | translate}}" required></ion-input>
+          <ion-input  formControlName="phoneNumber" name="phoneNumber" type="tel" placeholder="{{profile.MOBILE}}" required></ion-input>
           <ion-icon slot="end" name="call"></ion-icon>
         </ion-item>
         <ion-item lines="none">
-          <ion-input  name="licenseNumber" type="text" placeholder="{{'profile-licensenum.title' | translate}}" required></ion-input>
+          <ion-input formControlName="licenceNumber" name="licenseNumber" type="text" placeholder="{{profile.LICENSE_ID}}" required></ion-input>
           <ion-icon slot="end" name="newspaper"></ion-icon>
         </ion-item>
         <ion-item lines="none">
-          <ion-input  name="plateNumber" type="text" placeholder="{{'profile-platenum.title' | translate}}" required></ion-input>
+          <ion-input formControlName="plateNumber" name="plateNumber" type="text" placeholder="{{'profile-platenum.title' | translate}}" required></ion-input>
           <ion-icon slot="end" name="newspaper"></ion-icon>
         </ion-item>
   
         <ion-item lines="none">
-          <ion-input  name="pass" type="password" placeholder="{{'profile-passcon.title' | translate}}" required></ion-input>
+          <ion-input formControlName="pass"  name="pass" type="password" placeholder="{{profile.PASSWORD}}" required></ion-input>
           <ion-icon slot="end" name="eye"></ion-icon>
         </ion-item>
-        <ion-item lines="none">
-          <ion-input  name="confirmPassword" type="password" placeholder="{{'profile-pass.title' | translate}}" required></ion-input>
-          <ion-icon slot="end" name="eye"></ion-icon>
-        </ion-item>
-  
-  
-        <ion-button class="btn-send" expand="block" shape="round"  (click)="navigateToFeedPage()">{{'profile-update.title' | translate}}</ion-button>
+        <ion-button type="submit" class="btn-send" expand="block" shape="round"  (click)="navigateToFeedPage()">{{'profile-gogoback.title' | translate}}</ion-button>
+        <ion-button type="submit" class="btn-send" expand="block" shape="round"  (click)="navigateToFeedPage()">{{'profile-update.title' | translate}}</ion-button>
       </ion-list>
     </form>
   </ion-content>

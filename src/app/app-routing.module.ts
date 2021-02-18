@@ -24,11 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('./routelist/routelist.module').then( m => m.RoutelistPageModule)
   },
   {
-    path: 'techinspect/:dataFromRoute/:dataFromDriverId',
+    path: 'techinspect/:dataFromRoute/:datafromdriverId',
     loadChildren: () => import('./techinspect/techinspect.module').then( m => m.TechinspectPageModule)
   },
   {
-    path: 'map',
+    path: 'map/:thepickups/:rptroutes/:theidofdriver',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },
   {
@@ -100,7 +100,7 @@ const routes: Routes = [
     loadChildren: () => import('./routedetails/routedetails.module').then( m => m.RoutedetailsPageModule)
   },
   {
-    path: 'profile',
+    path: 'profile/:personid',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {

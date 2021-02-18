@@ -84,6 +84,9 @@ export class Register3Page  {
                   + '&plate='      + this.signupIsDone.plate
                   ).subscribe( async (data) =>{
 
+
+                    
+
                     console.log('%c FINAL DATA FROM SIGN UP BEFORE SEND TO API','color:orange;');
                     console.log(data);
 

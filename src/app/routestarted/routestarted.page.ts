@@ -40,7 +40,7 @@ export class RoutestartedPage implements OnInit {
 
     
 
-    this.dataFromRouteList = this.activatedRoute.snapshot.paramMap.get('xyz')
+    this.dataFromRouteList = this.activatedRoute.snapshot.paramMap.get('xyz');
     this.dataFromRouteListLogin = this.activatedRoute.snapshot.paramMap.get('loginid');
     this.dataFromRouteListJSON = JSON.parse(this.dataFromRouteList);
     this.dataFromRouteListLoginJSON = JSON.parse(this.dataFromRouteListLogin);
@@ -53,9 +53,6 @@ export class RoutestartedPage implements OnInit {
     this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?' + 'route_id=' + this.dataFromRouteListJSON.SERVICECODE + '&userid=dmta')
     .subscribe( (data) =>{
       console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
-      console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
-      console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
-      console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','color:red;');
       console.log(data);
       this.newCustomPickupRoutes = data;
       console.log(this.newCustomPickupRoutes)
@@ -64,6 +61,7 @@ export class RoutestartedPage implements OnInit {
       this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
       console.log(this.newCustomPickupRoutesJSONtoArray);
       this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.CUSTPICKUPS
+      console.log('auto thelw');
       console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS);
       console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].PICKUP_ADDRESS);
       this.startingPoint = this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].PICKUP_ADDRESS
@@ -92,7 +90,8 @@ export class RoutestartedPage implements OnInit {
   startRoute(){
     console.log("the route has started");
     alert('Route has started');
-    setTimeout((isClick) => { this.router.navigate(['map']) }, 3000);    
+    setTimeout((isClick) => { this.router.navigate(['map']) }, 3000);  
+    this.router.navigate(["map/" + JSON.stringify(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS) + '/' + JSON.stringify(this.dataFromRouteListJSON) + '/' + JSON.stringify(this.dataFromRouteListLoginJSON)]);                       
   }
   getPassengersInformationFromRouteListSelection(){
     console.log('%c Routing to Passengers List', 'color:orange;');
@@ -119,7 +118,7 @@ export class RoutestartedPage implements OnInit {
   goToWalletPageWithDriverId(){
     console.log('%c Going to Wallet Page | DRIVER ID |','color:pink;');
     console.log(this.dataFromRouteListLoginJSON);
-   this.router.navigate(['wallet/' + JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON)]);
+    this.router.navigate(['wallet/' + JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON)]);
   }
   goToRouteDetails(){
     console.log('%c Going to RouteDetails | DRIVER ID |','color:pink;');
@@ -128,7 +127,6 @@ export class RoutestartedPage implements OnInit {
     console.log(this.dataFromRouteListJSON);
     console.log('%c Going to RouteDetails | PickUps |','color:pink;');
     console.log(this.newCustomPickupRoutesJSONtoArray)
-
     this.router.navigate(['routedetails/' + JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON) + '/' + JSON.stringify(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS)]);
   }
   navigateToWalletPage(){
@@ -137,7 +135,7 @@ export class RoutestartedPage implements OnInit {
     this.router.navigate(['wallet/' + JSON.stringify(this.dataFromRouteListLoginJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON)]);
   }
   navigateToMapPage(){
-  	this.router.navigate(["map"])
+  //	this.router.navigate(["map/" + JSON.stringify(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS) + '/' + JSON.stringify(this.dataFromRouteListJSON) + '/' + JSON.stringify(this.dataFromRouteListJSON)]);                                       // pickups  
   }
   navigateToPassengersPage(){
   	this.router.navigate(["routepassengers"])

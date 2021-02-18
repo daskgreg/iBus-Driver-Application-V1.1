@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Plugins} from '@capacitor/core';
 import { LoadingController, AlertController } from '@ionic/angular';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
  import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
+import { HttpClient } from '@angular/common/http';
 
 const {Geolocation} = Plugins;
 
@@ -40,13 +41,13 @@ export class MapPage implements OnInit {
   latitude:any;
   longitude:any;
   //3/11/2017
-  destLat:any;
+  destLat:any = [];
   destLng:any;
   startTr:any;
   navCounter:number=0;
   chrcode=localStorage.getItem('chrcode');
-  lats:any;
-  longs:any;
+  lats:any = [];
+  longs:any = [];
   telos=0;
   infowindow:any;
   startLocation:any;
@@ -57,13 +58,15 @@ export class MapPage implements OnInit {
   r2:any;
   apostasi=[];
   xronos=[];
-
+  pickUpJsonFromApi:any;
     hideBackBtn = false;
   hideEndBtn  = false;
   hideCustomBtn = false;
-  
+  dataFromPickups:any = [];
+  dataFromPickupsJSON:any;
+  dataFromPickupsFromJSONtoArray:any = [];
   custom=localStorage.getItem("custom");
-  routeid=localStorage.getItem("routeid");
+  routeid=2;
     custroutePickups_json=[{"route_id": "1", "pickup_id": "1", "order_id": "1", "latitude": "37.865044000000000", "longitude": "23.755045000000000", "pickup_address": "Glyfada, Attica, Greece", "pickup_stop": "1"},
                          {"route_id": "1", "pickup_id": "2", "order_id": "2", "latitude": "37.955894000000000", "longitude": "23.702099000000000", "pickup_address": "Kallithea, Attica, Greece", "pickup_stop": "1"},
                          {"route_id": "1", "pickup_id": "3", "order_id": "3", "latitude": "37.983810000000000", "longitude": "23.727539000000000", "pickup_address": "Athens, Greece", "pickup_stop": "1"},
@@ -75,21 +78,43 @@ export class MapPage implements OnInit {
    {"chrbus_code": "panos", "zone_id": "5", "pup_code": "chrPup2", "duration": "1900-01-01 00:00:00.000", "time": "1900-01-01 02:00:00.000", "vhc_type": "", "order": "2", "chrbus_name": "panos", "zone_name": "panos_chr2", "pup_desc": "chrPup2", "cty_code": "3", "pup_address": "chrPup 2", "latitude": "40.630777", "longitude": "22.943101", "cty_name": "Thessaloniki"},
     {"chrbus_code": "panos", "zone_id": "6", "pup_code": "chrPup4", "duration": "1900-01-01 00:00:00.000", "time": "1900-01-01 03:00:00.000", "vhc_type": "", "order": "3", "chrbus_name": "panos", "zone_name": "panos_chr3", "pup_desc": "chrPup4", "cty_code": "1", "pup_address": "chrPup 4", "latitude": "38.011600", "longitude": "23.717808", "cty_name": "Athens"}];
   
+  dataFromThePickups:any=[];
+  dataFromThePickupsJSON:any;
+  dataFromTheRoutes:any=[];
+  dataFromTheRoutesJSON:any;
+  dataFromTheDriverId:any=[];
+  dataFromTheDriverIdJSON:any;
 
-  constructor(private backgroundGeolocation: BackgroundGeolocation, public alertCtrl: AlertController, public loadingCtrl: LoadingController,  private router : Router) {
+  constructor(private activatedRoute:ActivatedRoute, private http:HttpClient, private backgroundGeolocation: BackgroundGeolocation, public alertCtrl: AlertController, public loadingCtrl: LoadingController,  private router : Router) {
+    this.pickUpJsonFromApi=[];
+    this.dataFromPickupsFromJSONtoArray=[];
+    this.dataFromThePickups = this.activatedRoute.snapshot.paramMap.get('thepickups');
+    this.dataFromThePickupsJSON = JSON.parse(this.dataFromThePickups);
+    console.log('%c CUSTOM PICKUPS','color:yellow;');
+    console.log(this.dataFromThePickupsJSON);
+    this.dataFromTheRoutes = this.activatedRoute.snapshot.paramMap.get('rptroutes');
+    this.dataFromTheRoutesJSON = JSON.parse(this.dataFromTheRoutes);
+    console.log('%c RPT ROUTES','color:yellow;');
+    console.log(this.dataFromTheRoutesJSON);
+    this.dataFromTheDriverId = this.activatedRoute.snapshot.paramMap.get('theidofdriver');
+    this.dataFromTheDriverIdJSON = JSON.parse(this.dataFromTheDriverId);
+    console.log('%c ID OF DRIVER','color:yellow;');
+    console.log(this.dataFromTheDriverIdJSON);
 
-  	  this.lats=[];
-    this.longs=[];
-    var i=0;
-    if(this.custom=="true"){
-      for(i=0; i<this.custroutePickups_json.length; i++){
-      if(this.routeid==this.custroutePickups_json[i].route_id){
-        this.lats[i]=parseFloat(this.custroutePickups_json[i].latitude);
-        this.longs[i]=parseFloat(this.custroutePickups_json[i].longitude);
+    if( this.dataFromTheRoutesJSON.TYPE == 'CUST'){
+      console.log(this.dataFromTheRoutesJSON.TYPE);
+      for(var i=0; i<this.dataFromThePickupsJSON.length; i++){
+        if( 2 ==this.dataFromThePickupsJSON[i].ROUTE_ID){
+          //  this.lats[i]=parseFloat(this.custroutePickups_json[i].latitude);
+          //  this.longs[i]=parseFloat(this.custroutePickups_json[i].longitude);
+          this.longs[i] = parseFloat(this.dataFromThePickupsJSON[i].LONGITUDE);
+          this.lats[i] = parseFloat(this.dataFromThePickupsJSON[i].LATITUDE);
+          console.log('if = 2');
+          console.log(this.longs)
+
+        }
       }
-    }
-    }
-    else{
+    }else{
     for(i=0; i<this.chrbusroutepup_json.length; i++){
       if(this.chrcode==this.chrbusroutepup_json[i].chrbus_code){
         this.lats[i]=parseFloat(this.chrbusroutepup_json[i].latitude);
@@ -97,46 +122,47 @@ export class MapPage implements OnInit {
       }
     }
   }
-    console.log(this.lats,this.longs);
-    this.fire="";
-
-      this.directionsService = new google.maps.DirectionsService();
-     this.directionsDisplay = new google.maps.DirectionsRenderer({
-         suppressMarkers: true,
-         suppressPolylines: true
-     });
-     this.bounds = new google.maps.LatLngBounds();
+  let j :number;
+  this.i = 0;
+  this.waypoints.length = 0;
+   this.destLat =  this.lats[this.i];
+   console.log(this.destLat);
+   console.log('shit happens');
+      this.destLng = this.longs[this.i];     
+   for (let j =0 ; j < this.lats.length; j++ ){
+       let stations = 
+           {
+             location: { lat: this.lats[j], lng: this.longs[j] },
+             stopover: true,
+           }
+         ;
+         this.waypoints.push(stations);
+         console.log(stations);
+         console.log(this.waypoints);    
+      }
+      this.getPosition();
+      
+      //this.lats=[];
+      //this.longs=[];
+  
+      
+      console.log(this.lats,this.longs);
+      this.fire="";
+  
+        this.directionsService = new google.maps.DirectionsService();
+       this.directionsDisplay = new google.maps.DirectionsRenderer({
+           suppressMarkers: true,
+           suppressPolylines: true
+       });
+       this.bounds = new google.maps.LatLngBounds();
    }
-    async ngOnInit() {
-  	 this.loader = await this.loadingCtrl.create({
-      message: "Loading..."
-    });    
-      let j :number;
-    this.i = 0;
-     this.waypoints.length = 0;
-
-      this.destLat =  this.lats[this.i]
-         this.destLng = this.longs[this.i]
-      for (let j =0 ; j < this.lats.length; j++ ){
-          let stations = 
-              {
-                location: { lat: this.lats[j], lng: this.longs[j] },
-                stopover: true,
-              }
-            ;
-            this.waypoints.push(stations);
-            console.log(stations);
-            console.log(this.waypoints);    
-         
-        
-         }
-         this.getPosition();
+  async ngOnInit() {
+      
 }
    async getPosition(){
   	var response= await Geolocation.getCurrentPosition({enableHighAccuracy: true}).then(res =>{
   		console.log(res);
   		this.loadMap(res);
-
   	})
   	.catch(error =>{
   		console.log(error);
@@ -147,9 +173,11 @@ export class MapPage implements OnInit {
   // ngOnInit() {
   // }
   loadMap(res){
+      console.log('%c LOAD MAP','color:red;');
   		 let latLng = new google.maps.LatLng(51.9036442, 7.6673267);
+       
   		  this.latitude = res.coords.latitude;
-      this.longitude = res.coords.longitude;
+        this.longitude = res.coords.longitude;
       //this.latitude=41.1214145;
        //this.longitude=25.3878458;
      let mapEle: HTMLElement = document.getElementById('map');
@@ -307,10 +335,7 @@ for (var i = 0; i < polylines.length; i++) {
     });
   }
   	
-  	ionViewWillEnter(){
-  		console.log('here');
-  		// this.loadMap();
-  	}
+  
   	  startWithoutApi(){
   	  	this.backgroundGeolocation.start();
     var startDate = new Date().toLocaleTimeString();
@@ -353,7 +378,46 @@ for (var i = 0; i < polylines.length; i++) {
     
     .then(response => {
       console.log(response.coords.latitude,response.coords.longitude);
-      
+
+      this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?'
+        + 'driver_id=' + this.dataFromTheRoutesJSON.DRIVER_ID
+        + '&srv_type=' + this.dataFromTheRoutesJSON.SERVICE
+        + '&srv_code=' + this.dataFromTheRoutesJSON.SERVICECODE
+        + '&sp_id=' + -1
+        + '&sp_code=' + -1
+        + '&fromd=' + this.dataFromTheRoutesJSON.ASSIGNMENT_FROM_DATE
+        + '&tod=' + this.dataFromTheRoutesJSON.ASSIGNMENT_TO_DATE
+        + '&vehicle_map_id=' + this.dataFromTheRoutesJSON.VEHICLE_MAP_ID
+        + '&vhc_id=' +  1
+        + '&vhc_plates=' + this.dataFromTheRoutesJSON.VHC_PLATES
+        + '&version_id=' + 1
+        + '&VechicleTypeID=' + 1
+        + '&virtualversion_id=' + 1
+        + '&latitude=' + response.coords.latitude
+        + '&longitude=' + response.coords.longitude
+        + '&userid=dmta'
+      ).subscribe( (data) => {
+        console.log(data);
+      })
+      //cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?driver_id=16&srv_type=CHT&srv_code=2&sp_id=&sp_code=&fromd=January,%2016%202021%2000:00:00&tod=January,%2016%202021%2000:00:00&vehicle_map_id=2408&vhc_id=NaNOPE5400&version_id=1&VechicleTypeID=1&virtualversion_id=1&latitude=35.30806275377259&longitude=25.09014767116473&userid=dmta
+      // http://cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?
+      // driver_id=16
+      // &srv_type=CHT
+      // &srv_code=2
+      // &sp_id=1
+      // &sp_code=6
+      // &fromd=2020/11/28
+      // &tod=2020/11/28
+      // &vehicle_map_id=1025
+      // &vhc_id=1
+      // &vhc_plates=VFR111
+      // &version_id=1
+      // &VechicleTypeID=1
+      // &virtualversion_id=1
+      // &latitude=37.865044
+      // &longitude=23.755045
+      // &userid=dmta
+
     })
     .catch(error =>{
       console.log(error);
@@ -361,7 +425,7 @@ for (var i = 0; i < polylines.length; i++) {
     })
     setTimeout(() => {
     this.onTimeOut();
-}, 10000);
+}, 100000);
   }
   }
    showBtn(){

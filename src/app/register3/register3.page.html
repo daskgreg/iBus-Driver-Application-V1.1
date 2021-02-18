@@ -59,7 +59,7 @@
           <input (change)="onFileChange3($event)" type="file" name="imgProfile" id="file" class="fileInput"/>
           <label class="fileclass" for="file"> {{'register3-profilepic.title' | translate}}</label>
         </ion-item>   -->
-      <ion-button [disabled]="!finalRegistrationForm.valid"class="btn-send" expand="block" type="submit" shape="round" (click)="submitForm()" >{{'register-next.title' | translate}}</ion-button>
+      <ion-button [disabled]="!finalRegistrationForm.valid" class="btn-send" expand="block" type="submit" shape="round" (click)="submitForm()" >{{'register-next.title' | translate}}</ion-button>
     </ion-list>
   </form>
   </div>

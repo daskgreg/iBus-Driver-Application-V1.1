@@ -82,7 +82,7 @@ export class RoutelistPage implements OnInit {
     this.dataFromLoginPageJSON = JSON.parse(this.dataFromLoginPage);
     console.log('%c Print Data from Login','color:orange;');
     console.log(this.dataFromLoginPageJSON);
-
+    console.log(this.dataFromLoginPageJSON.PERSON_ID);
    }
 
   ngOnInit() {
@@ -147,7 +147,8 @@ export class RoutelistPage implements OnInit {
     this.http.get('http://cf11.travelsoft.gr/itourapi/rpt_drv_routes.cfm?' 
                   + 'driver_id=' + this.dataFromLoginPageJSON + '&from_date=' + theFirstDate + '&to_date=' + theLastDate + '&userid=dmta').subscribe( (data)=>{
       console.log(data);
-      this.rptDriverRoutes = data;this.rptDriverRoutesJSONparse = JSON.parse(this.rptDriverRoutes);
+      this.rptDriverRoutes = data;
+      this.rptDriverRoutesJSONparse = JSON.parse(this.rptDriverRoutes);
       this.rptDriverRoutesJSONparseToArray = this.rptDriverRoutesJSONparse;
       console.log('%c RPT DRIVER ROUTES','color:pink;');
       console.log(this.rptDriverRoutesJSONparseToArray);
@@ -236,7 +237,7 @@ export class RoutelistPage implements OnInit {
    
   }
 
-  getIdOfItem
+
   public sendDataToRouteStarted(selectedDatesFromCustomPickups){
     
     
@@ -310,7 +311,7 @@ export class RoutelistPage implements OnInit {
       this.router.navigate(["wallet"])
     }
     navigateToProfilePage(){
-      this.router.navigate(["profile"])
+      this.router.navigate(['profile/' + JSON.stringify(this.dataFromLoginPageJSON.PERSON_ID)])
     }
     navigateToNotificationsPage(){
       this.router.navigate(['notifications']);
