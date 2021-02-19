@@ -44,10 +44,11 @@ export class RoutedetailsPage implements OnInit {
 
 
     for (var i=1; i<this.dataFromRouteStartedPickupsJSON.length-1; i++){
+      this.thisIsMyStartingPoint = this.dataFromRouteStartedPickupsJSON[0].PICKUP_ADDRESS;
       this.toMyNewArray.push(this.dataFromRouteStartedPickupsJSON[i]);
       this.thisIsmyLastPoint = this.dataFromRouteStartedPickupsJSON[i+1].PICKUP_ADDRESS;
     }
-    this.thisIsMyStartingPoint = this.dataFromRouteStartedPickupsJSON[0].PICKUP_ADDRESS;
+   
    
     console.log(this.toMyNewArray);
 

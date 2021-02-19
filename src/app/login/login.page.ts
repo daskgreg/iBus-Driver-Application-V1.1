@@ -11,7 +11,7 @@ import { Platform } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
 import 'firebase/auth';
-
+import { Plugins } from '@capacitor/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -48,6 +48,8 @@ export class LoginPage {
       var locationstr1 = localStorage.getItem("location");
       console.log(locationstr1);
     });
+    const { Storage } = Plugins;
+        
    }
 
    ionViewWillEnter(){
@@ -71,7 +73,7 @@ export class LoginPage {
     loader.present();
     
    localStorage.setItem('mobile',this.mobile)
-   localStorage.setItem('pass',this.pass)   
+   localStorage.setItem('pass',this.pass);   
   
    this.http.get('http://cf11.travelsoft.gr/itourapi/trp_driver_login.cfm?'
    + '&mobile=' + this.mobile+'&password='+this.pass + '&userid=dmta').pipe( 
@@ -101,8 +103,9 @@ export class LoginPage {
           setTimeout(() => {
             loader.dismiss();
           }, 1000);
-
-           this.router.navigate(['routelist/', JSON.stringify(this.driversInformationLoginForChecks[i].DRIVER_ID)]);   
+          console.log(this.driversInformationLoginForChecks[i].PERSON_ID)
+          
+           this.router.navigate(['routelist/' + this.driversInformationLoginForChecks[i].DRIVER_ID + '/' + this.driversInformationLoginForChecks[i].PERSON_ID]);   
         }else {
           let loader = await this.loadingCtrl.create({
             message: "Password or login is wrong..."
@@ -141,6 +144,8 @@ export class LoginPage {
   //        console.log("Kati paei lathos:",err);
   //      });
  }
+ 
+
 
  signOut(){
   this.afAuth.signOut().then(
@@ -174,6 +179,7 @@ export class LoginPage {
   //     console.log("Kati paei lathos:",err);
   //   });
   // }
+  
     async loginwithoutapi(){
       
      localStorage.setItem('mobile',this.mobile)
@@ -192,6 +198,7 @@ export class LoginPage {
         this.flag=1;
         localStorage.setItem("driver_id",this.drv_master_json[0].driver_id);
         localStorage.setItem("person_id",this.drv_master_json[0].person_id);
+      
         console.log("komple");
       } 
       else{

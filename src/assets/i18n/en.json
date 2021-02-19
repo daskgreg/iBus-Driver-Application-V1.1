@@ -83,6 +83,7 @@
 		"title":"My Wallet"
 	
 },
+
 "routelist-routeHistory":{
 		"title":"Route History"
 	
@@ -158,6 +159,10 @@
 "myWallet-amount":{
 		"title":"Insert Amount"
 	
+},
+"myWallet-update":{
+	"title":"SEND"
+
 },
 "settings-distance":{
 		"title":"Distance Unit"
@@ -443,7 +448,7 @@
 		"title":"Password"
 	
 },
-"profile-gogoback"{
+"profile-gogoback":{
 		"title":"Go Back"
 },
 "profile-update":{

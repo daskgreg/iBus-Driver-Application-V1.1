@@ -80,10 +80,12 @@ export class TechinspectPage implements OnInit {
   dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId:any;
   dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON:any;
   constructor(private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder ) { 
+    const selects = document.querySelectorAll('.custom-options');
 
+   
     //greg 
     this.dataFromStartedRouteWhileGoingBack = this.activatedRoute.snapshot.paramMap.get('dataFromRoute')
-    this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId = this.activatedRoute.snapshot.paramMap.get('dataFromDriverId');
+    this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId = this.activatedRoute.snapshot.paramMap.get('datafromdriverId');
     this.dataFromStartedRouteWhileGoingBackJSON = JSON.parse(this.dataFromStartedRouteWhileGoingBack);
     this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON = JSON.parse(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId);
     console.log('%c DATA FROM ROUTELIST JSON','color:orange;')
@@ -124,6 +126,7 @@ export class TechinspectPage implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   public submit(){
@@ -225,16 +228,16 @@ export class TechinspectPage implements OnInit {
     this.router.navigate(['login'])
   }
 
-  check(amount){
+  // check(amount){
       
-    if(this.language=="en"){
-      alert( "Check " + this.checkpointen + " has been added with your comments " + this.amount);
-    }
-    else
-      if(this.language=="gr"){
-     alert( "Ο Έλεγχος " + this.checkpointen + " έχει προστεθεί μαζί με τα σχόλιά σος " + this.amount);
-    }
-  }
+  //   if(this.language=="en"){
+  //     alert( "Check " + this.checkpointen + " has been added with your comments " + this.amount);
+  //   }
+  //   else
+  //     if(this.language=="gr"){
+  //    alert( "Ο Έλεγχος " + this.checkpointen + " έχει προστεθεί μαζί με τα σχόλιά σος " + this.amount);
+  //   }
+  // }
   navigateToStartRoutePage(){
     this.router.navigate(['routestarted']);
   }

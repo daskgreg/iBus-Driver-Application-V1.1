@@ -56,11 +56,11 @@
     <div class="centerItems titleStyle">{{'myWallet-balance.title' | translate}}</div>
     <ion-item lines="none">
       <ion-img class="centerItems" src="assets/images/wallet_board.svg">
-      
+   
       </ion-img>
 
      
-        <!-- <p *ngFor="let wallet of wallets" class="money">{{wallet.CREDIT}}</p>  -->
+       <p  class="money">25</p>  
  
 
     </ion-item>
@@ -105,11 +105,13 @@
         <ion-input formControlName="ammountOfPayment" (click)="goBackToRouteListPageWithDriverId()" (onChange)="sendData()" name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
       </ion-item>
     </div>
+
+    <ion-button class="btn-send" expand="block" type="submit" shape="round" >{{'wallet-update.title' | translate}}</ion-button>
     <div class="myiontab">
 
       <ion-tab-bar slot="bottom" class="ion-no-border">
-        <ion-buttons class="addBtn" type="submit" vertical="bottom" horizontal="center" translucent="true">
-          <button (click)="sendData()"  class="adBtn2">
+        <ion-buttons class="addBtn" vertical="bottom" horizontal="center" translucent="true">
+          <button (click)="goBackToRouteListPageWithDriverId()"class="adBtn2">
             <ion-icon name="arrow-back"></ion-icon>
           </button>
         </ion-buttons>

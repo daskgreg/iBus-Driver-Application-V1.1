@@ -355,7 +355,7 @@ for (var i = 0; i < polylines.length; i++) {
     alert("Τέλος δρομολογίου από τη θέση " + this.latitude + "," + this.longitude + " και ώρα " + endDate + ".");
     this.telos=1;
     if(this.telos == 1 ){
-      this.router.navigate(['techinspect-finished-route']);
+      this.router.navigate(['techinspect-finished-route/' + this.dataFromTheRoutes + '/' + this.dataFromTheDriverId ]);
     }else {
       alert("Το δρομολόγιο δεν έχει τελειώσει");
     }
@@ -399,24 +399,6 @@ for (var i = 0; i < polylines.length; i++) {
       ).subscribe( (data) => {
         console.log(data);
       })
-      //cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?driver_id=16&srv_type=CHT&srv_code=2&sp_id=&sp_code=&fromd=January,%2016%202021%2000:00:00&tod=January,%2016%202021%2000:00:00&vehicle_map_id=2408&vhc_id=NaNOPE5400&version_id=1&VechicleTypeID=1&virtualversion_id=1&latitude=35.30806275377259&longitude=25.09014767116473&userid=dmta
-      // http://cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?
-      // driver_id=16
-      // &srv_type=CHT
-      // &srv_code=2
-      // &sp_id=1
-      // &sp_code=6
-      // &fromd=2020/11/28
-      // &tod=2020/11/28
-      // &vehicle_map_id=1025
-      // &vhc_id=1
-      // &vhc_plates=VFR111
-      // &version_id=1
-      // &VechicleTypeID=1
-      // &virtualversion_id=1
-      // &latitude=37.865044
-      // &longitude=23.755045
-      // &userid=dmta
 
     })
     .catch(error =>{

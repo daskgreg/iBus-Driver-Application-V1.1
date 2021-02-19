@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./forgotpass/forgotpass.module').then( m => m.ForgotpassPageModule)
   },
   {
-    path: 'routelist/:id',
+    path: 'routelist/:id/:theprofile',
     loadChildren: () => import('./routelist/routelist.module').then( m => m.RoutelistPageModule)
   },
   {
@@ -120,11 +120,7 @@ const routes: Routes = [
     loadChildren: () => import('./privacy/privacy.module').then( m => m.PrivacyPageModule)
   },
   {
-    path: 'techinspect-finished-route',
-    loadChildren: () => import('./techinspect-finished-route/techinspect-finished-route.module').then( m => m.TechinspectFinishedRoutePageModule)
-  },
-  {
-    path: 'techinspect-finished-route',
+    path: 'techinspect-finished-route/:custompickupsdata/:thelogindriverid',
     loadChildren: () => import('./techinspect-finished-route/techinspect-finished-route.module').then( m => m.TechinspectFinishedRoutePageModule)
   },
 ];

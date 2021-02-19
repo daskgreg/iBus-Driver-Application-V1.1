@@ -71,6 +71,7 @@ export class RoutepassengersPage implements OnInit {
   dataFromRouteStartedDriverId:any;
   dataFromRouteStartedJSONDromologio:any;
   dataFromRouteStartedJSONDriverId:any;
+  thepassengerListJSONtoArray:any = [];
   constructor(private http:HttpClient, private activatedRoute:ActivatedRoute, private router : Router) { 
     //greg
     this.dataFromRouteStartedDromologio = this.activatedRoute.snapshot.paramMap.get('dromologio');
@@ -85,41 +86,45 @@ export class RoutepassengersPage implements OnInit {
     console.log("HERE",this.dataFromRouteStartedJSON.VEHICLE_MAP_ID);
     this.VEHICLE_MAP_ID = this.dataFromRouteStartedJSON.VEHICLE_MAP_ID;
     console.log(this.VEHICLE_MAP_ID);
-
+    this.fnames=[];
+    this.lnames=[];
+    this.pases=[];
+    this.phones=[];
+    this.emails=[];
     this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_passengers_list.cfm?vehicle_map_id='+ this.VEHICLE_MAP_ID +'&userid=dmta')
     .subscribe((data)=>{
       console.log(data);
       this.thePassenger = data;
       this.thepassengerListJSON = JSON.parse(this.thePassenger);
       console.log(this.thepassengerListJSON);
+      this.thepassengerListJSONtoArray = this.thepassengerListJSON.PASSENGERS;
+      console.log('%c Passengers','color:yellow;');
+      console.log(this.thepassengerListJSONtoArray);
+      
+      var i=0;
+      var j=0;
+      for(i=0; i<this.thepassengerListJSONtoArray.length; i++){
+      if(this.VEHICLE_MAP_ID==this.thepassengerListJSONtoArray[i].VEHICLE_MAP_ID){
+        this.fnames[j]=this.thepassengerListJSONtoArray[i].FIRST_NAME;
+        this.lnames[j]=this.thepassengerListJSONtoArray[i].LAST_NAME;
+        this.phones[j]=this.thepassengerListJSONtoArray[i].MOBILE;
+        this.emails[j]=this.thepassengerListJSONtoArray[i].EMAIL;
+        this.pases.push({
+                           fname: this.fnames[i],
+                           lname: this.lnames[i],
+                           fullname: this.lnames[i] + " " + this.fnames[i],
+                           phone:this.phones[i],
+                           email:this.emails[i],
+                           number: i + 1,
+                       });
+        j++;
+      }
+    }
 
     })
 
 
-  	this.fnames=[];
-  	this.lnames=[];
-  	this.pases=[];
-    this.phones=[];
-    this.emails=[];
-  	var i=0;
-  	var j=0;
-  	for(i=0; i<this.chrbus_passengers_json.length; i++){
-  	if(this.vehmapid==this.chrbus_passengers_json[i].vehicle_map_id){
-  		this.fnames[j]=this.chrbus_passengers_json[i].first_name;
-  		this.lnames[j]=this.chrbus_passengers_json[i].last_name;
-      this.phones[j]=this.chrbus_passengers_json[i].mobile;
-      this.emails[j]=this.chrbus_passengers_json[i].email;
-  		this.pases.push({
-                         fname: this.fnames[i],
-                         lname: this.lnames[i],
-                         fullname: this.lnames[i] + " " + this.fnames[i],
-                         phone:this.phones[i],
-                         email:this.emails[i],
-                         number: i + 1,
-                     });
-  		j++;
-  	}
-  }
+  
   console.log(this.fnames,this.lnames);
 }
 

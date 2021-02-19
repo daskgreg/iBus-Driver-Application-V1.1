@@ -79,8 +79,8 @@
      <div *ngIf="eng" class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'vehicleCheck-checkArea.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select formControlName="measurementData" [(ngModel)]="checkpointen"  interface="action-sheet">
-          <ion-select-option  *ngFor="let enlang of englishLanguageJSON.CHECKS; let i = index" [value]="enlang">
+        <ion-select interface="action-sheet" formControlName="measurementData" [(ngModel)]="checkpointen"  >
+          <ion-select-option  class="custom-options" *ngFor="let enlang of englishLanguageJSON.CHECKS; let i = index" [value]="enlang">
                       {{enlang.CHECKPOINT}}
           </ion-select-option>
         </ion-select>
@@ -100,11 +100,11 @@
 
     </div>
 
-    <ion-buttons type="submit" class="hide-on-keyboard-open addBtn" vertical="bottom" horizontal="center" translucent="true">
+    <!-- <ion-buttons type="submit" class="hide-on-keyboard-open addBtn" vertical="bottom" horizontal="center" translucent="true">
       <button (click)="wannaBeData()" class="adBtn2">
         {{'vehicleCheck-start.title' | translate}}
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   
     <ion-list class="ionListClass">  
       <textarea formControlName="comment" type="text" class="txtArea" rows="4" cols="50" [(ngModel)]="amount"  (change)=check(amount)>

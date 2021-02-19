@@ -4,7 +4,7 @@ import { LanguageService } from '../services/language.service';
 import {  isWithinInterval } from 'date-fns';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-routelist',
@@ -72,9 +72,13 @@ export class RoutelistPage implements OnInit {
 
   serviceRegistration:any="";
 	dataFromService:any="";
+
   dataFromLoginPage:any;
   dataFromLoginPageJSON:any;
-  constructor(private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient,private router : Router, private languageService: LanguageService) {
+
+  dataFromLoginPageProfile:any;
+  dataFromLoginPageProfileJSON:any;
+  constructor(private alertController:AlertController,private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient,private router : Router, private languageService: LanguageService) {
 
     //greg
 
@@ -82,7 +86,10 @@ export class RoutelistPage implements OnInit {
     this.dataFromLoginPageJSON = JSON.parse(this.dataFromLoginPage);
     console.log('%c Print Data from Login','color:orange;');
     console.log(this.dataFromLoginPageJSON);
-    console.log(this.dataFromLoginPageJSON.PERSON_ID);
+
+    this.dataFromLoginPageProfile = this.activatedRoute.snapshot.paramMap.get('theprofile');
+    this.dataFromLoginPageProfileJSON = JSON.parse(this.dataFromLoginPageProfile);
+    console.log(this.dataFromLoginPageProfileJSON);
    }
 
   ngOnInit() {
@@ -97,6 +104,9 @@ export class RoutelistPage implements OnInit {
   routes: any = [];
   filtered = [...this.routes];
   RPT_DRIVER_ROUTES_DRIVER_ID;
+
+  startingPointElementFromArrayOfPickups:any;
+  theLastPointElementFromArrayOfPickups:any;
 
   chrbusCust:any = [];
 
@@ -127,12 +137,18 @@ export class RoutelistPage implements OnInit {
       console.log(data);
       this.customPickUps = data;
       this.myPickUp = JSON.parse(this.customPickUps);
-      this.theRealPickUp = this.myPickUp;
+      this.theRealPickUp = this.myPickUp.CUSTPICKUPS;
       console.log('%c JSON PARSE','color:red;');
       console.log(this.myPickUp);
       console.log('%c TheReal array Pickups','color:orange;');
       console.log(this.theRealPickUp);
       
+      for ( var i = 0; i < this.theRealPickUp.length; i++){
+        console.log(this.theRealPickUp[0].PICKUP_ADDRESS);
+        console.log(this.theRealPickUp[i].PICKUP_ADDRESS);
+        this.startingPointElementFromArrayOfPickups = this.theRealPickUp[0].PICKUP_ADDRESS
+        this.theLastPointElementFromArrayOfPickups = this.theRealPickUp[i].PICKUP_ADDRESS;
+      }
 
       
     } )
@@ -281,7 +297,7 @@ export class RoutelistPage implements OnInit {
     this.saveMyData(item).subscribe((dataReturnFromService) =>{
       this.dataFromService = JSON.stringify(dataReturnFromService);
       console.log(this.dataFromService['_body']);
-
+      console.log("LOGIN ID", this.dataFromLoginPageJSON);
       this.router.navigate(['routestarted/'+ JSON.stringify(item) + '/' +JSON.stringify(this.dataFromLoginPageJSON)]);
     });
 
@@ -307,11 +323,37 @@ export class RoutelistPage implements OnInit {
     navigateToTechHistoryPage(){
       this.router.navigate(["techhistory"])
     }
-    navigateToWalletPage(){
-      this.router.navigate(["wallet"])
+    // navigateToWalletPage(){
+    //  alert('You need to SELECT A route before going to wallet');
+    // }
+    async navigateToWalletPage() {
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Select Route!',
+        message: '<strong>Select Route before trying to enter into Wallet</strong>!!!',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Okay',
+            handler: () => {
+              console.log('Confirm Okay');
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
     }
     navigateToProfilePage(){
-      this.router.navigate(['profile/' + JSON.stringify(this.dataFromLoginPageJSON.PERSON_ID)])
+      console.log('%c going to profile')
+      console.log(this.dataFromLoginPageJSON.PERSON_ID);
+      this.router.navigate(['profile/' + JSON.stringify(this.dataFromLoginPageProfileJSON)])
     }
     navigateToNotificationsPage(){
       this.router.navigate(['notifications']);

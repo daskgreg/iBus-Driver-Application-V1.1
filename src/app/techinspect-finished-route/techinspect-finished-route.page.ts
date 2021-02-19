@@ -1,7 +1,7 @@
 import { LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class TechinspectFinishedRoutePage implements OnInit {
 
-  techchk_json=[{"checkpoint_id": "33", "checkpoint_gre": "Τα στοιχεία του οχήματος (πινακίδες κυκλοφορίας, αρ. πλαισίου, αρ. κινητήρα σύμφωνα με την άδεια. κυκλοφορίας).", "checkpoint_eng": "Vehicle details (registration plates, chassis number, engine number according to the license. Registration)."},
+	techchk_json=[{"checkpoint_id": "33", "checkpoint_gre": "Τα στοιχεία του οχήματος (πινακίδες κυκλοφορίας, αρ. πλαισίου, αρ. κινητήρα σύμφωνα με την άδεια. κυκλοφορίας).", "checkpoint_eng": "Vehicle details (registration plates, chassis number, engine number according to the license. Registration)."},
 	{"checkpoint_id": "34", "checkpoint_gre": "Το όχημα εσωτερικά- εξωτερικά (οπτικώς).", "checkpoint_eng": "The vehicle internally-externally (visually)."},
 	{"checkpoint_id": "35", "checkpoint_gre": "Ο εξοπλισμός του οχήματος (τρίγωνο, πυροσβεστήρας, φαρμακείο).", "checkpoint_eng": "The equipment of the vehicle (triangle, fire extinguisher, pharmacy)."},
 	{"checkpoint_id": "36", "checkpoint_gre": "Η πίεση των ελαστικών- η ύπαρξη ρεζέρβας.", "checkpoint_eng": "The tire pressure - the existence of a reserve."},
@@ -43,7 +43,13 @@ export class TechinspectFinishedRoutePage implements OnInit {
   imageChosen: any = 0;
   imagePath: any;
   imageNewPath: any;
-
+  greekLanguage:any = [];
+  greekLanguageJSON:any;
+  englishLanguage:any = []
+  englishLanguageJSON:any =[];
+  myCommentForm:any =[];
+  checkThePoint:any=[]
+  checkThePointComment:any=[]
   //greg
   get measurementData(){
     return this.commentForm.get('measurementData');
@@ -70,128 +76,137 @@ export class TechinspectFinishedRoutePage implements OnInit {
 
   serviceRegistration:any="";
   dataFromService:any="";
+  dataFromStartedRouteWhileGoingBack:any;
+  dataFromStartedRouteWhileGoingBackJSON:any;
+  dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId:any;
+  dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON:any;
+  constructor(private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder ) { 
+    const selects = document.querySelectorAll('.custom-options');
 
-  constructor(public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder ) { 
-  	this.enlangs=[];
-  	this.ellangs=[];
-  	this.ids=[];
-    var k=0;
-      if(this.language=="en" ){
-      console.log("here");
-      for(k=0; k<this.techchk_json.length; k++){
-        this.enlangs[k]=this.techchk_json[k].checkpoint_eng;
-        this.ids[k]=this.techchk_json[k].checkpoint_id;
-      }
-      this.el=false;
-      this.eng=true;
+   
+    //greg 
+    this.dataFromStartedRouteWhileGoingBack = this.activatedRoute.snapshot.paramMap.get('custompickupsdata')
+    this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId = this.activatedRoute.snapshot.paramMap.get('thelogindriverid');
+    this.dataFromStartedRouteWhileGoingBackJSON = JSON.parse(this.dataFromStartedRouteWhileGoingBack);
+    this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON = JSON.parse(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId);
+    console.log('%c DATA FROM ROUTELIST JSON','color:orange;')
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON);
+    console.log('before');
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON.PERSON_ID);
+  
+    console.log('%c DATA FROM ROUTELIST LOGIN JSON','color:yellow;')
+    console.log(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON);
+    //
+   
       
-    }
-    else if (this.language=="gr"){
-      for(k=0; k<this.techchk_json.length; k++){
-        this.ellangs[k]=this.techchk_json[k].checkpoint_gre;
-        this.ids[k]=this.techchk_json[k].checkpoint_id;
-      }
-      this.el=true;
-      this.eng=false;
-    }
+
+     this.enlangs=[];
+     this.ellangs=[];
+     this.ids=[];
+     var k=0;
+       if(this.language=="en" ){
+        this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=eng&userid=dmta').subscribe( (data) => {
+          console.log(data);
+           this.englishLanguage= data;
+           console.log('%c English Language','color:orange;');
+           this.englishLanguageJSON = JSON.parse(this.englishLanguage);
+           console.log(this.englishLanguageJSON);
+         })
+       this.el=false;
+       this.eng=true;
+       
+     }
+     else if (this.language=="gr"){
+      this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=gre&userid=dmta').subscribe( (data) => {
+         this.greekLanguage= data;
+         console.log('%c Greek Language','color:orange;');
+         this.greekLanguageJSON = this.greekLanguage.DATA;
+         console.log(this.greekLanguageJSON);
+       }) 
+       this.el=true;
+       this.eng=false;
+     }
     
   }
 
   ngOnInit() {
-  }
-    selLang(l){
-  	console.log(l);
-  	console.log(this.language);
-  	
-  	var i=0;
-  	if(this.language=="English"){
-  		for(i=0; i<this.techchk_json.length; i++){
-  			this.enlangs[i]=this.techchk_json[i].checkpoint_eng;
-  			this.ids[i]=this.techchk_json[i].checkpoint_id;
-  		}
-  		this.eng=true;
-  		this.el=false;
-  	}
-  	else if(this.language=="Ελληνικά"){
-  		for(i=0; i<this.techchk_json.length; i++){
-  			this.ellangs[i]=this.techchk_json[i].checkpoint_gre;
-  			this.ids[i]=this.techchk_json[i].checkpoint_id;
-  		}
-  		this.el=true;
-  		this.eng=false;
-  	}
-  }
-
-  tech(k){
-  	this.com=true;
-  	console.log(k);
-  	
-  	console.log(this.checkpointen);
     
-  	
   }
-
-  // comment(){
-  // 	console.log(this.comments);
-  // 	if(this.language=="English"){
-  // 		alert("The status of the element:" + this.checkpointen + "has been updated.");
-  // 	}
-  // 	else
-  // 		if(this.language=="Ελληνικά"){
-  // 		alert("Η κατάσταση του στοιχείου:" + this.checkpointel + "έχει ενημερωθεί.");
-  // 	}
-  // }
 
   public submit(){
-  
+    console.log('%c MY ENGLISH JSON','color:orange;');
     console.log(this.commentForm.value);
-    var myCommentForm = this.commentForm.value;
-    this.sendData(myCommentForm).subscribe(
-    (dataReturnFromService) => {
-      this.dataFromService = JSON.stringify(dataReturnFromService);
-      console.log(JSON.stringify(dataReturnFromService));
-      console.log(dataReturnFromService['_body'] );
-    }, error => {
-      console.log(error);
-    });
-}
+    
+    this.myCommentForm = this.commentForm.value;
+    console.log(this.myCommentForm.measurementData);
 
-sendData(myCommentForm){
+    this.checkThePointComment = this.myCommentForm.comment;
+    console.log(this.checkThePointComment)
+    this.checkThePoint = this.myCommentForm.measurementData;
+    console.log(this.checkThePoint.CHECKPOINT);
 
-  console.log("data send");
+    console.log( );
+//
+    this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?' 
+                  + 'vhc_plates=' + this.dataFromStartedRouteWhileGoingBackJSON.VHC_PLATES
+                  + '&chrbus_code=' + this.dataFromStartedRouteWhileGoingBackJSON.SERVICECODE 
+                  + '&chrbus_sp_id=' + 1 //this.dataFromStartedRouteWhileGoingBackJSON.CHRBUS_SP_ID
+                  + '&sp_code=' + 1 //this.dataFromStartedRouteWhileGoingBackJSON.SP_CODE
+                  + '&fromd=' + this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_FROM_DATE
+                  + '&tod=' + this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_TO_DATE
+                  + '&driver_id=' + this.dataFromStartedRouteWhileGoingBackJSON.DRIVER_ID
+                  + '&checkpoint_id=' + this.checkThePoint.CHECKPOINT_ID
+                  + '&checkpoint_txt=' + this.checkThePoint.CHECKPOINT
+                  + '&checkpoint_status=' + this.checkThePoint.FLAG
+                  + '&comment=' + this.checkThePointComment
+                  + '&userid=dmta'
+                  ).subscribe( async (data)=>{
+                    console.log(data);
 
-  var url="http://localhost:3000/vehicleCheck";
-  return this.http.post(url,myCommentForm,
-    {headers:new HttpHeaders(
-      { "content-type":"application/json"
-    })})
+                    let loader = await this.loadingCtrl.create({
+                      message:"Tech Inspect SuccessFully Done"
+                    });
+                    loader.present();
 
-}
+                    setTimeout(() => {
+                      loader.dismiss();
+                      this.router.navigate(['routelist/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON) + '/' +this.dataFromStartedRouteWhileGoingBackJSON.PERSON_ID  ]);
+                    }, 1000);
+                  })
+    // this.sendData(this.myCommentForm).subscribe(
+    // (dataReturnFromService) => {
+    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
+    //   this.dataFromService = JSON.stringify(dataReturnFromService);
+    //   console.log(JSON.stringify(dataReturnFromService));
+    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
+    //   console.log(this.dataFromService.CHECKPOINT)
+    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
+    //   console.log(dataReturnFromService['_body'] );
+    // }, error => {
+    //   console.log(error);
+    // });
+    //cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?vhc_plates=OPE5400&chrbus_code=2&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&driver_id=16&checkpoint_id=40&checkpoint_txt=The%20performance%20of%20the%20brakes.&checkpoint_status=1&comment=asdfasdfsadf&userid=dmta
+    //cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?vhc_plates=OPE5400&chrbus_code=2&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&driver_id=16&checkpoint_id=41&checkpoint_txt=Lights%20in%20terms%2unction          &checkpoint_status=1&comment=saffasafafsfasafs&userid=dmta
+} //http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?driverid=16&chrbus_code=CUST&vhc_plates=OPE5400&chrbus_sp_id=&sp_code=&fromd=2021-01-28&tod=2021-02-28&checkpoint_id=46&checkpoint_txt=The%20flexible%20-%20rigid%20piping%20of%20the%20braking%20system.&checkpoint_status=1&comment=rrffff&userid=dmta 
+ //http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?driver_id=16&vhc_plates=OPE6009&chrbus_code=panos&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&checkpoint_id=45&checkpoint_status=1&comments=test&userid=dmta
+// sendData(myCommentForm){
+  
+//   var url="";
+//   return this.http.post(url,myCommentForm,
+//     {headers:new HttpHeaders(
+//       { "content-type":"application/json"
+//     })})
+// }
    map(){
-     console.log("kati");
-  //	this.router.navigate(['routestarted'])
-  	// this.navCtrl.setRoot(CurrentPage);
-    let body = {
-      message: "Do you hear me?"
-    }
-    var url="http://localhost:3000/vehicleCheck";
-    this.http.post(url,JSON.stringify(body), 
-      { headers: new HttpHeaders(
-      {"content-type":"application/json"}
-    )}).subscribe(async (data) => {
-      let loader = await this.loadingCtrl.create({
-        message: "Tech Inspect Successfull"
-      });
-      loader.present();
-
+    
       setTimeout(() => {
-        loader.dismiss();
-        this.router.navigate(['routelist/', 200]);  
+       
+        this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackJSON) + '/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON)]);
       }, 1000);
-      console.log(data);
-    })
+ 
+    }
 
-  }
+  
 
 
 
@@ -217,16 +232,16 @@ sendData(myCommentForm){
     this.router.navigate(['login'])
   }
 
-  check(amount){
+  // check(amount){
       
-    if(this.language=="en"){
-      alert( "Check " + this.checkpointen + " has been added with your comments " + this.amount);
-    }
-    else
-      if(this.language=="gr"){
-     alert( "Ο Έλεγχος " + this.checkpointen + " έχει προστεθεί μαζί με τα σχόλιά σος " + this.amount);
-    }
-  }
+  //   if(this.language=="en"){
+  //     alert( "Check " + this.checkpointen + " has been added with your comments " + this.amount);
+  //   }
+  //   else
+  //     if(this.language=="gr"){
+  //    alert( "Ο Έλεγχος " + this.checkpointen + " έχει προστεθεί μαζί με τα σχόλιά σος " + this.amount);
+  //   }
+  // }
   navigateToStartRoutePage(){
     this.router.navigate(['routestarted']);
   }

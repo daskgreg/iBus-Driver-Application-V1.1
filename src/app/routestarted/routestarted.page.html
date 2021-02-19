@@ -63,10 +63,12 @@
       </ion-item>
       <ion-item class="timeItem" lines="none">
         <ion-icon class="dmpIconStyle timeIcon" name="hourglass" side="start" ></ion-icon>
-        <button class="timeBtn"><a class="numberStyle">{{dataFromRouteListJSON.time}}</a>hours</button>
+        <button class="timeBtn"><a class="numberStyle">34&nbsp;&nbsp;</a>hours</button>
       </ion-item>
-      <ion-item (click)="navigateToPassengersPage()" class="passItem" lines="none">
-        <button class="passBtn"><a class="numberStyle">{{dataFromRouteListJSON.passengersNumber}}</a>Passengers</button>
+      <ion-item (click)="getPassengersInformationFromRouteListSelection()" class="passItem" lines="none">
+        <button class="passBtn">
+          <a class="numberStyle">2&nbsp;&nbsp;</a>Passengers
+        </button>
         <ion-icon class="dmpIconStyle passIcon" name="walk" side="start" ></ion-icon>
       </ion-item>
     </ion-label>
@@ -74,9 +76,9 @@
     <ion-list class="ionListClass">
       <ion-button  (click)="startRoute()" class="btnStyle2">{{'routeStarted-startRoute.title' | translate}}</ion-button>
     </ion-list>
-    <ion-list class="ionListClass">
+    <!-- <ion-list class="ionListClass">
       <ion-button (click)="beforeRouteStartedGoTechInspectPage()"  class="btnStyle">{{'routeStarted-map.title' | translate}}</ion-button>
-    </ion-list>
+    </ion-list> -->
     <ion-list class="ionListClass">
       <ion-button (click)="getPassengersInformationFromRouteListSelection()"class="btnStyle">{{'routeStarted-passengers.title' | translate}}</ion-button>
     </ion-list>

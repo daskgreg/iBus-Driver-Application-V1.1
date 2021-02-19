@@ -9,6 +9,17 @@
     --background: #4E98FF;
     height: 87px;
 }
+.error-message{
+    position: absolute;
+    top: 120px;
+    left: 1px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size:18px;
+    font-family:monteRegular;
+    color:var(--ion-color-ibus-red);
+}
 .notBtn{
     color: white;
     width: 47px;
@@ -19,6 +30,9 @@
     width: 70px;
     color: white;
 }
+.my-custom-interface .select-interface-option {
+    color: red;
+  }
 .menuTxt{
     font-size:18px;
     font-family:monteRegular;
@@ -40,6 +54,8 @@
     position: relative;
     left: 27px;
     margin-bottom: 31px;
+    background-image: url(../../assets/images/profile.jpg);
+    background-size: 60px 80px;
 }
 .ios ion-title{
     position: absolute;
@@ -56,6 +72,8 @@
     position: relative;
     left: 27px;
     margin-top: 14px;
+    background-image: url(../../assets/images/profile.jpg);
+    background-size: 60px 80px;
 }
 .ios .nav-buttons{
     margin-bottom: 30px;

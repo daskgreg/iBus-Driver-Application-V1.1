@@ -58,14 +58,13 @@
 
   <ion-content style="--offset-top:0px; --offset-bottom:0px;position: relative;top: 21px;">
 
-    <ion-list *ngFor="let papapa of thepassengerListJSON.PASSENGERS; let i = index">
-      <ion-item>
-        <ion-label>Passenger Name</ion-label>
-        <ion-label>{{papapa.FIRST_NAME}}    {{papapa.LAST_NAME}}</ion-label>
+    <ion-list (click)="saveTodos(m)" *ngFor="let papapa of thepassengerListJSON.PASSENGERS; let m = index">
+      <ion-item class="ion-text-center itemStyle" lines="none">
+        {{m}} <ion-label> &nbsp; &nbsp; {{papapa.FIRST_NAME}}  &nbsp; &nbsp;   {{papapa.LAST_NAME}}</ion-label>
       </ion-item>
     </ion-list>
 
-    <!-- <ion-item (click)="saveTodos(m)" *ngFor="let item of pases; let m=index" class="ion-text-center itemStyle" lines="none" >
+    <!-- <ion-item  *ngFor="let item of pases; let m=index" class="ion-text-center itemStyle" lines="none" >
       <ion-fab vertical="bottom" horizontal="left" translucent="true">
         <ion-fab-button class="numberIconStyle" (click)="navigateToRouteListPage()">
           {{item.number}}

@@ -68,7 +68,6 @@
     <!-- <ion-list *ngFor="let customPicks of myPickUp; let i = index">
       <ion-item>{{customPicks}}</ion-item>
     </ion-list> -->
-    <ion-label>CUSTOM ROUTES</ion-label>
     <!-- <ion-item *ngFor="let papapa of theRealPickUp.CUSTPICKUPS; let i = index">
       <ion-buttons item-start>
         <ion-icon class="icon-size" name="map" ></ion-icon>
@@ -87,6 +86,7 @@
     <ion-item class="to" >
       <ion-datetime class="text-center" placeholder="{{'routelist-to.title' | translate}}" displayFormat="DD/MM/YYYY"(ionChange)="onChangeFromFunction()" [(ngModel)]="endDate"></ion-datetime>
     </ion-item>
+    <ion-label class="customRoutes">CUSTOM ROUTES</ion-label>
     <ion-list >
       <ion-item *ngFor="let select of rptDriverRoutesJSONparseToArray.DRVROUTES  " (click)="sendDataToRouteStarted(select)">
         <ion-buttons item-start>
@@ -95,13 +95,13 @@
       <ion-buttons item-end>
         <button  class="btn-accept" ion-button color="light">TAKE</button>
       </ion-buttons>
-      <ion-label class="availability" ></ion-label> <br>
-      <ion-label class="destination">{{select.ASSIGNMENT_FROM_DATE}}</ion-label> <br>
-      <!-- <ion-label class="date">Yolo,Yolo,Yolo</ion-label> -->
-      <ion-item style="position: relative;
+      <ion-label class="availability" >{{startingPointElementFromArrayOfPickups}}</ion-label> <br>
+      <ion-label class="destination">{{theLastPointElementFromArrayOfPickups}}</ion-label> <br>
+     <ion-label class="date">{{select.ASSIGNMENT_FROM_DATE}}</ion-label> 
+      <!-- <ion-item lines="none" style="position: relative;
       margin-top: 90px;" *ngFor="let selectRoute of newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS; let i = index">
         <ion-label  class="">{{selectRoute.PICKUP_ADDRESS}}{{selectRoute[i]}}</ion-label>
-      </ion-item>
+      </ion-item> -->
       </ion-item>
      
     </ion-list>
@@ -133,13 +133,14 @@
     <p class="text-md-danger" *ngIf="invalidSelection">Inavalid Date Selection </p>
     </ion-list>
   </ion-content>
+
   <div class="myiontab">
     <ion-tab-bar slot="bottom" class="ion-no-border">
-      <ion-buttons class="addBtn" (click)="navigateToCreateRoutePage()" vertical="bottom" horizontal="center" translucent="true">
+      <!-- <ion-buttons class="addBtn" (click)="navigateToCreateRoutePage()" vertical="bottom" horizontal="center" translucent="true">
         <button class="adBtn2">
           <ion-icon name="add"></ion-icon>
         </button>
-      </ion-buttons>
+      </ion-buttons> -->
       <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
         <ion-icon class="iconStyling" name="home"></ion-icon>
       </ion-tab-button>
@@ -148,8 +149,8 @@
         <ion-icon class="iconStyling" name="wallet"></ion-icon>
       </ion-tab-button>
   
-      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
-  
+      <!-- <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
+   -->
       <ion-tab-button tab="route-history" class="notifs" (click)="navigateToRouteHistoryPage()">
         <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
       </ion-tab-button>

@@ -1,3 +1,8 @@
+//2021
+.my-custom-class .alert-wrapper {
+    background: #e5e5e5;
+  }
+//2020
 .header{
     background-color:var(--ion-color-ibus-blue);
 }
@@ -54,6 +59,9 @@
     position: relative;
     left: 27px;
     margin-bottom: 31px;
+    background-image: url(../../assets/images/profile.jpg);
+    background-size: 60px 80px;
+    
 }
 .ios ion-title{
     position: absolute;
@@ -70,6 +78,8 @@
     position: relative;
     left: 27px;
     margin-top: 14px;
+    background-image: url(../../assets/images/profile.jpg);
+    background-size: 60px 80px;
 }
 .ios .nav-buttons{
     margin-bottom: 30px;
@@ -84,7 +94,15 @@
 .md .nav-buttons{
     margin-bottom: -15px;
 }
-
+.customRoutes{
+    font-size: 25px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10%;
+    font-family:monteBold;
+    color:var(--ion-color-ibus-theblue);
+}
 .myiontab{
 	ion-fab {
 		margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
@@ -218,17 +236,27 @@ ion-item{
     width: 550px;
 }
 .destination{
-    // position: relative;
-    // right: 144px;
-    // font-size: 14px;
-    // font-family: monteSBold;
-    // color:var(--ion-color-ibus-darkblue);
-    position: absolute;
-    right: 270px;
+    position: relative;
+    right: 144px;
     font-size: 14px;
     font-family: monteSBold;
-    color: var(--ion-color-ibus-darkblue);
-    top: 50px;
+    color:var(--ion-color-ibus-darkblue);
+    // position: absolute;
+    // right: 270px;
+    // font-size: 14px;
+    // font-family: monteSBold;
+    // color: var(--ion-color-ibus-darkblue);
+    // top: 50px;
+
+    // position: absolute;
+    // right: 320px;
+    // font-size: 14px;
+    // font-family: monteSBold;
+    // color: var(--ion-color-ibus-darkblue);
+    // top: 16px;
+}
+ion-list{
+    margin-top: 6%;
 }
 .date{
     position: relative;

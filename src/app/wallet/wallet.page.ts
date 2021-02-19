@@ -81,7 +81,7 @@ export class WalletPage implements OnInit {
 	this.dataTakenFromRouteStartedList = this.activatedRoute.snapshot.paramMap.get('routestartedetails');
 	this.dataTakenFromRouteSTartedListJSON =  JSON.parse(this.dataTakenFromRouteStartedList);
 	console.log('%c DATA TAKEN FROM ROUTE STARTED','color:yellow');
-	console.log(this.dataFromAllOverTheApplicationBringingDriverIdJSON);
+	console.log(this.dataTakenFromRouteSTartedListJSON);
 	
     this.dataFromAllOverTheApplicationBringingDriverId = this.activatedRoute.snapshot.paramMap.get('fordriverid');
     this.dataFromAllOverTheApplicationBringingDriverIdJSON = JSON.parse(this.dataFromAllOverTheApplicationBringingDriverId);
@@ -186,6 +186,7 @@ export class WalletPage implements OnInit {
   public submit(){
 	console.log('%c Data Im taking after submiting wallets form','color:orange;');
 	console.log(this.paymentForm.value);
+
 	var myPaymentForm = this.paymentForm.value;
 	this.sendData(myPaymentForm).subscribe(
 	async (dataReturnFromService) => {
@@ -198,7 +199,7 @@ export class WalletPage implements OnInit {
 	console.log( dataReturnFromService['_body'] );
 	setTimeout(() => {
 		loader.dismiss();
-		this.router.navigate(['routestarted']);
+		this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromAllOverTheApplicationBringingDriverIdJSON) + '/' + JSON.stringify(this.dataTakenFromRouteSTartedListJSON) ]);
 	  }, 1000);
 	//this.router.navigate(['register3']);
 
@@ -222,7 +223,7 @@ goBackToRouteListPageWithDriverId(){
 	console.log('%c Going Back To Route list Page with Driver Id','color:orange;');
 	console.log(this.dataFromAllOverTheApplicationBringingDriverIdJSON)
 
-	this.router.navigate(['routelist/' + JSON.stringify(this.dataFromAllOverTheApplicationBringingDriverIdJSON)]);
+	this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromAllOverTheApplicationBringingDriverIdJSON) + '/' + JSON.stringify(this.dataTakenFromRouteSTartedListJSON) ]);
 }
   navigateToSettingsPage(){
     this.router.navigate(['settings'])

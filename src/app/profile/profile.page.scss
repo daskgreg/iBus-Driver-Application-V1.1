@@ -9,6 +9,7 @@
     --background: #4E98FF;
     height: 87px;
 }
+ion-
 ion-fab{
     margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
 		ion-fab-button {
@@ -24,6 +25,8 @@ ion-fab{
     position: relative;
     left: 27px;
     margin-bottom: 31px;
+    background-image: url(../../assets/images/profile.jpg);
+    background-size: 60px 80px;
 }
 .ios ion-title{
     position: absolute;
@@ -40,6 +43,8 @@ ion-fab{
     position: relative;
     left: 27px;
     margin-top: 14px;
+    background-image: url(../../assets/images/profile.jpg);
+    background-size: 60px 80px;
 }
 .ios .nav-buttons{
     margin-bottom: 30px;
@@ -92,7 +97,9 @@ ion-icon{
     right: 29px;
     color: var(--ion-color-ibus-darkblue);
 }
-
+.button-native{
+    
+}
 ion-input{
     height: 70px;
     font-size:15px;
@@ -114,7 +121,20 @@ ion-input{
     font-family: monteBold;
     font-size:13px;
     border-radius: 21px;
-    background-image: linear-gradient(180deg, #4E98FF 90%,#4E98FF 10%);
+  //  background-image: linear-gradient(180deg, #4E98FF 90%,#4E98FF 10%);
+    margin-top:7%;
+}
+.btn-goback{
+    width:100%;
+    height: 60px;
+    height:18;
+    text-align:center;
+    color:white;
+    font-family: monteBold;
+    font-size:13px;
+    border-radius: 21px;
+    background-color:var(--ion-color-ibus-classicgreen) !important;
+  //  background-image: linear-gradient(180deg, #4E98FF 90%,#4E98FF 10%);
     margin-top:7%;
 }
 .centerItems{
