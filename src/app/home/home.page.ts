@@ -30,7 +30,7 @@ export class HomePage {
   	// 	this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   	// }
   	ionViewWillEnter(){
-  		console.log('here');
+  		console.log('here2');
 		  this.platform.ready().then(() => {
 			if (this.platform.is('android')) {
 				 console.log('android');

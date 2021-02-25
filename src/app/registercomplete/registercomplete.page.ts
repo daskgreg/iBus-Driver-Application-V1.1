@@ -10,7 +10,7 @@ export class RegistercompletePage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    alert('i suck');
+    
   }
   navigateLogin(){
   	this.router.navigate(['login'])

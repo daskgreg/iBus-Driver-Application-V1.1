@@ -8,16 +8,35 @@ ion-content.background{
     justify-content: center; 
     height: 100%; 
 } 
+.ios .style-center{ 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+} 
 .btnStyling{
     background-color:transparent;
 }
+.ios ion-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: white;
+    font-size: 22px;
+    position: absolute;
+    font-family: monteSBold;
+    margin-top:-50%;
+    margin-left: 0%;
+}
+
 ion-title{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     position: absolute;
     font-family: monteSBold;
     margin-left: 20%;
