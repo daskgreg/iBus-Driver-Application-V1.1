@@ -21,7 +21,7 @@
   <form id="form">
     <ion-list>
       <ion-item lines='none'>
-        <ion-input  name="mobile"  type="text" [(ngModel)]="mobile" placeholder="{{'LOGIN-PHONE.title' | translate}}" required>
+        <ion-input  name="phone"  type="text" [(ngModel)]="mobile" placeholder="{{'LOGIN-PHONE.title' | translate}}" required>
         </ion-input>  <ion-icon slot="end" name="call" ios="call"></ion-icon>
       </ion-item>
 
@@ -29,7 +29,7 @@
         <ion-input  type="password" name="password" [(ngModel)]="pass" placeholder="{{'LOGIN-PASSWORD.title' | translate}}" requred></ion-input>
         <ion-icon slot="end" name="eye"></ion-icon>
       </ion-item>
-      <ion-button class="btn-login"  (click)="login()" expand="block" shape="round" >{{'LOGIN.title' | translate}}</ion-button>
+      <ion-button class="btn-login"  (click)="getLoginFromEveryPlatform()" expand="block" shape="round" >{{'LOGIN.title' | translate}}</ion-button>
       <ion-item class="forgot-password" (click)="forgot()" lines='none'>
        {{'LOGIN-FORGOT.title' | translate}} 
       </ion-item>

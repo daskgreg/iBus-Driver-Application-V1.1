@@ -9,9 +9,5 @@
       "launchShowDuration": 0
     }
   },
-  "cordova": {},
-  "server": {
-    "url": "http://localhost:8103",
-    "cleartext": true
-  }
+  "cordova": {}
 }
