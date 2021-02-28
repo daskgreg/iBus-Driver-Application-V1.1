@@ -70,19 +70,21 @@
     <div class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-transactionType.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select formControlName="typeOfPayment" (onChange)="sendData()" [(ngModel)]="selectedValue" (ionChange)="confirm()" interface="action-sheet">
+        <ion-select formControlName="typeOfPayment"  [(ngModel)]="selectedValue" (ionChange)="confirm()"  interface="action-sheet">
           <ion-select-option  *ngFor="let type of types" [value]="type">
                       {{type}}
           </ion-select-option>
         </ion-select>
       </ion-item >
     </div>
-    <div *ngIf="eng" class="centerItems styleItems ion-padding">
+    <div *ngIf="costinc" class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-transaction.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select formControlName="transactionType" (onChange)="sendData()" [(ngModel)]="checkpointen"  interface="action-sheet">
-          <ion-select-option  *ngFor="let enlang of enlangs" [value]="enlang">
-                      {{enlang}}
+        <ion-select formControlName="transactionType"  [(ngModel)]="checkpointen" interface="action-sheet">
+          <ion-select-option  *ngFor="let test of walletsJSON; let mi = index">
+                                                    {{test.TRAN_TYPE_DESCR}}
+      
+                      
           </ion-select-option>
         </ion-select>
       </ion-item >
@@ -91,7 +93,7 @@
      <div *ngIf="el" class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-transaction.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select formControlName="otherTransactionType" (onChange)="sendData()" [(ngModel)]="checkpointel"  interface="action-sheet">
+        <ion-select formControlName="otherTransactionType"  [(ngModel)]="checkpointel"  interface="action-sheet">
           <ion-select-option  *ngFor="let ellang of ellangs" [value]="ellang">
                       {{ellang}}
           </ion-select-option>
@@ -102,7 +104,7 @@
     <div class="centerItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-amount.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-input formControlName="ammountOfPayment" (click)="goBackToRouteListPageWithDriverId()" (onChange)="sendData()" name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
+        <ion-input formControlName="ammountOfPayment" (click)="goBackToRouteListPageWithDriverId()"  name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
       </ion-item>
     </div>
 

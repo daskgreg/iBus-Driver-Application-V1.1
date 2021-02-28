@@ -4,6 +4,9 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
  import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 import { HttpClient } from '@angular/common/http';
+import { HTTP } from '@ionic-native/http/ngx';
+import { from } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 const {Geolocation} = Plugins;
 
@@ -85,7 +88,7 @@ export class MapPage implements OnInit {
   dataFromTheDriverId:any=[];
   dataFromTheDriverIdJSON:any;
 
-  constructor(private activatedRoute:ActivatedRoute, private http:HttpClient, private backgroundGeolocation: BackgroundGeolocation, public alertCtrl: AlertController, public loadingCtrl: LoadingController,  private router : Router) {
+  constructor(private nativeHttp: HTTP, private activatedRoute:ActivatedRoute, private http:HttpClient, private backgroundGeolocation: BackgroundGeolocation, public alertCtrl: AlertController, public loadingCtrl: LoadingController,  private router : Router) {
     this.pickUpJsonFromApi=[];
     this.dataFromPickupsFromJSONtoArray=[];
     this.dataFromThePickups = this.activatedRoute.snapshot.paramMap.get('thepickups');
@@ -176,10 +179,10 @@ export class MapPage implements OnInit {
       console.log('%c LOAD MAP','color:red;');
   		 let latLng = new google.maps.LatLng(51.9036442, 7.6673267);
        
-  		  this.latitude = res.coords.latitude;
-        this.longitude = res.coords.longitude;
-      //this.latitude=41.1214145;
-       //this.longitude=25.3878458;
+  		//  this.latitude = res.coords.latitude;
+      //  this.longitude = res.coords.longitude;
+      this.latitude=41.1214145;
+      this.longitude=25.3878458;
      let mapEle: HTMLElement = document.getElementById('map');
     let panelEle: HTMLElement = document.getElementById('panel');
      this.myLatLng = {lat: this.latitude, lng: this.longitude};
@@ -336,8 +339,8 @@ for (var i = 0; i < polylines.length; i++) {
   }
   	
   
-  	  startWithoutApi(){
-  	  	this.backgroundGeolocation.start();
+  	startWithoutApi(){
+  	// 	this.backgroundGeolocation.start();
     var startDate = new Date().toLocaleTimeString();
     console.log(startDate);
     this.board=1;
@@ -348,7 +351,7 @@ for (var i = 0; i < polylines.length; i++) {
     alert("Αποδοχή δρομολογίου από τη θέση " + this.latitude + "," + this.longitude + " και ώρα " + startDate + ".");
   }
    endWithoutApi(){
-   	this.backgroundGeolocation.stop();
+   //	this.backgroundGeolocation.stop();
      var endDate = new Date().toLocaleTimeString();
     console.log(endDate);
     this.startTr=0;
@@ -377,9 +380,10 @@ for (var i = 0; i < polylines.length; i++) {
      
     
     .then(response => {
+
       console.log(response.coords.latitude,response.coords.longitude);
 
-      this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?'
+      let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?'
         + 'driver_id=' + this.dataFromTheRoutesJSON.DRIVER_ID
         + '&srv_type=' + this.dataFromTheRoutesJSON.SERVICE
         + '&srv_code=' + this.dataFromTheRoutesJSON.SERVICECODE
@@ -395,8 +399,13 @@ for (var i = 0; i < polylines.length; i++) {
         + '&virtualversion_id=' + 1
         + '&latitude=' + response.coords.latitude
         + '&longitude=' + response.coords.longitude
-        + '&userid=dmta'
-      ).subscribe( (data) => {
+        + '&userid=dmta' ,{},{
+          'Content-Type': 'application/json'
+        });
+        
+        from(nativeCall).pipe(
+        finalize( () => console.log(''))
+      ).subscribe ( (data) => {
         console.log(data);
       })
 

@@ -72,8 +72,6 @@ export class ProfilePage implements OnInit {
                   + '&userid=dmta' ).subscribe( (data) => {
                     console.log(data);
                     this.getProfileInfo = data;
-                    // this.getProfileJSON = JSON.parse(this.getProfileInfo);
-                    // console.log(this.getProfileJSON);
                     this.getProfileJSONtoArray = this.getProfileInfo.DRIVER;
                     console.log(this.getProfileJSONtoArray);
                   })

@@ -42,6 +42,8 @@ export class RoutedetailsPage implements OnInit {
     this.dataFromRouteStartedPickupsJSON = JSON.parse(this.dataFromRouteStartedPickups);
     console.log(this.dataFromRouteStartedPickupsJSON);
 
+    
+
 
     for (var i=1; i<this.dataFromRouteStartedPickupsJSON.length-1; i++){
       this.thisIsMyStartingPoint = this.dataFromRouteStartedPickupsJSON[0].PICKUP_ADDRESS;

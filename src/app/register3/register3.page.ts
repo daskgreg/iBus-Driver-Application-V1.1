@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder , Validators} from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
-import { Camera, CameraResultType } from '@capacitor/core';
+import { Plugins, CameraResultType } from '@capacitor/core';
 import { HTTP } from '@ionic-native/http/ngx';
 import { LoadingController } from '@ionic/angular';
+const  { Camera } = Plugins;
 @Component({
   selector: 'app-register3',
   templateUrl: './register3.page.html',

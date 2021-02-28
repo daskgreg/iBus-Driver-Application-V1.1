@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { HTTP } from '@ionic-native/http/ngx';
+import { from } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-routepassengers',
@@ -61,7 +64,7 @@ export class RoutepassengersPage implements OnInit {
   }
   dataFromRouteStarted:any;
   dataFromRouteStartedJSON:any;
-  thePassenger: any = [];
+  thePassenger: any;
   VEHICLE_MAP_ID:any;
   passengersList;
   thePassengersListBecameAJSON:any;
@@ -71,8 +74,8 @@ export class RoutepassengersPage implements OnInit {
   dataFromRouteStartedDriverId:any;
   dataFromRouteStartedJSONDromologio:any;
   dataFromRouteStartedJSONDriverId:any;
-  thepassengerListJSONtoArray:any = [];
-  constructor(private http:HttpClient, private activatedRoute:ActivatedRoute, private router : Router) { 
+  thepassengerListJSONtoArray:any;
+  constructor(private http:HttpClient, private activatedRoute:ActivatedRoute, private router : Router, private nativeHttp: HTTP) { 
     //greg
     this.dataFromRouteStartedDromologio = this.activatedRoute.snapshot.paramMap.get('dromologio');
     this.dataFromRouteStartedJSONDromologio = JSON.parse(this.dataFromRouteStartedDromologio);
@@ -91,13 +94,26 @@ export class RoutepassengersPage implements OnInit {
     this.pases=[];
     this.phones=[];
     this.emails=[];
-    this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_passengers_list.cfm?vehicle_map_id='+ this.VEHICLE_MAP_ID +'&userid=dmta')
+
+
+    let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_passengers_list.cfm?vehicle_map_id='+ this.VEHICLE_MAP_ID +'&userid=dmta', {}, {
+      'Content-Type': 'application/json'
+
+    });
+    from(nativeCall).pipe(
+      finalize( () => console.log(''))
+    )
     .subscribe((data)=>{
+
+      let parsed = JSON.parse(data.data)
       console.log(data);
-      this.thePassenger = data;
-      this.thepassengerListJSON = JSON.parse(this.thePassenger);
-      console.log(this.thepassengerListJSON);
+      this.thePassenger = parsed;
+
+      this.thepassengerListJSON = this.thePassenger;
+
       this.thepassengerListJSONtoArray = this.thepassengerListJSON.PASSENGERS;
+
+    
       console.log('%c Passengers','color:yellow;');
       console.log(this.thepassengerListJSONtoArray);
       

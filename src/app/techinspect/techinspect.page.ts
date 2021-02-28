@@ -1,8 +1,11 @@
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { HTTP } from '@ionic-native/http/ngx';
+import { from } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-techinspect',
   templateUrl: './techinspect.page.html',
@@ -49,6 +52,8 @@ export class TechinspectPage implements OnInit {
   myCommentForm:any =[];
   checkThePoint:any=[]
   checkThePointComment:any=[]
+  test21: string;
+  test22: Date;
   //greg
   get measurementData(){
     return this.commentForm.get('measurementData');
@@ -79,7 +84,10 @@ export class TechinspectPage implements OnInit {
   dataFromStartedRouteWhileGoingBackJSON:any;
   dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverId:any;
   dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON:any;
-  constructor(private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder ) { 
+  test1:any;
+     test2:any;
+     test3:any;
+  constructor(private platform:Platform, private nativeHttp: HTTP,private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController,public http:HttpClient, private router : Router, public formBuilder: FormBuilder ) { 
     const selects = document.querySelectorAll('.custom-options');
 
    
@@ -99,17 +107,48 @@ export class TechinspectPage implements OnInit {
      this.enlangs=[];
      this.ellangs=[];
      this.ids=[];
+
+     
+
      var k=0;
-       if(this.language=="en" ){
-        this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=eng&userid=dmta').subscribe( (data) => {
-          console.log(data);
-           this.englishLanguage= data;
-           console.log('%c English Language','color:orange;');
-           this.englishLanguageJSON = JSON.parse(this.englishLanguage);
-           console.log(this.englishLanguageJSON);
-         })
-       this.el=false;
-       this.eng=true;
+     console.log(this.language);
+       if(this.language=="en"){
+       
+
+        if( this.platform.is('cordova') ){
+         let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=eng&userid=dmta',{},{
+            'Content-Type': 'application/json'
+          });
+          from(nativeCall).pipe(
+            finalize( () => console.log(''))
+          )
+          
+          .subscribe( (data) => {
+            console.log(data);
+            let parsed = JSON.parse(data.data).CHECKS;
+             this.englishLanguage= parsed;
+             this.test1 = this.englishLanguage;
+             console.log(this.test1);
+             console.log('%c English Language','color:orange;');
+             console.log(this.englishLanguageJSON);
+           })
+
+         this.el=false;
+         this.eng=true;
+        }
+
+
+            this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_checkpoints.cfm?lang=eng&userid=dmta').subscribe( (data) => {
+              console.log(data);
+              this.englishLanguage= data;
+              console.log('%c English Language','color:orange;');
+              this.englishLanguageJSON = JSON.parse(this.englishLanguage);
+              console.log(this.englishLanguageJSON);
+            })
+          this.el=false;
+          this.eng=true;
+
+
        
      }
      else if (this.language=="gr"){
@@ -128,8 +167,11 @@ export class TechinspectPage implements OnInit {
   ngOnInit() {
     
   }
+  submitWithEveryHttp(){
+    this.platform.is('cordova') ? this.submitNativeClient() : this.submitHttpClient();
+  }
 
-  public submit(){
+  public submitHttpClient(){
     console.log('%c MY ENGLISH JSON','color:orange;');
     console.log(this.commentForm.value);
     
@@ -169,30 +211,155 @@ export class TechinspectPage implements OnInit {
                       this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackJSON) + '/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON)]);
                     }, 1000);
                   })
-    // this.sendData(this.myCommentForm).subscribe(
-    // (dataReturnFromService) => {
-    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
-    //   this.dataFromService = JSON.stringify(dataReturnFromService);
-    //   console.log(JSON.stringify(dataReturnFromService));
-    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
-    //   console.log(this.dataFromService.CHECKPOINT)
-    //   console.log('%c SEARCHING FOR DATA FROM FORM','color:orange;');
-    //   console.log(dataReturnFromService['_body'] );
-    // }, error => {
-    //   console.log(error);
-    // });
-    //cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?vhc_plates=OPE5400&chrbus_code=2&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&driver_id=16&checkpoint_id=40&checkpoint_txt=The%20performance%20of%20the%20brakes.&checkpoint_status=1&comment=asdfasdfsadf&userid=dmta
-    //cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?vhc_plates=OPE5400&chrbus_code=2&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&driver_id=16&checkpoint_id=41&checkpoint_txt=Lights%20in%20terms%2unction          &checkpoint_status=1&comment=saffasafafsfasafs&userid=dmta
-} //http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?driverid=16&chrbus_code=CUST&vhc_plates=OPE5400&chrbus_sp_id=&sp_code=&fromd=2021-01-28&tod=2021-02-28&checkpoint_id=46&checkpoint_txt=The%20flexible%20-%20rigid%20piping%20of%20the%20braking%20system.&checkpoint_status=1&comment=rrffff&userid=dmta 
- //http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?driver_id=16&vhc_plates=OPE6009&chrbus_code=panos&chrbus_sp_id=1&sp_code=1&fromd=2021-01-28&tod=2021-01-28&checkpoint_id=45&checkpoint_status=1&comments=test&userid=dmta
-// sendData(myCommentForm){
-  
-//   var url="";
-//   return this.http.post(url,myCommentForm,
-//     {headers:new HttpHeaders(
-//       { "content-type":"application/json"
-//     })})
-// }
+    }
+    myData:any;
+  public submitNativeClient(){
+    console.log('%c MY ENGLISH JSON','color:orange;');
+    console.log(this.commentForm.value);
+    
+    this.myCommentForm = this.commentForm.value;
+    console.log(this.myCommentForm.measurementData);
+
+    this.checkThePointComment = this.myCommentForm.comment;
+    console.log(this.checkThePointComment)
+    this.checkThePoint = this.myCommentForm.measurementData;
+    console.log(this.checkThePoint.CHECKPOINT);
+
+    console.log( );
+   
+
+    console.log("tod")
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON.VHC_PLATES);
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON.SERVICECODE);
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_FROM_DATE);
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_TO_DATE);
+    console.log(this.dataFromStartedRouteWhileGoingBackJSON.DRIVER_ID);
+    console.log(this.checkThePoint.CHECKPOINT_ID);
+    console.log(this.checkThePoint.CHECKPOINT);
+    console.log(this.checkThePoint.FLAG);
+    console.log(this.checkThePointComment);
+
+
+
+    // let fromDate = this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_FROM_DATE;
+    // let fromDateToGo = fromDate.split(/\s/).join('');
+    // let fromDateToGo3 = fromDateToGo.replace('January,','');
+    // let fromDateToGo4 = fromDateToGo3.replace(':','')
+    // let fromDateToGo5 = fromDateToGo4.replace('0','')
+    // console.log("DATE5",fromDateToGo5);
+
+    // let toDate = this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_TO_DATE;
+    // let toDateToGo = toDate.split(/\s/).join('');
+    // let toDateToGo3 = toDateToGo.replace('January,','');
+    // let toDateToGo4 = toDateToGo3.replace(':','')
+    // let toDateToGo5 = toDateToGo4.replace('0','')
+
+   
+
+    let fromDate= this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_FROM_DATE;
+    let fromDateToGo555 = fromDate.split(/\s/).join(',');
+    console.log("from Date",fromDate);
+    
+    let fromDateToGo=new Date(fromDateToGo555);
+    
+    console.log("from Date 2 ", fromDateToGo);
+
+    let year=fromDateToGo.getFullYear();
+    console.log("year",year)
+
+    let month=fromDateToGo.getMonth()+1;
+   
+    console.log(month);
+    
+    let date=fromDateToGo.getDate();
+    console.log(date);
+    
+   
+    
+    let fulldateFromDate = year + '-' + month + '-' + date;
+    console.log(fulldateFromDate); 
+
+
+
+
+    let toDate= this.dataFromStartedRouteWhileGoingBackJSON.ASSIGNMENT_TO_DATE;
+    let toDateToGo555 = toDate.split(/\s/).join(',');
+    console.log("from Date",toDate);
+    
+    let toDateToGo=new Date(toDateToGo555);
+    
+    console.log("from Date 2 ", toDateToGo);
+
+    let year2=toDateToGo.getFullYear();
+    console.log("year",year)
+
+    let month2=toDateToGo.getMonth()+1;
+   
+    console.log(month2);
+    
+    let date2=toDateToGo.getDate();
+    console.log(date2);
+    
+   
+    
+    let fulldateToDate = year + '-' + month + '-' + date;
+    console.log(fulldateFromDate); 
+
+
+
+
+
+//     getDate(); 27
+
+// getFullYear(); 2020
+
+
+    let checkpoint = this.checkThePoint.CHECKPOINT;
+    let checkpoint3 = checkpoint.split(/\s/).join('');
+
+    console.log(checkpoint3)
+
+    let whiteSpace = ' A  B C D ';
+    let noWhiteSpace = whiteSpace.trim();
+    console.log(noWhiteSpace);
+
+
+   
+    //
+    let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_vehicle_tech_inspect_add.cfm?' 
+                  + 'vhc_plates=' + this.dataFromStartedRouteWhileGoingBackJSON.VHC_PLATES
+                  + '&chrbus_code=' + this.dataFromStartedRouteWhileGoingBackJSON.SERVICECODE 
+                  + '&chrbus_sp_id=' + 1 //this.dataFromStartedRouteWhileGoingBackJSON.CHRBUS_SP_ID
+                  + '&sp_code=' + 1 //this.dataFromStartedRouteWhileGoingBackJSON.SP_CODE
+                  + '&fromd=' + fulldateFromDate
+                  + '&tod=' + fulldateToDate
+                  + '&driver_id=' + this.dataFromStartedRouteWhileGoingBackJSON.DRIVER_ID
+                  + '&checkpoint_id=' + this.checkThePoint.CHECKPOINT_ID
+                  + '&checkpoint_txt=' + checkpoint3
+                  + '&checkpoint_status=' + this.checkThePoint.FLAG
+                  + '&comment=' + this.checkThePointComment
+                  + '&userid=dmta', {}, {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                  
+                  });
+                  
+                  console.log('after url call');
+                  from(nativeCall).pipe(
+                    finalize( () => console.log('Ready to send'))
+                  )
+                  .subscribe( data =>{
+                  
+                    
+                   console.log(data);
+
+                   
+                    this.router.navigate(['routestarted/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackJSON) + '/' + JSON.stringify(this.dataFromStartedRouteWhileGoingBackDataWasTakenFromLoginPageTheDriverIdJSON)]);
+                   console.log('LEITOURGW');
+                  },err => {
+                    console.log('Error of Vehicle check',err);
+                  })
+  } 
+
    map(){
     
       setTimeout(() => {

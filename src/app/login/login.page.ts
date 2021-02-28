@@ -31,7 +31,7 @@ export class LoginPage {
   kati:any;
   drv_master_json= [{ "driver_id": "16", "person_id": "11", "password": "11" }];
   locations:any;
-  
+  test:any;
   constructor( 
     public afAuth: AngularFireAuth,
     private languageService: LanguageService,
@@ -62,7 +62,9 @@ export class LoginPage {
         const response = await this.nativeHttp.get(url, params, headers);
   
         console.log(response.status);
-        console.log(JSON.parse(response.data)); // JSON data returned by server
+        console.log(JSON.parse(response.data));
+        this.test = response.data;
+        console.log(this.test.DRIVER) // JSON data returned by server
         console.log(response.headers);
     } catch (error) {
       console.error(error.status);
@@ -158,11 +160,15 @@ export class LoginPage {
  
  async nativeLogin(){
   console.log('Native Http Request');
+    
 
   let loader = await this.loadingCtrl.create({
    message: "Logging in"
  });
- await loader.present();
+  await loader.present();
+  setTimeout(() => {
+    loader.dismiss();
+  }, 800);
 
  
 localStorage.setItem('mobile',this.mobile)
@@ -179,15 +185,18 @@ const headers = {};
 
    from(nativeCall).pipe(
      finalize( () => loader.dismiss())
-   )
-.subscribe( async (response) => {
+   ).subscribe( async (response) => {
 
+
+    
 
 
   this.allData = JSON.parse(response.data);
   console.log('%c This is the data of Login','color:orange;');
   console.log(this.allData);
   console.log(this.allData.DRIVER);
+
+
   this.driversInformationsLogin = this.allData;
   this.driversInformationLoginForChecks = this.driversInformationsLogin.DRIVER;
 
