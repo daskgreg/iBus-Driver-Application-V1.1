@@ -181,8 +181,8 @@ export class Register3Page  {
                   + '&firstName='  + this.dataFromRegisterOneJSON.firstName
                   + '&lastName='   + this.dataFromRegisterOneJSON.lastName
                   + '&licNumber='  + this.signupIsDone.licNumber
-                  + '&birthday='      + this.dataFromRegisterOneJSON.birth
-                  + '&password='       + this.dataFromRegisterOneJSON.pass
+                  + '&birthday='   + this.dataFromRegisterOneJSON.birth
+                  + '&password='   + this.dataFromRegisterOneJSON.pass
                   + '&mobile='     + this.dataFromRegisterOneJSON.phoneNumber
                   + '&location='   + this.dataFromRegisterTwoJSON.location
                   + '&country='    + 1

@@ -20,10 +20,6 @@
         <ion-icon class="iconStyling" name="file-tray-full" slot="start"></ion-icon>
         <ion-label class="menuTxt" >{{'routelist-routeHistory.title' | translate}}</ion-label>
       </ion-item>
-      <ion-item (click)="navigateToTechHistoryPage()">
-        <ion-icon class="iconStyling" name="archive" slot="start"></ion-icon>
-        <ion-label class="menuTxt" >{{'routelist-techHistory.title' | translate}}</ion-label>
-      </ion-item>
       <ion-item (click)="navigateToProfilePage()">
         <ion-icon class="iconStyling" name="person" slot="start"></ion-icon>
         <ion-label class="menuTxt" >{{'routelist-profile.title' | translate}}</ion-label>
@@ -61,24 +57,47 @@
     <ion-item class="to" >
       <ion-datetime class="text-center" placeholder="{{'routelist-to.title' | translate}}" displayFormat="DD/MM/YYYY"(ionChange)="getChangeFunctionFromEveryHTTP()" [(ngModel)]="endDate"></ion-datetime>
     </ion-item>
-    <ion-label class="customRoutes">CUSTOM ROUTES</ion-label>
-    <ion-list >
-      <ion-item *ngFor="let select of rptDriverRoutesJSONparseToArray.DRVROUTES  " (click)="sendDataToRouteStarted(select)">
+    <!-- <ion-label class="customRoutes">CUSTOM ROUTESS EDW{{custArrayPicks}}</ion-label>
+    <ion-list>
+      <ion-item *ngFor="let item of bcustArrayPicks" (click)="sendDataToRouteStarted(select)">
         <ion-buttons item-start>
         <ion-icon class="icon-size" name="map" ></ion-icon>
       </ion-buttons>
       <ion-buttons item-end>
         <button  class="btn-accept" ion-button color="light">TAKE</button>
       </ion-buttons>
-      <ion-label class="availability" >{{startingPointElementFromArrayOfPickups}}</ion-label> <br>
-      <ion-label class="destination">{{theLastPointElementFromArrayOfPickups}}</ion-label> <br>
-     <ion-label class="date">{{select.ASSIGNMENT_FROM_DATE}}</ion-label> 
+      <ion-label class="availability" >{{CustStartingPointElementFromArrayOfPickups}}</ion-label> <br>
+      <ion-label class="destination">{{CustTheLastPointElementFromArrayOfPickups}}</ion-label> <br>
+      <ion-label class="date">{{item}}1</ion-label> 
+    
+      </ion-item>
+     
+     
+    </ion-list> -->
+
+   
+    <ion-list >
+      <ion-label class="customRoutes">ROUTES</ion-label>
+      <ion-item *ngFor="let select of filtered; " (click)="sendDataToRouteStarted(select)">
+        <ion-buttons item-start>
+        <ion-icon class="icon-size" name="map" ></ion-icon>
+      </ion-buttons>
+      <ion-buttons item-end>
+        <button  class="btn-accept" ion-button color="light">TAKE</button>
+      </ion-buttons>
+      
+      <ion-label class="availability" *ngIf="select.TYPE == 'FIX' ">FIXED ROUTE</ion-label> <br>
+      <ion-label class="availability" *ngIf="select.TYPE == 'CUST' ">CUSTOM ROUTE</ion-label> <br>
+      <ion-label class="destination" *ngIf="select.TYPE == 'FIX' " >{{FixedStartingPointElementFromArrayOfPickups}}</ion-label> <br>
+      <ion-label class="destination" *ngIf="select.TYPE == 'CUST' " >{{CustStartingPointElementFromArrayOfPickups}}</ion-label> <br>
+     <ion-label class="date" *ngIf="select.TYPE == 'FIX' ">{{FixedTheLastPointElementFromArrayOfPickups}}</ion-label> 
+     <ion-label class="date" *ngIf="select.TYPE == 'CUST' ">{{CustTheLastPointElementFromArrayOfPickups}}</ion-label> 
+
 
       </ion-item>
      
      
     </ion-list>
-
   </ion-content>
 
   <div class="myiontab">

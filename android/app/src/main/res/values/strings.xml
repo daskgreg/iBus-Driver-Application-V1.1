@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">iBus-Driver-Application-v1</string>
-    <string name="title_activity_main">iBus-Driver-Application-v1</string>
-    <string name="package_name">ts.travelsoft.iBusDriverApplcationV1</string>
-    <string name="custom_url_scheme">ts.travelsoft.iBusDriverApplcationV1</string>
+    <string name="app_name">iBus-Driver-Application-v001</string>
+    <string name="title_activity_main">iBus-Driver-Application-v001</string>
+    <string name="package_name">ts.travelsoft.iBusDriverApplcationV001</string>
+    <string name="custom_url_scheme">ts.travelsoft.iBusDriverApplcationV001</string>
     <string name="mauron85_bgloc_account_name">$ACCOUNT_NAME</string>
     <string name="mauron85_bgloc_account_type">$ACCOUNT_TYPE</string>
     <string name="mauron85_bgloc_content_authority">$CONTENT_AUTHORITY</string>

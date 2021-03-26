@@ -1,0 +1,45 @@
+.welcomeText{
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-family: monteBold;
+    color: var(--ion-color-ibus-darkblue);
+    margin-bottom: 15%;
+}
+ion-content{
+    position: absolute;
+    top: 21%;
+}
+.insideLogoImage{
+    width:287px;
+   height:108px;
+}
+.ios insideLogoImage{
+   
+   width:287px;
+   height:108px;
+}
+.registerBtn{
+    position: relative;
+    top: -70px;
+    justify-content:center;
+    display:flex;
+
+    padding: 1px 2px 3px 20px;
+
+
+}
+.loginBtn{
+    margin-top:5%;
+    justify-content:center;
+    display:flex;
+
+    padding: 1px 2px 3px 20px;
+
+}
+.imgDiv{
+    justify-content:center;
+    display:flex;
+    width: 100%;
+}

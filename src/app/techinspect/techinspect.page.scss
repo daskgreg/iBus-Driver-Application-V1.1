@@ -1,52 +1,62 @@
-.header{
-    background-color:var(--ion-color-ibus-blue);
+.header {
+    background-color: var(--ion-color-ibus-blue);
 }
-.ios ion-toolbar{
+
+.ios ion-toolbar {
     --background: #4E98FF;
     height: 127px;
 }
-.md ion-toolbar{
+
+.md ion-toolbar {
     --background: #4E98FF;
     height: 87px;
 }
-.error-message{
+
+.error-message {
     position: absolute;
     top: 120px;
     left: 1px;
     width: 100%;
     display: flex;
     justify-content: center;
-    font-size:18px;
-    font-family:monteRegular;
-    color:var(--ion-color-ibus-red);
+    font-size: 18px;
+    font-family: monteRegular;
+    color: var(--ion-color-ibus-red);
 }
-.notBtn{
+
+.notBtn {
     color: white;
     width: 47px;
     height: 62px;
 }
-.menuBtn{
+
+.menuBtn {
     font-size: 100px;
     width: 70px;
     color: white;
 }
+
 .my-custom-interface .select-interface-option {
     color: red;
-  }
-.menuTxt{
-    font-size:18px;
-    font-family:monteRegular;
-    color:var(--ion-color-ibus-darkblue);
 }
-.iconStyling{
-    color:var(--ion-color-ibus-darkblue);
+
+.menuTxt {
+    font-size: 18px;
+    font-family: monteRegular;
+    color: var(--ion-color-ibus-darkblue);
 }
-.menuToolbar{
+
+.iconStyling {
+    color: var(--ion-color-ibus-darkblue);
+}
+
+.menuToolbar {
     position: relative;
     margin-top: 80px;
     font-size: 25px;
 }
-.ios #profile{
+
+.ios #profile {
     width: 60px;
     height: 60px;
     background-color: white;
@@ -57,14 +67,16 @@
     background-image: url(../../assets/images/profile.jpg);
     background-size: 60px 80px;
 }
-.ios ion-title{
+
+.ios ion-title {
     position: absolute;
     top: -15px;
     left: -30px;
     color: white;
     font-size: 21px;
 }
-.md #profile{
+
+.md #profile {
     width: 60px;
     height: 60px;
     background-color: white;
@@ -75,30 +87,36 @@
     background-image: url(../../assets/images/profile.jpg);
     background-size: 60px 80px;
 }
-.ios .nav-buttons{
+
+.ios .nav-buttons {
     margin-bottom: 30px;
 }
-.md ion-title{
+
+.md ion-title {
     position: absolute;
     top: 30px;
     left: 80px;
     color: white;
     font-size: 21px;
 }
-.md .nav-buttons{
+
+.md .nav-buttons {
     margin-bottom: -15px;
 }
-.labelIon{
-    position:absolute;
-    font-size:20px;
-    font-family:monteBold;
-    color:var(--ion-color-ibus-darkblue);
+
+.labelIon {
+    position: absolute;
+    font-size: 20px;
+    font-family: monteBold;
+    color: var(--ion-color-ibus-darkblue);
 }
-.itemIon{
-    width:100%;
-    margin-top:10%;
+
+.itemIon {
+    width: 100%;
+    margin-top: 10%;
 }
-ion-select{
+
+ion-select {
     font-size: 21px;
     font-family: monteSBold;
     color: white;
@@ -109,12 +127,14 @@ ion-select{
     padding: 4px 5px 5px 29px;
     text-align: center;
 }
-.centerItems{
-    display:flex;
-    width:100%;
+
+.centerItems {
+    display: flex;
+    width: 100%;
     justify-content: center;
 }
-.titleStyle{
+
+.titleStyle {
     position: relative;
     top: -18px;
     left: 0px;
@@ -125,30 +145,34 @@ ion-select{
     font-family: monteBold;
 }
 
-.titleStyle{
+.titleStyle {
     font-size: 25px;
-    font-family:monteSBold;
-    color:var(--ion-color-ibus-darkblue);
+    font-family: monteSBold;
+    color: var(--ion-color-ibus-darkblue);
     padding: 37px;
 }
-.ionListClass{
-         justify-content: center;
-         display: flex!important;
-         align-items: center!important;
-    .btnStyle{
+
+.ionListClass {
+    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+
+    .btnStyle {
         width: 88%;
         height: 50px;
         border-radius: 12px;
-        --background:var(--ion-color-ibus-theblue);
-        font-family:monteBold;
-        font-size:16px;
-        --background-activated:red;
+        --background: var(--ion-color-ibus-theblue);
+        font-family: monteBold;
+        font-size: 16px;
+        --background-activated: red;
     }
-    .btnStyleChanged{
-        --background:var(--ion-color-ibus-lightgreen);
+
+    .btnStyleChanged {
+        --background: var(--ion-color-ibus-lightgreen);
     }
-    .txtArea{
-        width:91%;
+
+    .txtArea {
+        width: 91%;
         height: 150px;
         border-radius: 8px;
         border: none;
@@ -158,10 +182,11 @@ ion-select{
         font-size: 16px;
         padding: 56px;
         margin-top: 1%;
-        }
-      
+    }
+
 }
-ionic-selectable{
+
+ionic-selectable {
     font-size: 21px;
     font-family: monteSBold;
     color: white;
@@ -171,84 +196,87 @@ ionic-selectable{
     border-radius: 8px;
     padding-top: 8px;
     opacity: 1 !important;
-    text-align: center;  
+    text-align: center;
 }
 
-.myiontab{
-    position: relative;
-    top: 10px;
-    padding-top: 250px;
-	ion-fab {
-		margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
-		ion-fab-button {
-			--box-shadow: none;
-			z-index: 1;
-		}
-	}
-	ion-tab-bar {
+.myiontab {
+
+    ion-tab-bar {
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        height: 90px;
+
         .addBtn {
-            justify-content: center;
-            display: flex;
-            text-align: center;
-            margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
+
+            margin-bottom: env(safe-area-inset-bottom);
+
+            /* fix notch ios*/
             button {
                 --box-shadow: none;
                 background-color: var(--ion-color-ibus-classicgreen);
                 border-radius: 70px;
-                width: 51px;
-                height: 51px;
-                position: absolute;
-                left: 181px;
-                top: -32px;
-                color:white;
-                font-family:monteSBold;
-                font-size:11px;
+                width: 80px;
+                height: 80px;
+                color: white;
+                font-family: monteSBold;
+                font-size: 11px;
             }
-            ion-icon{
-                color:white;
-                width:30px;
-                height:30px;
+
+            ion-icon {
+                color: white;
+                width: 30px;
+                height: 30px;
                 stroke: 5px;
             }
-            ion-badge{
-            --background: transparent;
-             }
+
+            ion-badge {
+                --background: transparent;
+            }
         }
-		--border: 0;
-		--background: transparent;
-		position: absolute;
-		bottom: 0;
-		left:0; right: 0;
-        width: 100%;
-        height:70px;
-		&:after{
-			content: " ";
-			width: 100%;
-			bottom: 0;
-			background: var(--ion-color-light);
-			height: env(safe-area-inset-bottom);
-			position: absolute;
-		}
-		ion-tab-button {
-			--background: var(--ion-color-light);
-		}
-		ion-tab-button.comments {
-			margin-right: 0px;
-			border-top-right-radius: 18px;
-		}
-		ion-tab-button.notifs {
-			margin-left: 0px;
-			border-top-left-radius: 18px;
-		}
-		svg {    
-			width: 72px;
-			margin-top: 19px;
-			path{
-				fill:  var(--ion-color-light);
-			}		
-		}
-	}
+
+    }
 }
+
+.myiontab2 {
+
+    ion-tab-bar {
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        height: 90px;
+
+        .addBtn {
+
+            margin-bottom: env(safe-area-inset-bottom);
+
+            /* fix notch ios*/
+            button {
+                --box-shadow: none;
+                background-color: var(--ion-color-ibus-red);
+                border-radius: 70px;
+                width: 80px;
+                height: 80px;
+                color: white;
+                font-family: monteSBold;
+                font-size: 11px;
+            }
+
+            ion-icon {
+                color: white;
+                width: 30px;
+                height: 30px;
+                stroke: 5px;
+            }
+
+            ion-badge {
+                --background: transparent;
+            }
+        }
+
+    }
+}
+
 // ------------------ !!!!!! ---------------- // 
 // BottomBar CSS 
 
@@ -291,17 +319,20 @@ ionic-selectable{
 //          }
 //     }
 // }
-.bottomBar{
-//  position: relative;
-// height: 60px;
+.bottomBar {
+
+    //  position: relative;
+    // height: 60px;
     .ionTabBar {
         --border: 0;
         --background: transparent;
         position: absolute;
         bottom: 0;
-        left:0; right: 0;
+        left: 0;
+        right: 0;
         width: 100%;
-        &:after{
+
+        &:after {
             content: " ";
             width: 100%;
             bottom: 0;
@@ -309,160 +340,184 @@ ionic-selectable{
             height: env(safe-area-inset-bottom);
             position: absolute;
         }
+
         ion-tab-button {
             --background: var(--ion-color-light);
         }
+
         ion-tab-button.comments {
             margin-right: 0px;
             border-top-right-radius: 18px;
         }
+
         ion-tab-button.notifs {
             margin-left: 0px;
             border-top-left-radius: 18px;
         }
-        svg {    
+
+        svg {
             width: 72px;
             margin-top: 19px;
-            path{
-                fill:  var(--ion-color-light);
-            }       
+
+            path {
+                fill: var(--ion-color-light);
+            }
         }
     }
 }
+
 // ------------------ !!!!!! ---------------- // 
-.iconStyling{
-    color:var(--ion-color-ibus-darkblue);
+.iconStyling {
+    color: var(--ion-color-ibus-darkblue);
 }
-.centerTitle{
+
+.centerTitle {
     justify-content: center;
     width: 100%;
     display: flex;
     text-align: center;
     margin-top: 6%;
 }
+
 ion-select::part(icon) {
     display: none !important;
-   }
-.srchBtn{
-    width:100%;
-    margin-top:6%;
 }
+
+.srchBtn {
+    width: 100%;
+    margin-top: 6%;
+}
+
 @media only screen and (max-width: 414px) {
-    ion-toolbar{
+    ion-toolbar {
         --background: #4E98FF;
         height: 127px;
     }
-    .ionListClass{
+
+    .ionListClass {
         justify-content: center;
-        display: flex!important;
-        align-items: center!important;
-   .btnStyle{
-       width: 88%;
-       height: 50px;
-       border-radius: 12px;
-       --background:var(--ion-color-ibus-theblue);
-       font-family:monteBold;
-       font-size:16px;
-       --background-activated:red;
-   }
-   .btnStyleChanged{
-       --background:var(--ion-color-ibus-lightgreen);
-   }
-   .txtArea{
-       width:91%;
-       height: 150px;
-       border-radius: 8px;
-       border: none;
-       background-color: var(--ion-color-ibus-theblue);
-       color: white;
-       font-family: monteSBold;
-       font-size: 13px;
-       padding: 56px;
-       margin-top: 1%;
-       }
-     
+        display: flex !important;
+        align-items: center !important;
+
+        .btnStyle {
+            width: 88%;
+            height: 50px;
+            border-radius: 12px;
+            --background: var(--ion-color-ibus-theblue);
+            font-family: monteBold;
+            font-size: 16px;
+            --background-activated: red;
+        }
+
+        .btnStyleChanged {
+            --background: var(--ion-color-ibus-lightgreen);
+        }
+
+        .txtArea {
+            width: 91%;
+            height: 150px;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--ion-color-ibus-theblue);
+            color: white;
+            font-family: monteSBold;
+            font-size: 13px;
+            padding: 56px;
+            margin-top: 1%;
+        }
+
+    }
 }
-  }
-  @media only screen and (max-width: 320px) {
-    ion-toolbar{
+
+@media only screen and (max-width: 320px) {
+    ion-toolbar {
         --background: #4E98FF;
         height: 70px;
     }
-  }
+}
 
-  @media only screen and (max-width: 375px) {
-    .ios ion-toolbar{
+@media only screen and (max-width: 375px) {
+    .ios ion-toolbar {
         --background: #4E98FF;
         height: 95px;
     }
-    .ios ion-title{
+
+    .ios ion-title {
         position: absolute;
         top: -15px;
         left: -15px;
         color: white;
         font-size: 21px;
     }
-    .ionListClass{
+
+    .ionListClass {
         justify-content: center;
-        display: flex!important;
-        align-items: center!important;
-   .btnStyle{
-       width: 88%;
-       height: 50px;
-       border-radius: 12px;
-       --background:var(--ion-color-ibus-theblue);
-       font-family:monteBold;
-       font-size:16px;
-       --background-activated:red;
-   }
-   .btnStyleChanged{
-       --background:var(--ion-color-ibus-lightgreen);
-   }
-   .txtArea{
-       width:91%;
-       height: 150px;
-       border-radius: 8px;
-       border: none;
-       background-color: var(--ion-color-ibus-theblue);
-       color: white;
-       font-family: monteSBold;
-       font-size: 10px;
-       padding: 56px;
-       margin-top: 1%;
-       }
-     
-}
-  }
-  @media only screen and (max-width: 320px) {
-    .ionListClass{
-        justify-content: center;
-        display: flex!important;
-        align-items: center!important;
-   .btnStyle{
-       width: 88%;
-       height: 50px;
-       border-radius: 12px;
-       --background:var(--ion-color-ibus-theblue);
-       font-family:monteBold;
-       font-size:16px;
-       --background-activated:red;
-   }
-   .btnStyleChanged{
-       --background:var(--ion-color-ibus-lightgreen);
-   }
-   .txtArea{
-       width:91%;
-       height: 150px;
-       border-radius: 8px;
-       border: none;
-       background-color: var(--ion-color-ibus-theblue);
-       color: white;
-       font-family: monteSBold;
-       font-size: 8px;
-       padding: 56px;
-       margin-top: 1%;
-       }
-     
+        display: flex !important;
+        align-items: center !important;
+
+        .btnStyle {
+            width: 88%;
+            height: 50px;
+            border-radius: 12px;
+            --background: var(--ion-color-ibus-theblue);
+            font-family: monteBold;
+            font-size: 16px;
+            --background-activated: red;
+        }
+
+        .btnStyleChanged {
+            --background: var(--ion-color-ibus-lightgreen);
+        }
+
+        .txtArea {
+            width: 91%;
+            height: 150px;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--ion-color-ibus-theblue);
+            color: white;
+            font-family: monteSBold;
+            font-size: 10px;
+            padding: 56px;
+            margin-top: 1%;
+        }
+
+    }
 }
 
-  }
+@media only screen and (max-width: 320px) {
+    .ionListClass {
+        justify-content: center;
+        display: flex !important;
+        align-items: center !important;
+
+        .btnStyle {
+            width: 88%;
+            height: 50px;
+            border-radius: 12px;
+            --background: var(--ion-color-ibus-theblue);
+            font-family: monteBold;
+            font-size: 16px;
+            --background-activated: red;
+        }
+
+        .btnStyleChanged {
+            --background: var(--ion-color-ibus-lightgreen);
+        }
+
+        .txtArea {
+            width: 91%;
+            height: 150px;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--ion-color-ibus-theblue);
+            color: white;
+            font-family: monteSBold;
+            font-size: 8px;
+            padding: 56px;
+            margin-top: 1%;
+        }
+
+    }
+
+}

@@ -80,7 +80,7 @@
       <ion-label class="labelIon">{{'vehicleCheck-checkArea.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
         <ion-select interface="action-sheet" formControlName="measurementData" [(ngModel)]="checkpointen"  >
-          <ion-select-option  class="custom-options" *ngFor="let enlang of englishLanguage; let i = index" [value]="enlang">
+          <ion-select-option  class="custom-options" *ngFor="let enlang of englishLanguageJSON; let i = index" [value]="enlang">
                       {{enlang.CHECKPOINT}}
           </ion-select-option>
         </ion-select>
@@ -121,68 +121,18 @@
       <ion-tab-bar slot="bottom" class="ion-no-border">
         <ion-buttons type="submit" class="hide-on-keyboard-open addBtn" vertical="bottom" horizontal="center" translucent="true">
           <button class="adBtn2">
-            {{'vehicleCheck-start.title' | translate}}
+           END
           </button>
         </ion-buttons>
-        <ion-tab-button tab="routelist" (click)="navigateToRouteListPage()">
-          <ion-icon class="iconStyling" name="home"></ion-icon>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="wallet" class="comments" (click)="navigateToWalletPage()">
-          <ion-icon class="iconStyling" name="wallet"></ion-icon>
-        </ion-tab-button>
-    
-        <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
-    
-        <ion-tab-button tab="route-history" class="notifs" (click)="navigateToRouteHistoryPage()">
-          <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="settings" (click)="navigateToSettingsPage()">
-          <ion-icon class="iconStyling" name="settings"></ion-icon>
-        </ion-tab-button>
+       
       </ion-tab-bar>
     
     </div>
+  
   </form>
+
     </ion-list>
   </ion-content>
-
-<!-- ---------------- !!!!!! ---------------- --> 
-  <!-- BottomBar Code --> 
-  <!-- <ion-tab-bar slot="bottom" class="md hydrated startButtonClass">
-      <ion-buttons class="hide-on-keyboard-open addBtn" (click)="navigateToStartRoutePage()" vertical="bottom" horizontal="center" translucent="true">
-        <button (click)="navigateToStartRoutePage()" class="adBtn2">
-          START
-        </button>
-      </ion-buttons>
-    </ion-tab-bar> -->
-<!--     
-   <div class="hide-on-keyboard-open bottomBar">     
-     <ion-tab-bar slot="bottom" class="md hydrated startButtonClass">
-      <ion-buttons class="hide-on-keyboard-open addBtn" (click)="navigateToStartRoutePage()" vertical="bottom" horizontal="center" translucent="true">
-        <button (click)="navigateToStartRoutePage()" class="adBtn2">
-          {{'vehicleCheck-start.title' | translate}}
-        </button>
-      </ion-buttons>
-    </ion-tab-bar>
-      <ion-tab-bar  slot="bottom" class="ionTabBar ion-no-border">
-        <ion-tab-button tab="feed" (click)="navigateToroutelist()">
-          <ion-icon class="iconStyling" name="home"></ion-icon>
-        </ion-tab-button>
-        <ion-tab-button (click)="navigateToWalletPage()" tab="wallet" class="comments">
-          <ion-icon class="iconStyling" name="wallet"></ion-icon>
-        </ion-tab-button>
-        <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
-        <ion-tab-button (click)="navigateToRouteHistoryPage()" tab="route-history" class="notifs">
-          <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>
-        </ion-tab-button>
-        <ion-tab-button (click)="navigateToSettingsPage()" tab="settings">
-          <ion-icon class="iconStyling" name="settings"></ion-icon>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </div> -->
-   <!-- ---------------- !!!!!! ---------------- --> 
   
 </div>
 
@@ -190,77 +140,23 @@
 
 
 
+ <!-- <div class="myiontab">
 
+  <ion-tab-bar slot="bottom" class="ion-no-border">
+    <ion-buttons type="submit" class="hide-on-keyboard-open addBtn" vertical="bottom" horizontal="center" translucent="true">
+      <button class="adBtn2">
+        {{'vehicleCheck-start.title' | translate}}
+      </button>
+    </ion-buttons>
+  </ion-tab-bar>
 
-
-
-
-
-
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>techinspect</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-		 <ion-label color="primary">Language</ion-label>
-    <ion-item>
-      <ion-select  [(ngModel)]="language">
-        <ion-select-option *ngFor="let lang of langs; let l=index" [value]="lang">{{lang}}</ion-select-option> 
-        </ion-select>
-    </ion-item>
-    <ion-row>
-  
-    <button class="btn-round bg-primary" ion-button color = "primary"(click)="selLang()">Confirm</button>
-  
-   
-</ion-row>
-
-<div *ngIf="eng">
-	 <ion-label color="primary">Select checkpoint</ion-label>
-    <ion-item>
-      <ion-select  [(ngModel)]="checkpointen">
-        <ion-select-option *ngFor="let enlang of enlangs; let k=index" [value]="enlang">{{enlang}}</ion-select-option> 
-        </ion-select>
-    </ion-item>
-    <ion-row>
-  
-    <button class="btn-round bg-primary" ion-button color = "primary"(click)="tech(k)">Confirm</button>
-  
-   
-</ion-row>
 </div>
-
-<div *ngIf="el">
-	 <ion-label color="primary">Επέλεξε checkpoint</ion-label>
-    <ion-item>
-      <ion-select  [(ngModel)]="checkpointel">
-        <ion-select-option *ngFor="let ellang of ellangs; let k=index" [value]="ellang">{{ellang}}</ion-select-option> 
-        </ion-select>
-    </ion-item>
-    <ion-row>
-  
-    <button class="btn-round bg-primary" ion-button color = "primary"(click)="tech(k)">Confirm</button>
-  
-   
-</ion-row>
-</div>
-
-  
-
-<div *ngIf="com">
-	<ion-label color="primary">Remarks-Comments</ion-label>
-		<ion-textarea [(ngModel)]="comments" cols="80" rows="4" maxlength="250" [value]="comments"></ion-textarea>
-		<ion-row>
-  
-    <button class="btn-round bg-primary" ion-button color = "primary"(click)="comment()">Confirm</button>
-  
-   
-</ion-row>
-	</div>
-	<button class="btn-round bg-primary" ion-button color = "primary"(click)="map()">Map</button>
-
-</ion-content>
- -->
+<div class="myiontab2">
+  <ion-tab-bar slot="bottom" class="ion-no-border">
+  <ion-buttons  (click)="navigateToroutelist()" type="submit" class="hide-on-keyboard-open addBtn" vertical="bottom" horizontal="center" translucent="true">
+    <button  (click)="navigateToroutelist()" class="adBtn2">
+      CANCEL
+    </button>
+  </ion-buttons>      
+</ion-tab-bar>
+</div> -->

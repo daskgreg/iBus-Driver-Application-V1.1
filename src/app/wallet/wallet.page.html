@@ -8,7 +8,7 @@
 
   <ion-content>
     <ion-list>
-      <ion-item (click)="goBackToRouteListPageWithDriverId()" >
+      <ion-item (click)="goingBackToRouteList()" >
         <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
         <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
       </ion-item>
@@ -70,7 +70,7 @@
     <div class="centerItems styleItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-transactionType.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-select formControlName="typeOfPayment"  [(ngModel)]="selectedValue" (ionChange)="confirm()"  interface="action-sheet">
+        <ion-select formControlName="typeOfPayment"  [(ngModel)]="selectedValue" (ionChange)="confirmPaymentWithEveryHttp()"  interface="action-sheet">
           <ion-select-option  *ngFor="let type of types" [value]="type">
                       {{type}}
           </ion-select-option>
@@ -104,7 +104,7 @@
     <div class="centerItems ion-padding">
       <ion-label class="labelIon">{{'myWallet-amount.title' | translate}}</ion-label>
       <ion-item class="itemIon" lines="none">
-        <ion-input formControlName="ammountOfPayment" (click)="goBackToRouteListPageWithDriverId()"  name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
+        <ion-input formControlName="ammountOfPayment"  name="number" placeholder="23€" [(ngModel)]="amount"  (change)=check(amount)  ></ion-input>
       </ion-item>
     </div>
 
@@ -113,11 +113,11 @@
 
       <ion-tab-bar slot="bottom" class="ion-no-border">
         <ion-buttons class="addBtn" vertical="bottom" horizontal="center" translucent="true">
-          <button (click)="goBackToRouteListPageWithDriverId()"class="adBtn2">
+          <button (click)="goBackToRouteListPageWithDriverId()" class="adBtn2">
             <ion-icon name="arrow-back"></ion-icon>
           </button>
         </ion-buttons>
-        <ion-tab-button tab="routelist" (click)="goBackToRouteListPageWithDriverId()">
+        <ion-tab-button tab="routelist" (click)="goingBackToRouteList()">
           <ion-icon class="iconStyling" name="home"></ion-icon>
         </ion-tab-button>
     

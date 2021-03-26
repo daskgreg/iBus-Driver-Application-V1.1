@@ -1,5 +1,5 @@
 {
-  "appId": "ts.travelsoft.iBusDriverApplcationV1",
+  "appId": "ts.travelsoft.iBusDriverApplcationV001",
   "appName": "iBus-Driver-Application-v1",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -9,9 +9,5 @@
       "launchShowDuration": 0
     }
   },
-  "cordova": {},
-  "server": {
-    "url": "http://192.168.1.3:8101",
-    "cleartext": true
-  }
+  "cordova": {}
 }

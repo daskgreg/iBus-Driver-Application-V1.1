@@ -8,7 +8,7 @@
 
   <ion-content>
     <ion-list>
-      <ion-item (click)="goBackToRouteListPage()" >
+      <ion-item (click)="navigateToStartFeedPage()" >
         <ion-icon class="iconStyling" name="home" slot="start"></ion-icon>
         <ion-label class="menuTxt" >{{'routelist-myRoutes.title' | translate}}</ion-label>
       </ion-item>
@@ -90,11 +90,11 @@
 
     <ion-tab-bar slot="bottom" class="ion-no-border">
       <ion-buttons class="addBtn" (click)="goBackToRouteListPage()" vertical="bottom" horizontal="center" translucent="true">
-        <button (click)="goBackToRouteListPage()" class="adBtn2">
+        <button (click)="navigateToStartFeedPage()" class="adBtn2">
           <ion-icon  name="arrow-back"></ion-icon>
         </button>
       </ion-buttons>
-      <ion-tab-button tab="routelist" (click)="goBackToRouteListPage()">
+      <ion-tab-button tab="routelist" (click)="navigateToStartFeedPage()">
         <ion-icon class="iconStyling" name="home"></ion-icon>
       </ion-tab-button>
   

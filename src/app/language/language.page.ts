@@ -17,14 +17,14 @@ export class LanguagePage implements OnInit {
   	this.lang='en';
      localStorage.setItem('lang',this.lang); 
   	this.languageService.setLanguage(this.lang);
-  	this.router.navigate(['login'])
+  	this.router.navigate(['beforelogin'])
   }
 
   selectgr(){
   	this.lang='gr';
     localStorage.setItem('lang',this.lang); 
   	this.languageService.setLanguage(this.lang);
-  	this.router.navigate(['login'])
+  	this.router.navigate(['beforelogin'])
   }
 
 }
