@@ -15,8 +15,8 @@ localSettingProfile:any;
   constructor(private languageService: LanguageService, private router : Router) { 
   	this.languages=[];
   	this.languages=["English", "Ελληνικά"];
-    this.localSettingId = localStorage.getItem("locallocalSettingId");
-    this.localSettingProfile = localStorage.getItem("localSettingId");
+    this.localSettingId = localStorage.getItem("localSettingId");
+    this.localSettingProfile = localStorage.getItem("localSettingProfile");
   }
 
   ngOnInit() {

@@ -12,8 +12,8 @@ export class MaintenancePage implements OnInit {
   localSettingProfile:any;
   constructor(private router : Router) { 
   	this.number=123;
-    this.localSettingId = localStorage.getItem("locallocalSettingId");
-    this.localSettingProfile = localStorage.getItem("localSettingId");
+    this.localSettingId = localStorage.getItem("localSettingId");
+    this.localSettingProfile = localStorage.getItem("localSettingProfile");
   }
 
   ngOnInit() {

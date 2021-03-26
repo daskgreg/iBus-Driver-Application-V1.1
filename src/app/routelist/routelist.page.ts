@@ -19,36 +19,29 @@ const { Camera } = Plugins;
   templateUrl: './routelist.page.html',
   styleUrls: ['./routelist.page.scss'],
 })
-export class RoutelistPage implements OnInit {
+export class RoutelistPage   {
 
   serviceRegistration: any = "";
   dataFromService: any = "";
   img: any;
   dataFromLoginPage: any;
   dataFromLoginPageJSON: any;
-
   dataFromLoginPageProfile: any;
   dataFromLoginPageProfileJSON: any;
 
   constructor(private nativeHttp: HTTP, private platform: Platform, private alertController: AlertController, private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController, public http: HttpClient, private router: Router, private languageService: LanguageService) {
 
-    //greg
-
     this.dataFromLoginPage = this.activatedRoute.snapshot.paramMap.get('id');
     this.dataFromLoginPageJSON = JSON.parse(this.dataFromLoginPage);
-    localStorage.setItem("localSettingId", this.dataFromLoginPageJSON);
-   
-
+    console.log(this.dataFromLoginPage);
+    console.log(this.dataFromLoginPageJSON);
+    localStorage.setItem("localSettingId", this.dataFromLoginPage);
     this.dataFromLoginPageProfile = this.activatedRoute.snapshot.paramMap.get('theprofile');
     this.dataFromLoginPageProfileJSON = JSON.parse(this.dataFromLoginPageProfile);
-    localStorage.setItem("localSettingId", this.dataFromLoginPageProfile);
+    localStorage.setItem("localSettingProfile", this.dataFromLoginPageProfile);
     
   }
 
-  ngOnInit() {
-  }
-
-  //greg 
   myDate: String = new Date().toISOString();
   allDates;
   startDate;
