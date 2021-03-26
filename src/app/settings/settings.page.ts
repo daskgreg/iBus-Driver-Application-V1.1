@@ -11,7 +11,7 @@ languages:any;
 selectedValueLanguage:any;
 localSettingId:any;
 localSettingProfile:any;
-lsid:any;
+
   constructor(private languageService: LanguageService, private router : Router) { 
   	this.languages=[];
   	this.languages=["English", "Ελληνικά"];
