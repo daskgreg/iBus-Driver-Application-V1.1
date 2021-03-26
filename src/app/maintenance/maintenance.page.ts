@@ -8,19 +8,18 @@ declare var window: any;
 })
 export class MaintenancePage implements OnInit {
 	number:any;
+  localSettingId:any;
+  localSettingProfile:any;
   constructor(private router : Router) { 
   	this.number=123;
+    this.localSettingId = localStorage.getItem("locallocalSettingId");
+    this.localSettingProfile = localStorage.getItem("localSettingId");
   }
 
   ngOnInit() {
   }
   callWash(){
   	 window.open(`tel:12345`, '_system');
-  	 // window.plugins.CallNumber.callNumber(function(){
-    //  //success logic goes here
-    // }, function(){
-    //  //error logic goes here
-    // }, number) 
   }
   callAccident(){
   	window.open(`tel:123456`, '_system');
@@ -32,7 +31,7 @@ export class MaintenancePage implements OnInit {
   	window.open(`tel:12345678`, '_system');
   }
   navigateToroutelist(){
-  	this.router.navigate(["home2/routelist"])
+    this.router.navigate(['routelist/' + this.localSettingId + '/' + this.localSettingProfile]);
   }
   navigateToWalletPage(){
   	this.router.navigate(["home2/wallet"])

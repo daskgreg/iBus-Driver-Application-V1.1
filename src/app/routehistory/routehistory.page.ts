@@ -26,18 +26,23 @@ export class RoutehistoryPage implements OnInit {
 
   dataFromLoginPageProfile: any;
   dataFromLoginPageProfileJSON: any;
+
+  localSettingId:any;
+  localSettingProfile:any;
   constructor(private nativeHttp: HTTP, private platform: Platform, private alertController: AlertController, private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController, public http: HttpClient, private router: Router, private languageService: LanguageService) {
 
-    //greg
+
 
     this.dataFromLoginPage = this.activatedRoute.snapshot.paramMap.get('id');
     this.dataFromLoginPageJSON = JSON.parse(this.dataFromLoginPage);
-    console.log('%c Print Data from Login', 'color:orange;');
-    console.log(this.dataFromLoginPageJSON);
+
 
     this.dataFromLoginPageProfile = this.activatedRoute.snapshot.paramMap.get('theprofile');
     this.dataFromLoginPageProfileJSON = JSON.parse(this.dataFromLoginPageProfile);
-    console.log(this.dataFromLoginPageProfileJSON);
+
+
+    this.localSettingId = localStorage.getItem("locallocalSettingId");
+    this.localSettingProfile = localStorage.getItem("localSettingId");
   }
 
   ngOnInit() {
@@ -461,7 +466,7 @@ export class RoutehistoryPage implements OnInit {
     this.router.navigate(['notifications']);
   }
   navigateToRouteListPage() {
-    this.router.navigate(['routelist']);
+    this.router.navigate(['routelist/' + this.localSettingId + '/' + this.localSettingProfile]);
   }
   navigateToCreateRoutePage() {
     this.router.navigate(['createroute']);

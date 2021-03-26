@@ -86,11 +86,7 @@
 </ion-content>
 
 <div  class="bottomBar">
-  <ion-buttons class="addBtn" (click)="navigateToSettingsPage()" vertical="bottom" horizontal="center" translucent="true">
-    <button (click)="navigateToSettingsPage()" class="adBtn2">
-      <ion-icon name="arrow-back"></ion-icon>
-    </button>
-  </ion-buttons>
+
       <ion-tab-bar slot="bottom" class="ion-no-border">
         <ion-tab-button (click)="navigateToroutelist()" tab="routelist">
           <ion-icon class="iconStyling" name="home"></ion-icon>
@@ -99,8 +95,6 @@
         <ion-tab-button (click)="navigateToWalletPage()" tab="wallet" class="comments">
           <ion-icon class="iconStyling" name="wallet"></ion-icon>
         </ion-tab-button>
-    
-        <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
     
         <ion-tab-button (click)="navigateToRouteHistoryPage()" tab="route-history" class="notifs">
           <ion-icon class="iconStyling" name="file-tray-full"></ion-icon>

@@ -9,9 +9,14 @@ import {Router} from '@angular/router';
 export class SettingsPage implements OnInit {
 languages:any;
 selectedValueLanguage:any;
+localSettingId:any;
+localSettingProfile:any;
+lsid:any;
   constructor(private languageService: LanguageService, private router : Router) { 
   	this.languages=[];
   	this.languages=["English", "Ελληνικά"];
+    this.localSettingId = localStorage.getItem("locallocalSettingId");
+    this.localSettingProfile = localStorage.getItem("localSettingId");
   }
 
   ngOnInit() {
@@ -24,9 +29,10 @@ selectedValueLanguage:any;
   	this.languageService.setLanguage("gr");
   }
   }
+  
 
   navigateToStartFeedPage(){
-    this.router.navigate(['routelist']);
+    this.router.navigate(['routelist/' + this.localSettingId + '/' + this.localSettingProfile]);
   }
    navigateToMaintenancePage(){
     this.router.navigate(['maintenance']);
