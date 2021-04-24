@@ -82,13 +82,9 @@ export class RoutepassengersPage implements OnInit {
     this.dataFromRouteStartedDriverId = this.activatedRoute.snapshot.paramMap.get('driverid');
     this.dataFromRouteStartedJSONDriverId = JSON.parse(this.dataFromRouteStartedDriverId);
     this.dataFromRouteStarted = this.activatedRoute.snapshot.paramMap.get('passengers')
-    console.log('%c JSON', 'color:orange;');
-    console.log(this.dataFromRouteStarted);
-    console.log('%c JSON', 'color:yellow;');
+
     this.dataFromRouteStartedJSON = JSON.parse(this.dataFromRouteStarted);
-    console.log("HERE", this.dataFromRouteStartedJSON.VEHICLE_MAP_ID);
     this.VEHICLE_MAP_ID = this.dataFromRouteStartedJSON.VEHICLE_MAP_ID;
-    console.log(this.VEHICLE_MAP_ID);
     this.fnames = [];
     this.lnames = [];
     this.pases = [];
@@ -106,16 +102,12 @@ export class RoutepassengersPage implements OnInit {
       .subscribe((data) => {
 
         let parsed = JSON.parse(data.data)
-        console.log(data);
         this.thePassenger = parsed;
 
         this.thepassengerListJSON = this.thePassenger;
 
         this.thepassengerListJSONtoArray = this.thepassengerListJSON.PASSENGERS;
 
-
-        console.log('%c Passengers', 'color:yellow;');
-        console.log(this.thepassengerListJSONtoArray);
 
         var i = 0;
         var j = 0;
@@ -139,9 +131,6 @@ export class RoutepassengersPage implements OnInit {
 
       })
 
-
-
-    console.log(this.fnames, this.lnames);
   }
 
   navigateToStartRoutePage() {

@@ -30,27 +30,21 @@ export class TestApiPage implements OnInit {
   i = 0;
   j:any;
 
-//  nativeRequest()
-//  {
-//     this.http.get('http://157.230.111.163/drvRoutes?drv_id=2')
-//      .subscribe( (data) => 
-//      {
-//         this.response = data;
-//         for( this.i; this.i<this.response.data[0].length; this.i++ )
-//         {
-//              this.id = this.response.data[0][this.i]["ID"];
-//         }
-//      });
-// }
 
 nativeRequest(){
+
     var headers = new Headers();
+
     headers.append("Accept", 'application/json');
+
     headers.append('Content-Type', 'application/json' );
+
     const requestOptions  = 
     {
       headers: new HttpHeaders({
+
         'Content-Type':  'application/json'
+
         })
     };
     let postData = 
@@ -61,22 +55,33 @@ nativeRequest(){
     this.http.post("http://157.230.111.163/simple", postData, requestOptions)
       .subscribe(data => 
        {
+
         console.log(data['_body']);
+
        }, error => {
+
         console.log(error);
+        
        });
 }
 
 
 simpleRequest(){
+
   let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/', {}, {
+
     'Content-Type': 'application/json'
+
   });
   from(nativeCall).pipe(
+
     finalize(() => console.log('smth'))
+
   )
     .subscribe(async (data) => {
+
       console.log(data);
+
     })
 }
 }

@@ -96,83 +96,74 @@ export class MapPage implements OnInit {
   startingPoint: any;
 
   constructor(private platform: Platform, private loading: LoadingController, private nativeHttp: HTTP, private activatedRoute: ActivatedRoute, private http: HttpClient, private backgroundGeolocation: BackgroundGeolocation, public alertCtrl: AlertController, public loadingCtrl: LoadingController, private router: Router) {
-    console.log('%cIN MAP', 'color:red;')
+
     this.pickUpJsonFromApi = [];
+
     this.dataFromPickupsFromJSONtoArray = [];
+
     this.dataFromTheRoutes = this.activatedRoute.snapshot.paramMap.get('rptroutes');
+
     this.dataFromTheRoutesJSON = JSON.parse(this.dataFromTheRoutes);
-    console.log('%c RPT ROUTES', 'color:yellow;');
-    console.log(this.dataFromTheRoutesJSON);
+
     this.dataFromTheDriverId = this.activatedRoute.snapshot.paramMap.get('theidofdriver');
+
     this.dataFromTheDriverIdJSON = JSON.parse(this.dataFromTheDriverId);
-    console.log('%c ID OF DRIVER', 'color:yellow;');
-    console.log(this.dataFromTheDriverIdJSON);
+
 
     if (platform.is('cordova')) {
 
       if (this.dataFromTheRoutesJSON.TYPE == 'FIX') {
 
         let fixNativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_route_pup.cfm?' + 'chrbus_code=' + this.dataFromTheRoutesJSON.SERVICECODE + '&userid=dmta', {}, {
+
           'Content-Type': 'application/json'
+
         })
+
         from(fixNativeCall).pipe(
+
           finalize(() => console.log('fix route'))
+
         )
           .subscribe((data) => {
 
 
-            console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'color:red;');
-            console.log(data);
             this.newCustomPickupRoutes = JSON.parse(data.data);
-            console.log(this.newCustomPickupRoutes)
-            alert(this.newCustomPickupRoutes);
+
             this.newCustomPickupRoutesJSON = this.newCustomPickupRoutes;
-            console.log(this.newCustomPickupRoutesJSON);
+
             this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
-            console.log(this.newCustomPickupRoutesJSONtoArray);
+
             this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.FIXEDPICKUPS
-            alert(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS);
-            console.log('auto thelw');
-            console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS);
-            console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].CTY_NAME);
+
             this.startingPoint = this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].CTY_NAME
 
             for (var i = 0; i < this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS.length; i++) {
-              console.log('%c Data From CUSTOM PICKUP', 'color:red;', this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i]);
-              //  this.lats[i]=parseFloat(this.custroutePickups_json[i].latitude);
-              //  this.longs[i]=parseFloat(this.custroutePickups_json[i].longitude);
+
               this.longs[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LONGITUDE);
               this.lats[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LATITUDE);
-              console.log('if = 2');
-              console.log(this.longs)
-
 
             }
             let j: number;
             this.i = 0;
             this.waypoints.length = 0;
             this.destLat = this.lats[this.i];
-            console.log(this.destLat);
-            console.log('shit happens');
+
             this.destLng = this.longs[this.i];
             for (let j = 0; j < this.lats.length; j++) {
+
               let stations =
               {
                 location: { lat: this.lats[j], lng: this.longs[j] },
+
                 stopover: true,
               }
                 ;
               this.waypoints.push(stations);
-              console.log(stations);
-              console.log(this.waypoints);
+
             }
             this.getPosition();
 
-            //this.lats=[];
-            //this.longs=[];
-
-
-            console.log(this.lats, this.longs);
             this.fire = "";
 
             this.directionsService = new google.maps.DirectionsService();
@@ -193,60 +184,52 @@ export class MapPage implements OnInit {
           .subscribe(async (data) => {
 
 
-            console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'color:red;');
-            console.log(data);
+
             this.newCustomPickupRoutes = JSON.parse(data.data);
-            console.log(this.newCustomPickupRoutes)
+
             this.newCustomPickupRoutesJSON = this.newCustomPickupRoutes;
-            console.log(this.newCustomPickupRoutesJSON);
+
             this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
-            console.log(this.newCustomPickupRoutesJSONtoArray);
+
             this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.CUSTPICKUPS
 
 
 
-            console.log('NEWWWW CUSTOOOOOOM PIIIIICKUPPPPP', this.newCustomPickupRoutesJSONtoArray);
-            console.log('NEWWWW CUSTOOOOOOM PIIIIICKUPPPPP', this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS);
             for (var i = 0; i < this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS.length; i++) {
-              console.log('%c Data From CUSTOM PICKUP', 'color:red;', this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i]);
-              //  this.lats[i]=parseFloat(this.custroutePickups_json[i].latitude);
-              //  this.longs[i]=parseFloat(this.custroutePickups_json[i].longitude);
-              this.longs[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LONGITUDE);
-              this.lats[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LATITUDE);
-              console.log('if = 2');
-              console.log('Longitude', this.longs)
-              console.log('Latitude', this.lats)
 
+              this.longs[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LONGITUDE);
+
+              this.lats[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LATITUDE);
 
             }
             let j: number;
+
             this.i = 0;
+
             this.waypoints.length = 0;
+
             this.destLat = this.lats[this.i];
-            console.log(this.destLat);
-            console.log('shit happens');
+
             this.destLng = this.longs[this.i];
+
             for (let j = 0; j < this.lats.length; j++) {
+
               let stations =
               {
                 location: { lat: this.lats[j], lng: this.longs[j] },
+
                 stopover: true,
               }
                 ;
               this.waypoints.push(stations);
-              console.log(stations);
-              console.log(this.waypoints);
+
             }
             this.getPosition();
 
-            //this.lats=[];
-            //this.longs=[];
-
-
-            console.log(this.lats, this.longs);
             this.fire = "";
 
             this.directionsService = new google.maps.DirectionsService();
+
             this.directionsDisplay = new google.maps.DirectionsRenderer({
               suppressMarkers: true,
               suppressPolylines: true
@@ -263,38 +246,33 @@ export class MapPage implements OnInit {
           .subscribe((data) => {
 
 
-            console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'color:red;');
-            console.log(data);
             this.newCustomPickupRoutes = data;
-            console.log(this.newCustomPickupRoutes)
+
             this.newCustomPickupRoutesJSON = this.newCustomPickupRoutes;
-            console.log(this.newCustomPickupRoutesJSON);
+
             this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
-            console.log(this.newCustomPickupRoutesJSONtoArray);
+
             this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.FIXEDPICKUPS
-            console.log('auto thelw');
-            console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS);
-            console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].CTY_NAME);
+
             this.startingPoint = this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].CTY_NAME
 
             for (var i = 0; i < this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS.length; i++) {
-              console.log('%c Data From CUSTOM PICKUP', 'color:red;', this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i]);
-              //  this.lats[i]=parseFloat(this.custroutePickups_json[i].latitude);
-              //  this.longs[i]=parseFloat(this.custroutePickups_json[i].longitude);
+          
               this.longs[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LONGITUDE);
-              this.lats[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LATITUDE);
-              console.log('if = 2');
-              console.log(this.longs)
 
+              this.lats[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LATITUDE);
 
             }
             let j: number;
+
             this.i = 0;
+
             this.waypoints.length = 0;
+
             this.destLat = this.lats[this.i];
-            console.log(this.destLat);
-            console.log('shit happens');
+
             this.destLng = this.longs[this.i];
+
             for (let j = 0; j < this.lats.length; j++) {
               let stations =
               {
@@ -303,19 +281,14 @@ export class MapPage implements OnInit {
               }
                 ;
               this.waypoints.push(stations);
-              console.log(stations);
-              console.log(this.waypoints);
+
             }
             this.getPosition();
 
-            //this.lats=[];
-            //this.longs=[];
-
-
-            console.log(this.lats, this.longs);
             this.fire = "";
 
             this.directionsService = new google.maps.DirectionsService();
+
             this.directionsDisplay = new google.maps.DirectionsRenderer({
               suppressMarkers: true,
               suppressPolylines: true
@@ -327,40 +300,35 @@ export class MapPage implements OnInit {
           .subscribe(async (data) => {
 
 
-            console.log('%c DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'color:red;');
-            console.log(data);
             this.newCustomPickupRoutes = data;
-            console.log(this.newCustomPickupRoutes)
+
             this.newCustomPickupRoutesJSON = this.newCustomPickupRoutes;
-            console.log(this.newCustomPickupRoutesJSON);
+
             this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
-            console.log(this.newCustomPickupRoutesJSONtoArray);
+
             this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.CUSTPICKUPS
-            console.log('auto thelw');
-            console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS);
-            console.log(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].PICKUP_ADDRESS);
+
             this.startingPoint = this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[0].PICKUP_ADDRESS
 
 
 
             for (var i = 0; i < this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS.length; i++) {
-              console.log('%c Data From CUSTOM PICKUP', 'color:red;', this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i]);
-              //  this.lats[i]=parseFloat(this.custroutePickups_json[i].latitude);
-              //  this.longs[i]=parseFloat(this.custroutePickups_json[i].longitude);
+           
               this.longs[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LONGITUDE);
-              this.lats[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LATITUDE);
-              console.log('if = 2');
-              console.log(this.longs)
 
+              this.lats[i] = parseFloat(this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS[i].LATITUDE);
 
             }
             let j: number;
+
             this.i = 0;
+
             this.waypoints.length = 0;
+
             this.destLat = this.lats[this.i];
-            console.log(this.destLat);
-            console.log('shit happens');
+
             this.destLng = this.longs[this.i];
+
             for (let j = 0; j < this.lats.length; j++) {
               let stations =
               {
@@ -369,19 +337,14 @@ export class MapPage implements OnInit {
               }
                 ;
               this.waypoints.push(stations);
-              console.log(stations);
-              console.log(this.waypoints);
+
             }
             this.getPosition();
 
-            //this.lats=[];
-            //this.longs=[];
-
-
-            console.log(this.lats, this.longs);
             this.fire = "";
 
             this.directionsService = new google.maps.DirectionsService();
+
             this.directionsDisplay = new google.maps.DirectionsRenderer({
               suppressMarkers: true,
               suppressPolylines: true
@@ -393,34 +356,6 @@ export class MapPage implements OnInit {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    // if (this.dataFromTheRoutesJSON.TYPE == 'CUST') {
-    //   console.log('%c Data From CUSTOM PICKUP', 'color:red;', this.dataFromTheRoutesJSON);
-    //   console.log('%c Data From CUSTOM PICKUP', 'color:red;', this.dataFromTheRoutesJSON.TYPE);
-
-    // } else {
-    //   console.log('TIN PANAGIA DEN THA TIN KSANA ')
-    //   for (i = 0; i < this.newCustomPickupRoutesJSON.length; i++) {
-    //     console.log(this.newCustomPickupRoutesJSON);
-    //     console.log(this.newCustomPickupRoutesJSON[i].LATITUDE);
-    //     this.lats[i] = parseFloat(this.newCustomPickupRoutesJSON[i].LATITUDE);
-    //     this.longs[i] = parseFloat(this.newCustomPickupRoutesJSON[i].LONGITUDE);
-    //     console.log(this.longs);
-    //     console.log(this.lats);
-    //   }
-    // }
-
   }
   ionViewWillEnter() {
 
@@ -429,11 +364,9 @@ export class MapPage implements OnInit {
 
   }
   async getPosition() {
-    console.log('before get position');
 
-    console.log('after get position');
     var response = await Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(res => {
-      console.log(res);
+
       this.loadMap(res);
     })
       .catch(error => {
@@ -447,25 +380,25 @@ export class MapPage implements OnInit {
   // }
   loadMap(res) {
 
-    console.log('%c LOAD MAP', 'color:red;');
     let latLng = new google.maps.LatLng(41.1214145, 25.3878458);
-    console.log('%c LOAD MAP', 'color:red;');
-    //this.latitude = res.coords.latitude;
-    //this.longitude = res.coords.longitude;
-    console.log('%c LOAD MAP', 'color:red;');
+
     this.latitude = 41.1214145;
+
     this.longitude = 25.3878458;
-    console.log('%c LOAD MAP', 'color:red;');
+
     let mapEle: HTMLElement = document.getElementById('map');
+
     let panelEle: HTMLElement = document.getElementById('panel');
+
     this.myLatLng = { lat: this.latitude, lng: this.longitude };
-    console.log('%c LOAD MAP', 'color:red;');
+
     let mapOptions = {
       center: this.myLatLng,
       zoom: 5,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
     this.infowindow = new google.maps.InfoWindow();
 
     this.directionsDisplay.setMap(this.map);
@@ -479,7 +412,9 @@ export class MapPage implements OnInit {
   }
 
   private calculateRoute() {
+
     var stepDisplay = new google.maps.InfoWindow();
+
     this.bounds.extend(this.myLatLng);
 
     this.waypoints.forEach(waypoint => {
@@ -499,14 +434,13 @@ export class MapPage implements OnInit {
       destination: new google.maps.LatLng(this.destLat, this.destLng),
       waypoints: this.waypoints,
       optimizeWaypoints: true,
-      //suppressMarkers: true,
       travelMode: google.maps.TravelMode.DRIVING,
       avoidTolls: true
     }, (response, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
-        console.log(response);
 
         this.directionsDisplay.setDirections(response);
+
         this.directionsDisplay.setMap(this.map);
         var polylineOptions = {
           strokeColor: '#C83939',
@@ -514,68 +448,95 @@ export class MapPage implements OnInit {
           strokeWeight: 4
         };
         var polylines = [];
+
         for (var i = 0; i < polylines.length; i++) {
+
           polylines[i].setMap(null);
+
         }
         this.startLocation = new Object();
         this.endLocation = new Object();
         this.waypointLocations = [];
 
-        // Display start and end markers for the route.
+
         var legs = response.routes[0].legs;
         for (i = 0; i < legs.length; i++) {
+
           var steps = legs[i].steps;
+
           for (this.r1 = 0; this.r1 < steps.length; this.r1++) {
+
             var nextSegment = steps[this.r1].path;
+
             var stepPolyline = new google.maps.Polyline(polylineOptions);
+
             for (this.r2 = 0; this.r2 < nextSegment.length; this.r2++) {
+
               stepPolyline.getPath().push(nextSegment[this.r2]);
+
               this.bounds.extend(nextSegment[this.r2]);
+
             }
             google.maps.event.addListener(stepPolyline, 'mouseover', function (evt) {
               console.log(evt);
               console.log("route mouse over event @" + evt.latLng.toUrlValue(6));
               console.log(legs[i].distance, legs[i].duration);
             });
+
             polylines.push(stepPolyline);
+
             stepPolyline.setMap(this.map);
             // route click listeners, different one on each step
 
             google.maps.event.addListener(stepPolyline, 'click', function (evt) {
-              console.log(legs[i].distance, legs[i].duration);
+
               var apostasi = google.maps.geometry.spherical.computeLength(stepPolyline.getPath().getArray());
-              console.log(apostasi);
+
               stepDisplay.setContent("you clicked on the route<br>" + evt.latLng.toUrlValue(6));
+
               stepDisplay.setPosition(evt.latLng);
+
               stepDisplay.open(this.map);
 
             });
           }
           if (i == 0) {
+
             this.startLocation.latlng = legs[i].start_location;
+
             this.startLocation.address = legs[i].start_address;
+
             var startDistance = legs[i].distance;
+
             var startDuracion = legs[i].duration;
-            // createMarker(legs[i].start_location, "start", legs[i].start_address, "green");
           }
           if (i != 0 && i != legs.length - 1) {
+
             this.waypoint = {};
+
             this.waypoint.latlng = legs[i].start_location;
+
             this.waypoint.address = legs[i].start_address;
 
             this.waypointLocations.push(this.waypoint);
           }
           if (i == legs.length - 1) {
             this.endLocation.latlng = legs[i].end_location;
+            
             this.endLocation.address = legs[i].end_address;
+            
             var endDistance = legs[i].distance;
+            
             var endDuration = legs[i].duration;
           }
           // var steps = legs[i].steps;
         }
         var legs2 = response.routes[0].legs;
+        
         this.createMarker(this.endLocation.latlng, "end", "special text for end marker", "http://www.google.com/mapfiles/markerB.png", endDistance, endDuration)
+        
         this.createMarker(this.startLocation.latlng, "start", "special text for start marker", "http://maps.gstatic.com/mapfiles/markers2/marker_greenA.png", startDistance, startDuracion);
+        
         for (var i = 0; i < this.waypointLocations.length; i++) {
           this.apostasi[i] = legs[i + 1].distance;
           this.xronos[i] = legs[i + 1].duration;
@@ -583,133 +544,244 @@ export class MapPage implements OnInit {
         }
 
       } else {
+        
         alert('Could not display directions due to: ' + status);
       }
     });
 
   }
   createMarker(latlng, label, html, url, distance, duration) {
-    console.log(distance);
     if (distance == undefined) { distance = ""; }
+  
     if (duration == undefined) { distance = ""; }
+  
     var dis = distance.text;
+  
     var dur = duration.text;
+  
     var sint = latlng.lat() + " , " + latlng.lng();
+  
     var contentString = '<b>' + label + '</b><br>' + "<p>" + sint + "<p>" + "Επόμενος σταθμός:" + dis + "/" + dur;
+  
     var infowindow2 = new google.maps.InfoWindow();
+  
     var marker = new google.maps.Marker({
+  
       position: latlng,
+  
       map: this.map,
+  
       icon: url,
+  
       title: label,
+  
       subtitle: sint,
+  
       zIndex: Math.round(latlng.lat() * -100000) << 5
+  
     });
 
+
+    
     google.maps.event.addListener(marker, 'click', function () {
+    
       infowindow2.setContent(contentString);
+    
       infowindow2.open(this.map, marker);
+    
     });
   }
 
 
+
+
+
+  
   startWithoutApi() {
+  
     // 	this.backgroundGeolocation.start();
+  
     var startDate = new Date().toLocaleTimeString();
+  
     console.log(startDate);
+  
     this.board = 1;
+  
     this.startTr = 1;
+  
     if (this.startTr == 1) {
+  
       this.onTimeOut();
+  
     }
+  
     alert("Αποδοχή δρομολογίου από τη θέση " + this.latitude + "," + this.longitude + " και ώρα " + startDate + ".");
+  
   }
+  
   endWithoutApi() {
+  
     //	this.backgroundGeolocation.stop();
+  
     var endDate = new Date().toLocaleTimeString();
+  
     console.log(endDate);
+  
     this.startTr = 0;
+  
     alert("Τέλος δρομολογίου από τη θέση " + this.latitude + "," + this.longitude + " και ώρα " + endDate + ".");
+  
     this.telos = 1;
+  
     if (this.telos == 1) {
 
+
+      
       console.log(this.dataFromTheRoutes);
+      
       console.log(this.dataFromTheDriverId);
+      
       this.router.navigate(['techinspect-finished-route/' + this.dataFromTheRoutes + '/' + this.dataFromTheDriverId]);
-    } else {
-      alert("Το δρομολόγιο δεν έχει τελειώσει");
-    }
-  }
-  inspect() {
-    if (this.telos == 1) {
-      this.router.navigate(['techinspect'])
-    }
+    } 
     else {
-      alert("Απαιτείται ολοκλήρωση του δρομολογίου.")
+    
+      alert("Το δρομολόγιο δεν έχει τελειώσει");
+    
     }
   }
-  navigateToRouteOnGoPage() {
-    this.router.navigate(['routestarted'])
+
+  
+  inspect() {
+  
+    if (this.telos == 1) {
+  
+      this.router.navigate(['techinspect'])
+  
+    }
+  
+    else {
+  
+      alert("Απαιτείται ολοκλήρωση του δρομολογίου.")
+  
+    }
+  
   }
+  
+  navigateToRouteOnGoPage() {
+  
+    this.router.navigate(['routestarted'])
+  
+  }
+  
   onTimeOut() {
+  
     if (this.startTr == 1) {
+  
       Geolocation.getCurrentPosition()
 
 
-        .then(response => {
 
-          console.log(response.coords.latitude, response.coords.longitude);
+
+      
+      .then(response => {
+
+
+        
+        console.log(response.coords.latitude, response.coords.longitude);
+
 
           let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_drv_geo.cfm?'
-            + 'driver_id=' + this.dataFromTheRoutesJSON.DRIVER_ID
-            + '&srv_type=' + this.dataFromTheRoutesJSON.SERVICE
-            + '&srv_code=' + this.dataFromTheRoutesJSON.SERVICECODE
-            + '&sp_id=' + -1
-            + '&sp_code=' + -1
-            + '&fromd=' + this.dataFromTheRoutesJSON.ASSIGNMENT_FROM_DATE
-            + '&tod=' + this.dataFromTheRoutesJSON.ASSIGNMENT_TO_DATE
-            + '&vehicle_map_id=' + this.dataFromTheRoutesJSON.VEHICLE_MAP_ID
-            + '&vhc_id=' + 1
-            + '&vhc_plates=' + this.dataFromTheRoutesJSON.VHC_PLATES
-            + '&version_id=' + 1
-            + '&VechicleTypeID=' + 1
-            + '&virtualversion_id=' + 1
-            + '&latitude=' + response.coords.latitude
-            + '&longitude=' + response.coords.longitude
-            + '&userid=dmta', {}, {
+        
+          + 'driver_id=' + this.dataFromTheRoutesJSON.DRIVER_ID
+        
+          + '&srv_type=' + this.dataFromTheRoutesJSON.SERVICE
+        
+          + '&srv_code=' + this.dataFromTheRoutesJSON.SERVICECODE
+        
+          + '&sp_id=' + -1
+        
+          + '&sp_code=' + -1
+        
+          + '&fromd=' + this.dataFromTheRoutesJSON.ASSIGNMENT_FROM_DATE
+        
+          + '&tod=' + this.dataFromTheRoutesJSON.ASSIGNMENT_TO_DATE
+        
+          + '&vehicle_map_id=' + this.dataFromTheRoutesJSON.VEHICLE_MAP_ID
+        
+          + '&vhc_id=' + 1
+        
+          + '&vhc_plates=' + this.dataFromTheRoutesJSON.VHC_PLATES
+        
+          + '&version_id=' + 1
+        
+          + '&VechicleTypeID=' + 1
+        
+          + '&virtualversion_id=' + 1
+        
+          + '&latitude=' + response.coords.latitude
+        
+          + '&longitude=' + response.coords.longitude
+        
+          + '&userid=dmta', {}, {
+        
             'Content-Type': 'application/json'
+        
           });
 
+
+          
           from(nativeCall).pipe(
+          
             finalize(() => console.log(''))
-          ).subscribe((data) => {
-            console.log(data);
-          })
+          
+            ).subscribe((data) => {
+          
+          
+              console.log(data);
+          
+            })
 
         })
+        
         .catch(error => {
+        
           console.log('error could not ');
+        
           console.log(error);
 
+
         })
-      setTimeout(() => {
-        this.onTimeOut();
+
+      
+        setTimeout(() => {
+      
+          this.onTimeOut();
       }, 100000);
     }
   }
   showBtn() {
-    console.log('here');
     if ((this.hideBackBtn === false) && (this.hideEndBtn === false) && (this.hideCustomBtn === false)) {
+   
       this.hideBackBtn = true;
+   
       this.hideEndBtn = true;
+   
       this.hideCustomBtn = true;
+   
       document.getElementById('map').style.height = "75%";
+   
     } else {
+   
       this.hideBackBtn = false;
+   
       this.hideEndBtn = false;
+   
       this.hideCustomBtn = false;
+   
       document.getElementById('map').style.height = "87%";
+   
     }
+  
   }
 
 

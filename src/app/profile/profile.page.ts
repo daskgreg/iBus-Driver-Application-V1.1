@@ -78,8 +78,6 @@ export class ProfilePage implements OnInit {
    }
 
   submit(){
-    console.log('%c Information from Profile','color:yellow;');
-    console.log(this.profileRegistrationUpdateForm.value);
 
     // this.http.get('updateProfile')
   }

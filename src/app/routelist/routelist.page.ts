@@ -32,12 +32,15 @@ export class RoutelistPage   {
   constructor(private nativeHttp: HTTP, private platform: Platform, private alertController: AlertController, private activatedRoute: ActivatedRoute, public loadingCtrl: LoadingController, public http: HttpClient, private router: Router, private languageService: LanguageService) {
 
     this.dataFromLoginPage = this.activatedRoute.snapshot.paramMap.get('id');
+
     this.dataFromLoginPageJSON = JSON.parse(this.dataFromLoginPage);
-    console.log(this.dataFromLoginPage);
-    console.log(this.dataFromLoginPageJSON);
+
     localStorage.setItem("localSettingId", this.dataFromLoginPage);
+
     this.dataFromLoginPageProfile = this.activatedRoute.snapshot.paramMap.get('theprofile');
+
     this.dataFromLoginPageProfileJSON = JSON.parse(this.dataFromLoginPageProfile);
+
     localStorage.setItem("localSettingProfile", this.dataFromLoginPageProfile);
     
   }
@@ -77,7 +80,9 @@ export class RoutelistPage   {
   filtered = [...this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES]
 
   getChangeFunctionFromEveryHTTP() {
+
     this.platform.is('cordova') ? this.onChangeFromFunctionWitheNativeHTTP() : this.onChangeFromFunctionHTTP();
+
   }
   onChangeFromFunctionHTTP() {
 
@@ -90,14 +95,17 @@ export class RoutelistPage   {
       + 'driver_id=' + this.dataFromLoginPageJSON + '&from_date=' + theFirstDate + '&to_date=' + theLastDate + '&userid=dmta').subscribe((data) => {
        
         this.rptDriverRoutes = data;
+
         this.rptDriverRoutesJSONparseToArray = this.rptDriverRoutes;
       
         this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES = this.rptDriverRoutesJSONparseToArray.DRVROUTES
        
         const startDate = new Date(this.startDate);
+
         const endDate = new Date(this.endDate);
         
         this.filtered = this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.filter(item => {
+
                 return isWithinInterval(new Date(item.ASSIGNMENT_TO_DATE), { start: startDate, end: endDate });
          
         })
@@ -110,9 +118,13 @@ export class RoutelistPage   {
               .subscribe((data) => {
 
                 this.customPickUps = data;
+
                 this.theRealPickUp = this.customPickUps.FIXEDPICKUPS;
+
                 this.FixedStartingPointElementFromArrayOfPickups = this.theRealPickUp[0].CTY_NAME
+
                 this.FixedTheLastPointElementFromArrayOfPickups = this.theRealPickUp[this.theRealPickUp.length-1].CTY_NAME;
+
               })
           } else {
 
@@ -120,9 +132,13 @@ export class RoutelistPage   {
               .subscribe((data) => {
             
                 this.customPickUps = data;
-                this.theRealPickUp = this.customPickUps.CUSTPICKUPS;            
+
+                this.theRealPickUp = this.customPickUps.CUSTPICKUPS;      
+
                 this.CustStartingPointElementFromArrayOfPickups = this.theRealPickUp[0].PICKUP_ADDRESS
+
                 this.CustTheLastPointElementFromArrayOfPickups = this.theRealPickUp[this.theRealPickUp.length-1].PICKUP_ADDRESS;
+
               })
           }
         }
@@ -132,22 +148,38 @@ export class RoutelistPage   {
 
   }
   async onChangeFromFunctionWitheNativeHTTP() {
+
     const theFirstDate = this.startDate.split('T')[0];
+
     const theLastDate = this.endDate.split('T')[0];
+
     let loader = await this.loadingCtrl.create({
+
       message: "searching"
+
     });
     await loader.present();
+
     loader.present();
+
     setTimeout(() => {
+
       loader.dismiss();
+
     }, 800);
+
     let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/rpt_drv_routes.cfm?'
+
       + 'driver_id=' + this.dataFromLoginPageJSON
+
       + '&from_date=' + theFirstDate +
+
       '&to_date=' + theLastDate +
+
       '&userid=dmta', {}, {
+
       'Content-Type': 'application/json'
+
     });
     await from(nativeCall).pipe(
       finalize(() => loader.dismiss())
@@ -156,32 +188,50 @@ export class RoutelistPage   {
 
 
         this.rptDriverRoutesJSONparse = JSON.parse(data.data);
+
         this.rptDriverRoutesJSONparseToArray = this.rptDriverRoutesJSONparse;
+
         this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES = this.rptDriverRoutesJSONparseToArray.DRVROUTES
+
         var i = 0;
+
         const startDate = new Date(this.startDate);
+        
         const endDate = new Date(this.endDate);
+
         this.filtered = this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.filter(item => {
+
           return isWithinInterval(new Date(item.ASSIGNMENT_TO_DATE), { start: startDate, end: endDate });
 
+
         })
+
         for (var j = 0; j < this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.length; j++) {
 
           if (this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES[j].TYPE === "FIX") {
 
             let fixedRoutesNativelyCalled =  this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_route_pup.cfm?' + 'chrbus_code=' + this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES[j].SERVICECODE + '&userid=dmta', {}, {
-              'Content-Type': 'application/json'
+             
+            'Content-Type': 'application/json'
+
             });
             await from(fixedRoutesNativelyCalled).pipe(
+
               finalize(() => loader.dismiss())
+
             )
               .subscribe((data) => {
 
                 this.customPickUps = JSON.parse(data.data);
+
                 this.theRealPickUp = this.customPickUps.FIXEDPICKUPS;
+
                 for (var i = 0; i < this.theRealPickUp.length; i++) {
+
                   this.FixedStartingPointElementFromArrayOfPickups = this.theRealPickUp[0].CTY_NAME
+
                   this.FixedTheLastPointElementFromArrayOfPickups = this.theRealPickUp[i].CTY_NAME;
+
                 }
               })
           } else {
@@ -210,18 +260,25 @@ export class RoutelistPage   {
 
 
     this.saveMyData(selectedDatesFromCustomPickups).subscribe((dataReturnFromService) => {
+      
       this.dataFromService = JSON.stringify(dataReturnFromService);
+
       this.router.navigate(['techinspect/' + JSON.stringify(selectedDatesFromCustomPickups) + '/' + JSON.stringify(this.dataFromLoginPageJSON)]);
     });
 
   }
 
   saveMyData(dataToSend) {
+
     var url = "https://reqres.in/api/users";
+
     return this.http.post(url, dataToSend,
+
       {
         headers: new HttpHeaders(
+
           { "Content-type": "Application/json" }
+
         )
       })
   }
@@ -232,28 +289,46 @@ export class RoutelistPage   {
 
   async takePicture4() {
     const image = await Camera.getPhoto({
+
       quality: 90,
+
       allowEditing: true,
+
       resultType: CameraResultType.Base64
+
     });
+
     this.img = image.base64String;
+
   }
 
 
 
   async takePhotoWithOldFashionHttpRequest() {
+
     const image = await Camera.getPhoto({
+
       quality: 90,
+
       allowEditing: true,
+
       resultType: CameraResultType.Base64
+
     });
+
     this.img = image.base64String;
+
     const formData2 = new FormData();
+
     formData2.append("photo", this.img);
 
+
     var date = new Date().getHours();
+
     var date2 = new Date().getMinutes();
+
     var kati = date + "_" + date2;
+
     this.http.post('http://cf11.travelsoft.gr/itourapi/chrbus_drv_img.cfm?driver_id=16&srv_type=CHT&srv_code=2&sp_id=1&sp_code=6&fromd=2020/11/27&tod=2020/11/27&vehicle_map_id=1025&vhc_id=1&vhc_plates=VFR111&version_id=1&VechicleTypeID=1&virtualversion_id=1&img_type=TOLL&latitude=37.865044&longitude=23.755045&pickup_address=kapou&first_name=christos24&last_name=christos24&time=' + kati + '&userid=dmta', formData2)
       .subscribe(data => {
         console.log(data);
@@ -273,11 +348,15 @@ export class RoutelistPage   {
     }
 
     this.nativeHttp.setDataSerializer('urlencoded');
+
     this.nativeHttp.setHeader('*', 'Content-Type', 'application/x-www-form-urlencoded');
 
     var date = new Date().getHours();
+
     var date2 = new Date().getMinutes();
+
     var kati = date + "_" + date2;
+
     this.nativeHttp.post('http://cf11.travelsoft.gr/itourapi/chrbus_drv_img.cfm?driver_id=16&srv_type=CHT&srv_code=2&sp_id=1&sp_code=6&fromd=2020/11/27&tod=2020/11/27&vehicle_map_id=1025&vhc_id=1&vhc_plates=VFR111&version_id=1&VechicleTypeID=1&virtualversion_id=1&img_type=TOLL&latitude=37.865044&longitude=23.755045&pickup_address=kapou&first_name=christos24&last_name=christos24&time=' + kati + '&userid=dmta', formData2, headers)
       .then(data => {
 
@@ -291,13 +370,19 @@ export class RoutelistPage   {
   }
 
   navigateToSettingsPage() {
+
     this.router.navigate(["settings"])
+
   }
   navigateToRouteHistoryPage() {
+
     this.router.navigate(["routehistory"])
+
   }
   navigateToTechHistoryPage() {
+
     this.router.navigate(["techhistory"])
+
   }
 
   async navigateToWalletPage() {
@@ -328,13 +413,19 @@ export class RoutelistPage   {
     this.router.navigate(['profile/' + JSON.stringify(this.dataFromLoginPageProfileJSON)])
   }
   navigateToNotificationsPage() {
+
     this.router.navigate(['notifications']);
+
   }
   navigateToRouteListPage() {
+
     this.router.navigate(['routelist']);
+
   }
   navigateToCreateRoutePage() {
+
     this.router.navigate(['createroute']);
+
   }
 
 

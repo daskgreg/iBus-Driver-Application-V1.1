@@ -42,9 +42,6 @@ export class Register3Page  {
   finalRegistrationForm = this.formBuilder.group({
     licNumber:['', [Validators.required]],
     plate:['',[Validators.required]],
-    // registerId:['', [Validators.required]],
-    // profileId:['',[Validators.required]],
-    // licenceId:['',[Validators.required]]
   })
 
 
@@ -62,40 +59,44 @@ export class Register3Page  {
   dataFromRegisterTwo:any;
   dataFromRegisterTwoJSON:any;
   signupIsDone:any;
+
   constructor( public platform:Platform,public loadingCtrl: LoadingController, private activatedRoute: ActivatedRoute,  private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private nativeHttp: HTTP) {
 
   this.dataFromRegisterOne = this.activatedRoute.snapshot.paramMap.get('infofromregisterone');
   this.dataFromRegisterOneJSON = JSON.parse(this.dataFromRegisterOne);
 
-  console.log('%c Register 1 ','color:lightblue;');
-  console.log(this.dataFromRegisterOneJSON);
-
   this.dataFromRegisterTwo = this.activatedRoute.snapshot.paramMap.get('infofromregistertwo');
   this.dataFromRegisterTwoJSON = JSON.parse(this.dataFromRegisterTwo);
-
-  console.log('%c Register 2 ','color:lightblue;');
-  console.log(this.dataFromRegisterTwoJSON);
 
    }
 
    async takePicture4() {
+
     const image = await Camera.getPhoto({
+
       quality: 90,
+
       allowEditing: true,
+
       resultType: CameraResultType.Base64
+
     });
     this.img=image.base64String;
   
-  console.log(image);
+
   }
   call3(){
+
     const formData2 = new FormData();
+
     formData2.append("photo", this.img);
    
-    console.log(formData2);
     var date= new Date().getHours();
+
      var date2=new Date().getMinutes();
+
      var kati= date + "_" + date2;
+
    this.http.post('http://cf11.travelsoft.gr/itourapi/chrbus_drv_img.cfm?driver_id=16&srv_type=CHT&srv_code=2&sp_id=1&sp_code=6&fromd=2020/11/27&tod=2020/11/27&vehicle_map_id=1025&vhc_id=1&vhc_plates=VFR111&version_id=1&VechicleTypeID=1&virtualversion_id=1&img_type=TOLL&latitude=37.865044&longitude=23.755045&pickup_address=kapou&first_name=christos24&last_name=christos24&time=' + kati + '&userid=dmta', formData2)
    .subscribe(data => {
      console.log(data);
@@ -110,104 +111,143 @@ export class Register3Page  {
  }
 
  async takePicture() {
+
         const image = await Camera.getPhoto({
+
         quality: 90,
+
         allowEditing: true,
+
         resultType: CameraResultType.Base64
+
         });
         
         this.reg=image.base64String;
         
-        console.log(image);
         this.kappa=true;
         
         }
         async takePicture2() {
+
         const image = await Camera.getPhoto({
+
         quality: 90,
+
         allowEditing: true,
+
         resultType: CameraResultType.Base64
+
         });
+
         this.ins=image.base64String;
         
-        console.log(image);
         }
         async takePicture3() {
+
         const image = await Camera.getPhoto({
+
         quality: 90,
+
         allowEditing: true,
+
         resultType: CameraResultType.Base64
+
         });
         this.prof=image.base64String;
-        console.log(image);
+
         }
         call2(){
         var headers = new HttpHeaders();
+
         headers.append("Accept", 'application/json');
+
         headers.append('Content-Type', 'application/json');
+
         headers.append('Access-Control-Allow-Origin', '*');
+
         const formData = new FormData();
+
         formData.append("reg", this.reg);
+
         formData.append("ins",this.ins);
+
         formData.append("prof", this.prof);
-        console.log(formData);
+
         
         this.http.post('http://cf11.travelsoft.gr/itourapi/trp_driver_signup.cfm?first_name=christos24&last_name=christos24&license_number=1235456&birthday=23/02/2020&password=1234567&mobile=0123455555&country=1&location=greece&address=krimpa&zip=123465&email=christos23test@mail.gr&userid=dmta', formData)
         .subscribe(data => {
+
         console.log(data);
+
         }
         )
   }
   public submit(){
     var headers = new HttpHeaders();
+
     headers.append("Accept", 'application/json');
+
     headers.append('Content-Type', 'application/json');
+
     headers.append('Access-Control-Allow-Origin', '*');
+
     const formData = new FormData();
+
     formData.append("reg", this.reg);
+
     formData.append("ins",this.ins);
+
     formData.append("prof", this.prof);
-    console.log(formData);
-    
-    console.log('%c Data From Final Registration Form','color:yellow;');
-    console.log(this.finalRegistrationForm.value);
 
     this.signupIsDone = this.finalRegistrationForm.value;
-    console.log('%c Passed Data From Final Registration Form','color:red;');
-    console.log(this.signupIsDone.licNumber)
+
  
-  
+
   this.http.post('http://cf11.travelsoft.gr/itourapi/trp_driver_signup.cfm?'
-                  + '&firstName='  + this.dataFromRegisterOneJSON.firstName
-                  + '&lastName='   + this.dataFromRegisterOneJSON.lastName
-                  + '&licNumber='  + this.signupIsDone.licNumber
-                  + '&birthday='   + this.dataFromRegisterOneJSON.birth
-                  + '&password='   + this.dataFromRegisterOneJSON.pass
-                  + '&mobile='     + this.dataFromRegisterOneJSON.phoneNumber
-                  + '&location='   + this.dataFromRegisterTwoJSON.location
-                  + '&country='    + 1
-                  + '&location='   + this.dataFromRegisterTwoJSON.country
-                  + '&address='    + this.dataFromRegisterTwoJSON.address
-                  + '&zip='        + this.dataFromRegisterTwoJSON.zip
-                  + '&email='      + this.dataFromRegisterOneJSON.email
-                  + '&userid=dmta', formData
+               
+  + '&firstName='  + this.dataFromRegisterOneJSON.firstName
+  
+  + '&lastName='   + this.dataFromRegisterOneJSON.lastName
+  
+  + '&licNumber='  + this.signupIsDone.licNumber
+  
+  + '&birthday='   + this.dataFromRegisterOneJSON.birth
+  
+  + '&password='   + this.dataFromRegisterOneJSON.pass
+  
+  + '&mobile='     + this.dataFromRegisterOneJSON.phoneNumber
+  
+  + '&location='   + this.dataFromRegisterTwoJSON.location
+  
+  + '&country='    + 1
+  
+  + '&location='   + this.dataFromRegisterTwoJSON.country
+  
+  + '&address='    + this.dataFromRegisterTwoJSON.address
+  
+  + '&zip='        + this.dataFromRegisterTwoJSON.zip
+  
+  + '&email='      + this.dataFromRegisterOneJSON.email
+  
+  + '&userid=dmta', formData
                   // + '&plate='      + this.signupIsDone.plate
                   ).subscribe( async (data) =>{
 
 
-                    
-
-                    console.log('%c FINAL DATA FROM SIGN UP BEFORE SEND TO API','color:orange;');
-                    console.log(data);
-
                     let loader = await this.loadingCtrl.create({
+
                       message:"You have successfully sign up"
+
                     });
+
                     loader.present();
 
                     setTimeout(() => {
+
                       loader.dismiss();
+
                       this.router.navigate(['registercomplete']);
+
                     }, 1000);
 
 
@@ -217,13 +257,7 @@ export class Register3Page  {
   
   public nativeSubmit(){
  
-    
-    console.log('%c Data From Final Registration Form','color:yellow;');
-    console.log(this.finalRegistrationForm.value);
-
     this.signupIsDone = this.finalRegistrationForm.value;
-    console.log('%c Passed Data From Final Registration Form','color:red;');
-    console.log(this.signupIsDone.licNumber)
 
     this.nativeHttp.setDataSerializer('urlencoded');
 
@@ -238,50 +272,58 @@ export class Register3Page  {
     "api-auth": 'apiAuthToken String',
     "User-Auth": 'userAuthToken String'
     }
-     // const formData2 = new FormData();
-    //  formData2.append("photo", this.img);
-     
-    //  console.log(formData2);
+
     this.nativeHttp.setDataSerializer('urlencoded');
+
     this.nativeHttp.setHeader('*', 'Content-Type', 'application/x-www-form-urlencoded');
-    // this.http_native.post('url String', formData, headers).then(api_response => {
-  
-   // });
+
       var date= new Date().getHours();
       var date2=new Date().getMinutes();
       var kati= date + "_" + date2;
    
   
   this.nativeHttp.post('http://cf11.travelsoft.gr/itourapi/trp_driver_signup.cfm?'
-                  + '&first_name='  + this.dataFromRegisterOneJSON.firstName
-                  + '&last_name='   + this.dataFromRegisterOneJSON.lastName
-                  + '&license_number='  + this.signupIsDone.licNumber
-                  + '&birthday='      + this.dataFromRegisterOneJSON.birth
-                  + '&password='       + this.dataFromRegisterOneJSON.pass
-                  + '&mobile='     + this.dataFromRegisterOneJSON.phoneNumber
-                  + '&location='   + this.dataFromRegisterTwoJSON.location
-                  + '&country='    + 1
-                  + '&address='    + this.dataFromRegisterTwoJSON.address
-                  + '&zip='        + this.dataFromRegisterTwoJSON.zip
-                  + '&email='      + this.dataFromRegisterOneJSON.email
-                  + '&userid=dmta', formData2, headers
+                 
+  + '&first_name='  + this.dataFromRegisterOneJSON.firstName
+  
+  + '&last_name='   + this.dataFromRegisterOneJSON.lastName
+  
+  + '&license_number='  + this.signupIsDone.licNumber
+  
+  + '&birthday='      + this.dataFromRegisterOneJSON.birth
+  
+  + '&password='       + this.dataFromRegisterOneJSON.pass
+  
+  + '&mobile='     + this.dataFromRegisterOneJSON.phoneNumber
+  
+  + '&location='   + this.dataFromRegisterTwoJSON.location
+  
+  + '&country='    + 1
+  
+  + '&address='    + this.dataFromRegisterTwoJSON.address
+  
+  + '&zip='        + this.dataFromRegisterTwoJSON.zip
+  
+  + '&email='      + this.dataFromRegisterOneJSON.email
+  
+  + '&userid=dmta', formData2, headers
                   // + '&plate='      + this.signupIsDone.plate
                   ).then( async (data) =>{
 
-
-                    
-
-                    console.log('%c FINAL DATA FROM SIGN UP BEFORE SEND TO API','color:orange;');
-                    console.log(data);
-
                     let loader = await this.loadingCtrl.create({
+
                       message:"You have successfully sign up"
+
                     });
+
                     loader.present();
 
                     setTimeout(() => {
+
                       loader.dismiss();
+
                       this.router.navigate(['registercomplete']);
+
                     }, 1000);
 
 
@@ -289,11 +331,15 @@ export class Register3Page  {
   }
 
   getSignUpFromEveryPlatForm(){
+
     this.platform.is('cordova') ? this.nativeSubmit() : this.submit() ;
+
   }
 
   onFileChange(fileChangeEvent){
+
     this.file = fileChangeEvent.target.files[0];
+
   }
   
  
@@ -302,11 +348,15 @@ export class Register3Page  {
 
 
   registerCompleted(){
+
   	this.router.navigate(['registercomplete'])
+
   }
 
   navigateBack(){
+
   	this.router.navigate(['register2/' + JSON.stringify(this.dataFromRegisterTwoJSON) ]);
+    
   }
 
 

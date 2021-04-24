@@ -92,34 +92,17 @@ export class RoutehistoryPage implements OnInit {
   }
 
   getCustomPickupDataWithHTTP() {
-    console.log('Old Fashion HTTP Custom PIckup');
-    // this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?route_id=2&userid=dmta')
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //     this.customPickUps = data;
-    //     this.theRealPickUp = this.myPickUp.CUSTPICKUPS;
-    //     console.log('%c JSON PARSE', 'color:red;');
-    //     console.log(this.myPickUp);
-    //     console.log('%c TheReal array Pickups', 'color:orange;');
-    //     console.log(this.theRealPickUp);
 
-    //     for (var i = 0; i < this.theRealPickUp.length; i++) {
-    //       console.log(this.theRealPickUp[0].PICKUP_ADDRESS);
-    //       console.log(this.theRealPickUp[i].PICKUP_ADDRESS);
-    //       this.startingPointElementFromArrayOfPickups = this.theRealPickUp[0].PICKUP_ADDRESS
-    //       this.theLastPointElementFromArrayOfPickups = this.theRealPickUp[i].PICKUP_ADDRESS;
-    //     }
-
-    //   })
   }
   nativePickup = [];
+
   data = [];
+
   nativePickupArray: any;
+
   nativePickupArrayArray: any = [];
+
   async getCustomPickupDataWithNativeHTTP() {
-
-
-
 
     let url = ''
     let myNativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?route_id=16&userid=dmta', {}, {
@@ -137,21 +120,13 @@ export class RoutehistoryPage implements OnInit {
 
         this.nativePickupArray = this.data;
 
-
-        console.log(this.nativePickupArray)
         this.nativePickupArrayArray = this.nativePickupArray.PICKUP_ADDRESS;
-        console.log(this.nativePickupArrayArray)
-        for (var i = 0; i < this.nativePickupArray.length; i++) {
 
-          console.log(this.nativePickupArray[0].PICKUP_ADDRESS);
-          console.log(this.nativePickupArray[i].PICKUP_ADDRESS);
+        for (var i = 0; i < this.nativePickupArray.length; i++) {
 
           this.startingPointElementFromArrayOfPickups = this.nativePickupArray[0].PICKUP_ADDRESS
           this.theLastPointElementFromArrayOfPickups = this.nativePickupArray[i].PICKUP_ADDRESS;
         }
-        console.log(this.startingPointElementFromArrayOfPickups);
-        console.log(this.theLastPointElementFromArrayOfPickups);
-
       }, err => {
         console.log('Native error', err);
       })
@@ -162,40 +137,40 @@ export class RoutehistoryPage implements OnInit {
   }
 
   getChangeFunctionFromEveryHTTP() {
+
     this.platform.is('cordova') ? this.onChangeFromFunctionWitheNativeHTTP() : this.onChangeFromFunctionHTTP();
+
   }
   onChangeFromFunctionHTTP() {
-    console.log('Old Fashion HTTP')
+
     const theFirstDate = this.startDate.split('T')[0];
-    console.log("THE FIRST DATE", theFirstDate);
+
     const theLastDate = this.endDate.split('T')[0];
-    console.log("THE LAST DATE", theLastDate);
-    console.log("You selected FROM:");
+
 
     this.http.get('http://cf11.travelsoft.gr/itourapi/rpt_drv_routes.cfm?'
       + 'driver_id=' + this.dataFromLoginPageJSON + '&from_date=' + theFirstDate + '&to_date=' + theLastDate + '&userid=dmta').subscribe((data) => {
-        console.log(data);
+     
         this.rptDriverRoutes = data;
         this.rptDriverRoutesJSONparseToArray = this.rptDriverRoutes;
-        console.log('%c RPT DRIVER ROUTES', 'color:pink;');
-        console.log(this.rptDriverRoutesJSONparseToArray);
 
         this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES = this.rptDriverRoutesJSONparseToArray.DRVROUTES
-        console.log(this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES);
 
         for (var j = 0; j < this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.length; j++) {
 
           if (this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES[j].TYPE === "FIX") {
 
-
             this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_route_pup.cfm?' + 'chrbus_code=' + this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES[j].SERVICECODE + '&userid=dmta')
               .subscribe((data) => {
 
                 this.customPickUps = data;
+
                 this.theRealPickUp = this.customPickUps.FIXEDPICKUPS;
+
                 for (var i = 0; i < this.theRealPickUp.length; i++) {
-                  console.log(this.theRealPickUp[i].CTY_NAME);
+
                   this.FixedStartingPointElementFromArrayOfPickups = this.theRealPickUp[0].CTY_NAME
+
                   this.FixedTheLastPointElementFromArrayOfPickups = this.theRealPickUp[i].CTY_NAME;
                 }
               })
@@ -203,12 +178,15 @@ export class RoutehistoryPage implements OnInit {
 
             this.http.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?' + 'route_id=' + this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES[j].SERVICECODE + '&userid=dmta')
               .subscribe((data) => {
-                console.log(data);
+
                 this.customPickUps = data;
+
                 this.theRealPickUp = this.customPickUps.CUSTPICKUPS;
+
                 for (var i = 0; i < this.theRealPickUp.length; i++) {
-                  console.log(this.theRealPickUp[i].PICKUP_ADDRESS);
+
                   this.CustStartingPointElementFromArrayOfPickups = this.theRealPickUp[0].PICKUP_ADDRESS
+
                   this.CustTheLastPointElementFromArrayOfPickups = this.theRealPickUp[i].PICKUP_ADDRESS;
                 }
               })
@@ -219,62 +197,78 @@ export class RoutehistoryPage implements OnInit {
       })
   }
   async onChangeFromFunctionWitheNativeHTTP() {
-    console.log('Native HTTP')
+
     const theFirstDate = this.startDate.split('T')[0];
-    console.log("THE FIRST DATE", theFirstDate);
+
     const theLastDate = this.endDate.split('T')[0];
-    console.log("THE LAST DATE", theLastDate);
-    console.log("You selected FROM:");
+
     let loader = await this.loadingCtrl.create({
+
       message: "searching"
+
     });
     await loader.present();
+
     loader.present();
+
     setTimeout(() => {
       loader.dismiss();
     }, 800);
+
     let nativeCall = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/rpt_drv_routes.cfm?'
       + 'driver_id=' + this.dataFromLoginPageJSON
+
       + '&from_date=' + theFirstDate +
+
       '&to_date=' + theLastDate +
+
       '&userid=dmta', {}, {
+
       'Content-Type': 'application/json'
+
     });
     from(nativeCall).pipe(
+
       finalize(() => loader.dismiss())
+
     )
       .subscribe(async (data) => {
 
 
         this.rptDriverRoutesJSONparse = JSON.parse(data.data);
+
         this.rptDriverRoutesJSONparseToArray = this.rptDriverRoutesJSONparse;
-        console.log('%c RPT DRIVER ROUTES', 'color:pink;');
-        console.log(this.rptDriverRoutesJSONparseToArray);
-        console.log(this.rptDriverRoutesJSONparseToArray.DRVROUTES.DRIVER_ID);
+
         this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES = this.rptDriverRoutesJSONparseToArray.DRVROUTES
-        console.log(this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.SERVICECODE);
+
         var i = 0;
 
         for (var j = 0; j < this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES.length; j++) {
 
           if (this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES[j].TYPE === "FIX") {
 
-
-
-
             let fixedRoutesNativelyCalled = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_route_pup.cfm?' + 'chrbus_code=' + this.chrBusCustRoutesJSONparseToArrayRPTDRIVERROUTES[j].SERVICECODE + '&userid=dmta', {}, {
+
               'Content-Type': 'application/json'
+
             });
             from(fixedRoutesNativelyCalled).pipe(
+
               finalize(() => loader.dismiss())
+
             )
               .subscribe((data) => {
 
                 this.customPickUps = JSON.parse(data.data);
+
                 this.theRealPickUp = this.customPickUps.FIXEDPICKUPS;
+
                 for (var i = 0; i < this.theRealPickUp.length; i++) {
+
                   this.FixedStartingPointElementFromArrayOfPickups = this.theRealPickUp[0].CTY_NAME
+
                   this.FixedTheLastPointElementFromArrayOfPickups = this.theRealPickUp[i].CTY_NAME;
+
                 }
               })
           } else {
@@ -283,48 +277,27 @@ export class RoutehistoryPage implements OnInit {
               'Content-Type': 'application/json'
             });
             from(customRoutesNativelyCalled).pipe(
+
               finalize(() => loader.dismiss())
+
             )
               .subscribe((data) => {
-                console.log(data);
+
                 this.customPickUps = JSON.parse(data.data);
+
                 this.theRealPickUp = this.customPickUps.CUSTPICKUPS;
+
                 for (var i = 0; i < this.theRealPickUp.length; i++) {
+
                   this.CustStartingPointElementFromArrayOfPickups = this.theRealPickUp[0].PICKUP_ADDRESS
+
                   this.CustTheLastPointElementFromArrayOfPickups = this.theRealPickUp[i].PICKUP_ADDRESS;
+
                 }
               })
           }
         }
 
-        // while (i < this.rptDriverRoutesJSONparseToArray.DRVROUTES.length) { // Looking for Chapter Bus Service 
-
-        //   if (this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SERVICE == 'CHT') {
-
-
-
-        //     let nativeCalling = this.nativeHttp.get('http://cf11.travelsoft.gr/itourapi/chrbus_cust_route_pickups.cfm?'
-        //       + 'route_id=' + this.rptDriverRoutesJSONparseToArray.DRVROUTES[i].SERVICECODE
-        //       + '&userid=dmta', {}, {
-
-        //     });
-        //     from(nativeCalling).pipe(
-        //       finalize(() => loader.dismiss())
-        //     )
-        //       .subscribe((data) => {
-
-
-        //         this.newCustomPickupRoutesJSON = JSON.parse(data.data);
-        //         this.newCustomPickupRoutesJSONtoArray = this.newCustomPickupRoutesJSON;
-        //         this.newCustomPickupRoutesJSONtoArrayCUSTOMPICKUPS = this.newCustomPickupRoutesJSONtoArray.CUSTPICKUPS
-        //       }, err => {
-        //         console.log('Error on Cust Routes');
-        //       })
-
-        //     i++;
-        //   }
-        //   console.log('finish');
-        // }
       })
 
   }
@@ -333,17 +306,19 @@ export class RoutehistoryPage implements OnInit {
 
 
     this.saveMyData(selectedDatesFromCustomPickups).subscribe((dataReturnFromService) => {
+
       this.dataFromService = JSON.stringify(dataReturnFromService);
-      console.log(this.dataFromService['_body']);
-      console.log(selectedDatesFromCustomPickups);
-      console.log(JSON.stringify(selectedDatesFromCustomPickups));
+
       this.router.navigate(['techinspect/' + JSON.stringify(selectedDatesFromCustomPickups) + '/' + JSON.stringify(this.dataFromLoginPageJSON)]);
+
     });
 
   }
 
   saveMyData(dataToSend) {
+
     var url = "https://reqres.in/api/users";
+
     return this.http.post(url, dataToSend,
       {
         headers: new HttpHeaders(
@@ -352,11 +327,8 @@ export class RoutehistoryPage implements OnInit {
       })
   }
 
-
-
-
-
   async takePicture4() {
+
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: true,
@@ -370,6 +342,7 @@ export class RoutehistoryPage implements OnInit {
 
 
   async takePhotoWithOldFashionHttpRequest() {
+
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: true,
@@ -377,12 +350,9 @@ export class RoutehistoryPage implements OnInit {
     });
     this.img = image.base64String;
 
-    console.log(image);
-
     const formData2 = new FormData();
     formData2.append("photo", this.img);
 
-    console.log(formData2);
     var date = new Date().getHours();
     var date2 = new Date().getMinutes();
     var kati = date + "_" + date2;
@@ -409,8 +379,11 @@ export class RoutehistoryPage implements OnInit {
     this.nativeHttp.setHeader('*', 'Content-Type', 'application/x-www-form-urlencoded');
 
     var date = new Date().getHours();
+
     var date2 = new Date().getMinutes();
+
     var kati = date + "_" + date2;
+
     this.nativeHttp.post('http://cf11.travelsoft.gr/itourapi/chrbus_drv_img.cfm?driver_id=16&srv_type=CHT&srv_code=2&sp_id=1&sp_code=6&fromd=2020/11/27&tod=2020/11/27&vehicle_map_id=1025&vhc_id=1&vhc_plates=VFR111&version_id=1&VechicleTypeID=1&virtualversion_id=1&img_type=TOLL&latitude=37.865044&longitude=23.755045&pickup_address=kapou&first_name=christos24&last_name=christos24&time=' + kati + '&userid=dmta', formData2, headers)
       .then(data => {
 
@@ -424,17 +397,25 @@ export class RoutehistoryPage implements OnInit {
   }
 
   navigateToSettingsPage() {
+
     this.router.navigate(["settings"])
+
   }
   navigateToRouteHistoryPage() {
+
     this.router.navigate(["routehistory"])
+
   }
   navigateToTechHistoryPage() {
+
     this.router.navigate(["techhistory"])
+
   }
 
   async navigateToWalletPage() {
+
     const alert = await this.alertController.create({
+
       cssClass: 'my-custom-class',
       header: 'Select Route!',
       message: '<strong>Select Route before trying to enter into Wallet</strong>!!!',
@@ -458,18 +439,25 @@ export class RoutehistoryPage implements OnInit {
     await alert.present();
   }
   navigateToProfilePage() {
-    console.log('%c going to profile')
-    console.log(this.dataFromLoginPageJSON.PERSON_ID);
+
     this.router.navigate(['profile/' + JSON.stringify(this.dataFromLoginPageProfileJSON)])
+
   }
   navigateToNotificationsPage() {
+
     this.router.navigate(['notifications']);
+
   }
   navigateToRouteListPage() {
+
     this.router.navigate(['routelist/' + this.localSettingId + '/' + this.localSettingProfile]);
+
   }
+  
   navigateToCreateRoutePage() {
+
     this.router.navigate(['createroute']);
+    
   }
 
 }
